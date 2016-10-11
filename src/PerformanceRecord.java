@@ -9,6 +9,7 @@ public abstract class PerformanceRecord {
 	
 	public PerformanceRecord(float totalScore, Date date, int elapsedTimeSeconds) {
 		this.totalScore = totalScore;
+		this.date = date;
 		this.elapsedTimeSeconds = elapsedTimeSeconds;
 	}
 }
