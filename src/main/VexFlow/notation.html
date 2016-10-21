@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html>
+<head>
+	<script src="vextab-div.js"></script>
+	<script src="jquery-2.2.4.min.js"></script>
+	<!--
+	<script src="vexflow-debug.js"></script>
+	-->
+	<script src="lodash.js"></script>
+	
+	<script src="notate.js"></script>
+	
+</head>
+<body>
+	<div id="div"></div>
+	<canvas id="canvas"></div>
+	<!--
+	<script type="text/javascript">
+		const VF = Vex.Flow;
+
+		function notate() {
+			console.log("notating...");
+			// Create an SVG renderer and attach it to the DIV element named "boo".
+			var vf = new VF.Factory({renderer: {selector: 'canvas'}});
+			var score = vf.EasyScore();
+			var system = vf.System();
+		
+			system.addStave({
+			  voices: [score.voice(score.notes('C#5/q, B4, A4, G#4'))]
+			}).addClef('treble').addTimeSignature('4/4');
+		
+			vf.draw();
+		}
+	</script>
+	-->
+</body>
+</html>

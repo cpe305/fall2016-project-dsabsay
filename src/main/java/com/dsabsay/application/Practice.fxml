@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsabsay.application.PracticeController">
+   <children>
+      <WebView fx:id="notationWebView" layoutX="125.0" layoutY="53.0" prefHeight="100.0" prefWidth="450.0" />
+      <Label fx:id="melodyTypeLabel" layoutX="61.0" layoutY="288.0" text="4/4 Meter">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font></Label>
+      <Button fx:id="recordButton" layoutX="322.0" layoutY="282.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/mic.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="optionsButton" contentDisplay="GRAPHIC_ONLY" graphicTextGap="2.0" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="29.0" style="-fx-background-image: url(&quot;gear.png&quot;);">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/gear.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Label fx:id="melodyTypeLabel1" layoutX="61.0" layoutY="307.0" text="Rhythm 1" />
+   </children>
+</AnchorPane>
