@@ -11,6 +11,8 @@ public class UserConfiguration {
     private HashMap<String, String> rhythmTypes;
     private String sightSingingRecordsPath;
     private String rhythmRecordsPath;
+    
+    private String rhythmsPath;
 
     public HashMap<String, String> getMelodyTypes() {
         return melodyTypes;
