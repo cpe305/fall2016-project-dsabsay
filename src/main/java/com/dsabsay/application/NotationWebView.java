@@ -5,12 +5,15 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class NotationWebView extends Region {
-	private WebView webView;
-	private WebEngine webEngine;
-	
-	public NotationWebView() {
-		webView = new WebView();
-		webEngine = new WebEngine();
-		webEngine.load("notation.html");
-	}
+  private WebView webView;
+  private WebEngine webEngine;
+
+  /**
+   * Creates a NotationWebView object.
+   */
+  public NotationWebView() {
+    webView = new WebView();
+    webEngine = new WebEngine();
+    webEngine.load("notation.html");
+  }
 }
