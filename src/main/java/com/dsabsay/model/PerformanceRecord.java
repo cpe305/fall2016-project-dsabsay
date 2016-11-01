@@ -1,12 +1,17 @@
 package com.dsabsay.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class PerformanceRecord {
+public abstract class PerformanceRecord implements Serializable {
   private float totalScore;
   private int elapsedTimeSeconds;
   private Date date;
 
+  public PerformanceRecord() {
+    
+  }
+  
   /**
    * Creates a PerformanceRecord object.
    * 

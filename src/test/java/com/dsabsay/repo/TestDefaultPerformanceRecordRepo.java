@@ -44,13 +44,16 @@ public class TestDefaultPerformanceRecordRepo {
 
   @Test
   public void testSaveSightSingingRecord() throws IOException {
+    System.out.println("testSaveSightSingingRecord");
     SightSingingRecord record = new SightSingingRecord(1, "melodyType", 1, 1, 1, new Date(), 10);
     this.repo.savePerformanceRecord(record);
+    
+    System.out.println("saved record");
 
     List<SightSingingRecord> records = repo.getSightSingingRecords();
     Assert.assertTrue(records.contains(record));
     Assert.assertEquals(1, records.size());
-
+    
     // if we reinstantiate the repo to read from disk, it should still be there
     this.repo = new DefaultPerformanceRecordRepo(config);
 
@@ -61,10 +64,15 @@ public class TestDefaultPerformanceRecordRepo {
 
   @Test
   public void testSaveRhythmRecord() throws IOException {
+    System.out.println("testSaveRhythmRecord");
     RhythmRecord record = new RhythmRecord(1, "rhythmType", 1, 1, new Date(), 10);
     this.repo.savePerformanceRecord(record);
 
     List<RhythmRecord> records = repo.getRhythmRecords();
+    System.out.println("records:");
+    for (RhythmRecord r : records) {
+      r.print();
+    }
     Assert.assertTrue(records.contains(record));
     Assert.assertEquals(1, records.size());
 
@@ -72,6 +80,10 @@ public class TestDefaultPerformanceRecordRepo {
     this.repo = new DefaultPerformanceRecordRepo(config);
 
     records = repo.getRhythmRecords();
+    System.out.println("records:");
+    for (RhythmRecord r : records) {
+      r.print();
+    }
     Assert.assertTrue(records.contains(record));
     Assert.assertEquals(1, records.size());
   }

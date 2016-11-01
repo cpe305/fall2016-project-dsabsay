@@ -6,10 +6,13 @@ import java.util.Date;
 public class RhythmRecord extends PerformanceRecord implements Serializable {
   private int rhythmId;
   private String rhythmType;
-  private float totalScore;
   private float rhythmScore;
   private final String performanceType = "rhythm";
 
+  public RhythmRecord() {
+    super();
+  }
+  
   /**
    * Creates a RhythmRecord object.
    * @param rhythmId id of rhythm
@@ -24,8 +27,13 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     super(totalScore, date, elapsedTimeSeconds);
     this.rhythmId = rhythmId;
     this.rhythmType = rhythmType;
-    this.totalScore = totalScore;
     this.rhythmScore = rhythmScore;
+  }
+  
+  public void print() {
+    System.out.println("RhythmRecord: " + getrhythmId() + ", " + getRhythmType() + ", "
+        + getTotalScore() + ", " + getRhythmScore() + ", " + getDate() + ", "
+        + getElapsedTimeSeconds());
   }
 
   @Override
@@ -36,7 +44,7 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     result = prime * result + rhythmId;
     result = prime * result + Float.floatToIntBits(rhythmScore);
     result = prime * result + ((rhythmType == null) ? 0 : rhythmType.hashCode());
-    result = prime * result + Float.floatToIntBits(totalScore);
+    //result = prime * result + Float.floatToIntBits(totalScore);
     return result;
   }
 
@@ -72,9 +80,11 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     } else if (!rhythmType.equals(other.rhythmType)) {
       return false;
     }
+    /*
     if (Float.floatToIntBits(totalScore) != Float.floatToIntBits(other.totalScore)) {
       return false;
     }
+    */
     return true;
   }
 
@@ -94,6 +104,7 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     this.rhythmType = rhythmType;
   }
 
+  /*
   public float getTotalScore() {
     return totalScore;
   }
@@ -101,6 +112,7 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
   public void setTotalScore(float totalScore) {
     this.totalScore = totalScore;
   }
+  */
 
   public float getRhythmScore() {
     return rhythmScore;

@@ -7,6 +7,7 @@ import com.dsabsay.model.UserConfiguration;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.Objects;
 
 public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
 
+  //private static final String DEFAULT_RHYTHM_RECORDS_PATH = "repo/rhythmRecords.ser";
   private UserConfiguration config;
   private List<RhythmRecord> rhythmRecords;
   private List<SightSingingRecord> sightSingingRecords;
@@ -131,9 +134,20 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
 
   private void readRhythmRecordsFromDisk() throws IOException {
     ObjectInput input = null;
-
+    
     try {
+      /*
+      File file = new File(this.config.getRhythmRecordsPath());
+      if (!file.exists()) {
+        System.out.println("createNewFile()");
+        file.createNewFile();
+        System.out.println("created new file");
+      }
+      */
+      
       InputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
+      //InputStream stream = new FileInputStream(file);
+      //InputStream buffer = new BufferedInputStream(stream);
       InputStream buffer = new BufferedInputStream(file);
 
       input = new ObjectInputStream(buffer);
@@ -148,8 +162,22 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     ObjectInput input = null;
 
     try {
+      
+      /*
+      File file = new File(this.config.getSightSingingRecordsPath());
+      if (!file.exists()) {
+        System.out.println("createNewFile()");
+        file.createNewFile();
+        System.out.println("created new file");
+
+      }
+      */
+      
       InputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
+      //InputStream stream = new FileInputStream(file);
+      //InputStream buffer = new BufferedInputStream(stream);
       InputStream buffer = new BufferedInputStream(file);
+
 
       input = new ObjectInputStream(buffer);
       this.sightSingingRecords = (List<SightSingingRecord>) input.readObject();
@@ -158,4 +186,5 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
       exception.printStackTrace();
     }
   }
+  
 }

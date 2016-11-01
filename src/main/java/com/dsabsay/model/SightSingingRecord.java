@@ -10,6 +10,10 @@ public class SightSingingRecord extends PerformanceRecord implements Serializabl
   private float rhythmScore;
   private final String performanceType = "sightsinging";
 
+  public SightSingingRecord(){
+    
+  }
+  
   /**
    * Creates SightSingingRecord object.
    * @param melodyId id of melody
