@@ -21,7 +21,7 @@
          <graphic>
             <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/mic.png" />
+                  <Image url="@mic.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -29,7 +29,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/gear.png" />
+                  <Image url="@gear.png" />
                </image>
             </ImageView>
          </graphic></Button>

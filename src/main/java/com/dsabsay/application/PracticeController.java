@@ -3,6 +3,8 @@ package com.dsabsay.application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,6 +44,9 @@ public class PracticeController {
      * @Override public void handle(ActionEvent event) {
      * System.out.println("Practice sight singing!"); } }); }
      */
+    
+    assert recordButton != null
+        : "fx:id=\"recordButton\" was not injected: check your FXML file 'Practice.fxml'.";
 
     String options = "options font-size=14 space=15";
     String tabstave = "tabstave notation=true tablature=false time=4/4 clef=percussion";

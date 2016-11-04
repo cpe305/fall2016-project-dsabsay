@@ -21,7 +21,7 @@ public class MainController {
   public void startPracticeView() {
     try {
       // create FXMLLoader
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Practice.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Practice.fxml"));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
 
@@ -42,8 +42,9 @@ public class MainController {
       // AnchorPane mainMenu = (AnchorPane)
       // fxmlLoader.load(Main.class.getResource("MainMenu.fxml"));
 
+      System.out.println("get resource: " + getClass().getClassLoader().getResource("MainMenu.fxml"));
       // create FXMLLoader
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MainMenu.fxml"));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
       primaryStage.setTitle("SightSinger");
