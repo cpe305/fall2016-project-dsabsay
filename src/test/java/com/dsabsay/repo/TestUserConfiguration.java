@@ -9,11 +9,12 @@ import org.junit.Test;
 
 public class TestUserConfiguration {
 
-  UserConfiguration config;
+  UserConfiguration config, config2;
 
   @Before
   public void setup() {
     config = new UserConfiguration();
+    config2 = new UserConfiguration();
   }
 
   @Test
@@ -23,6 +24,12 @@ public class TestUserConfiguration {
     config.setRhythmRecordsPath("test/");
     config.saveUserConfig();
     assertEquals(config.getRhythmRecordsPath(), "test/");
+    
+    config.readUserConfig();
+    config2.setRhythmRecordsPath("test/");
+    config2.saveUserConfig();
+    assertEquals(config2.getRhythmRecordsPath(), "test/");
+    
     config.setRhythmRecordsPath(orig);
     config.saveUserConfig();
     assertEquals(config.getRhythmRecordsPath(), orig);
