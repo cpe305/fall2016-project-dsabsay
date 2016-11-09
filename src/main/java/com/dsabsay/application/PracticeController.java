@@ -51,7 +51,8 @@ public class PracticeController {
     String options = "options font-size=14 space=15";
     String tabstave = "tabstave notation=true tablature=false time=4/4 clef=percussion";
     //String notes = "notes :2S Bd/4 :qS Bd/4 :q ## | :8S Bd/4 Bu/4 :qS Bd-Bu-Bd/4 ^3^";
-    String notes = "notes :2S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
+    //String notes = "notes :2S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
+    String notes = "notes :1S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
     String notation = "\n options font-size=14 space=15"
         + "\n tabstave notation=true tablature=false"
         + "\n time=4/4 clef=percussion "
