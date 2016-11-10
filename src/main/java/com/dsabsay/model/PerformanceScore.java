@@ -10,4 +10,12 @@ public abstract class PerformanceScore {
     this.score = score;
     this.comments = comments;
   }
+
+  public float getScore() {
+    return score;
+  }
+
+  public List<String> getComments() {
+    return comments;
+  }
 }

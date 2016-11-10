@@ -40,7 +40,7 @@ public class VexTabRhythmParser {
     //right now this only parses one line of notes
     String[] tokens = noteLine.split("\\s+");
     
-    System.out.println("tokens: ");
+    //System.out.println("tokens: ");
     
     /*
     for (String token: tokens) {
@@ -49,7 +49,7 @@ public class VexTabRhythmParser {
     */
     
     for (String token : tokens) {
-      System.out.println("Token: " + token);
+      //System.out.println("Token: " + token);
       if (token.length() == 0) {
         continue;
       }

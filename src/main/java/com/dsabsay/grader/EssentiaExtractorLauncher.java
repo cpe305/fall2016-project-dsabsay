@@ -58,7 +58,7 @@ public class EssentiaExtractorLauncher {
     String string = scanner.hasNext() ? scanner.next() : "";
     scanner.close();
     
-    System.out.println("output of extractor:\n" + string);
+    //System.out.println("output of extractor:\n" + string);
     
     return string;
   }
