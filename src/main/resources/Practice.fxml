@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dsabsay.application.PracticeController">
    <children>
-      <WebView fx:id="notationWebView" layoutX="125.0" layoutY="53.0" prefHeight="100.0" prefWidth="450.0" />
+      <WebView fx:id="webView" layoutX="125.0" layoutY="53.0" prefHeight="100.0" prefWidth="450.0" />
       <Label fx:id="melodyTypeLabel" layoutX="61.0" layoutY="288.0" text="4/4 Meter">
          <font>
             <Font name="System Bold Italic" size="13.0" />

@@ -4,6 +4,48 @@
 const VF = Vex.Flow;
 vextab = VexTabDiv;
 
+var notation = {timeSigNumerator: 4,
+				timeSigDenominator: 4};
+
+//sets the time signature
+//s is a string: "4/4"
+function setTimeSig(s) {
+	notation.timeSigNumerator = s.split("/")[0];
+	notation.timeSigDenominator = s.split("/")[1];
+}
+
+function notateNotes(notes) {
+	
+	// Define options here for now
+	options = "options font-size=14 space=0";
+	tabstave = "tabstave notation=true tablature=false time=" + notation.timeSigNumerator + "/"
+		+ notation.timeSigDenominator + " clef=percussion";
+	
+	VexTab = vextab.VexTab;
+	Artist = vextab.Artist;
+	Renderer = Vex.Flow.Renderer;
+
+	// Create VexFlow Renderer from canvas element with id #boo.
+	//renderer = new Renderer($('#canvas')[0], Renderer.Backends.CANVAS);
+
+	// For SVG, you can use the following line (make sure #boo is a div element)
+	renderer = new Renderer($('#div')[0], Renderer.Backends.SVG);
+
+	// Initialize VexTab artist and parser.
+	artist = new Artist(10, 10, 600, {scale: 0.8});
+	vextab = new VexTab(artist);
+
+	try {
+	    // Parse VexTab music notation passed in as a string.
+		vextab.parse(options+"\n"+tabstave+"\n"+s);
+
+	    // Render notation onto canvas.
+	    artist.render(renderer);
+	} catch (e) {
+	    console.log(e);
+	}
+}
+
 function notate() {
 	// Create an SVG renderer and attach it to the DIV element named "boo".
 	var vf = new VF.Factory({renderer: {selector: 'div'}});

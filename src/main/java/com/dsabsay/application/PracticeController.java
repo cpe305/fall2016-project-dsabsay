@@ -14,6 +14,9 @@ import javafx.scene.web.WebView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.dsabsay.model.InvalidVexTabException;
+import com.dsabsay.model.VexTabRhythmExercise;
+
 public class PracticeController {
   @FXML // ResourceBundle that was given to the FXMLLoader
   private ResourceBundle resources;
@@ -24,7 +27,7 @@ public class PracticeController {
   @FXML
   private Button optionsButton;
   @FXML
-  private WebView notationWebView;
+  private WebView webView;
   @FXML
   private Label melodyTypeLabel;
 
@@ -48,11 +51,23 @@ public class PracticeController {
     assert recordButton != null
         : "fx:id=\"recordButton\" was not injected: check your FXML file 'Practice.fxml'.";
 
+    NotationWebView notationWebView = new NotationWebView(webView);
+    
+    String path = "src/main/resources/testRhythm2.txt";
+    VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
+    try {
+      notationWebView.displayExercise(exercise);
+    } catch (InvalidVexTabException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+    /*
     String options = "options font-size=14 space=15";
     String tabstave = "tabstave notation=true tablature=false time=4/4 clef=percussion";
     //String notes = "notes :2S Bd/4 :qS Bd/4 :q ## | :8S Bd/4 Bu/4 :qS Bd-Bu-Bd/4 ^3^";
-    //String notes = "notes :2S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
-    String notes = "notes :1S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
+    String notes = "notes :2S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
+    //String notes = "notes :1S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
     String notation = "\n options font-size=14 space=15"
         + "\n tabstave notation=true tablature=false"
         + "\n time=4/4 clef=percussion "
@@ -78,6 +93,7 @@ public class PracticeController {
       }
     });
     webEngine.load(url);
+    */
 
     /*
     webEngine

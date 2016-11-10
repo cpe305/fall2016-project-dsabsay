@@ -94,10 +94,25 @@ public class VexTabRhythmParser {
         continue;
       }
       
+      // '^' - tuplets
+      if (token.charAt(0) == '^') {
+        continue;
+      }
+      
       //notes!
       //probably can just add a note with the proper duration at this point without parsing the rest
       //of the token
-      notes.add(new Note(duration, dotted, false));
+      //need to check for dashes
+      String[] parts = token.split("-");
+      
+      // multiple notes separated by "-"
+      if (parts.length > 1) {
+        for (int a = 0; a < parts.length; a++) {
+          notes.add(new Note(duration, dotted, false));
+        }
+      } else {
+        notes.add(new Note(duration, dotted, false));
+      }
       
       /*
       int i = 0;

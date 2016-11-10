@@ -23,11 +23,11 @@ public class Note {
     this.isRest = isRest;
   }
 
-  public boolean isRest() {
+  public boolean getIsRest() {
     return isRest;
   }
 
-  public void setRest(boolean isRest) {
+  public void setIsRest(boolean isRest) {
     this.isRest = isRest;
   }
 
@@ -60,5 +60,76 @@ public class Note {
     return "" + (isRest ? "#" : "") + rhythmicValue + (isDotted ? "." : "") + " " ;
   }
   
+  /*
+  @Override
+  public boolean equals(Object other) {
+    if (other == null) {
+      return false;
+    }
+    if (!(other instanceof Note)) {
+      return false;
+    }
+    
+    Note otherNote = (Note) other;
+    return this.rhythmicValue == otherNote.getRhythmicValue()
+        && this.pitch == otherNote.getPitch()
+        && this.isDotted == otherNote.getIsDotted()
+        && this.isRest == otherNote.getIsRest()
+        && this.tied == otherNote.getTied();
+  }
+  */
   
+  public boolean getIsDotted() {
+    return isDotted;
+  }
+  
+  public void setIsDotted(boolean isDotted) {
+    this.isDotted = isDotted;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (isDotted ? 1231 : 1237);
+    result = prime * result + (isRest ? 1231 : 1237);
+    result = prime * result + pitch;
+    result = prime * result + rhythmicValue;
+    result = prime * result + ((tied == null) ? 0 : tied.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    Note other = (Note) obj;
+    if (isDotted != other.isDotted) {
+      return false;
+    }
+    if (isRest != other.isRest) {
+      return false;
+    }
+    if (pitch != other.pitch) {
+      return false;
+    }
+    if (rhythmicValue != other.rhythmicValue) {
+      return false;
+    }
+    if (tied == null) {
+      if (other.tied != null) {
+        return false;
+      }
+    } else if (!tied.equals(other.tied)) {
+      return false;
+    }
+    return true;
+  }
 }

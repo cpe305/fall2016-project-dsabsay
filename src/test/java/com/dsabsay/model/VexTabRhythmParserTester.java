@@ -1,17 +1,12 @@
 package com.dsabsay.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertArrayEquals;
-
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestVexTabRhythmParser {
-
-  @Test
-  public void testVexTabRhythmParser1() {
+public class VexTabRhythmParserTester {
+  public static void main(String[] args) {
+    //String path = TestVexTabRhythmParser.class.getClassLoader().getResource("rhythm1.txt").toString();
+    //String path = "/resources/rhythm1.txt";
     String path = "src/main/resources/testRhythm1.txt";
     VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
     
@@ -26,11 +21,8 @@ public class TestVexTabRhythmParser {
     notes.add(new Note(4, false, false));
     
     int[] timeSig = {4, 4};
-    RhythmExercise expected = new RhythmExercise(4, 4, notes);
+    RhythmExercise expected = new RhythmExercise(timeSig[0], timeSig[1], notes);
     RhythmExercise parsed = exercise.getExercise();
     
-    assertArrayEquals(timeSig, parsed.getTimeSig());
-    assertEquals(notes, parsed.getNotes());
   }
-
 }

@@ -13,9 +13,32 @@ public class RhythmExercise {
     this.notes = notes;
   }
   
-  public void printNotes() {
+  public int[] getTimeSig() {
+    return timeSig;
+  }
+
+  public void setTimeSig(int[] timeSig) {
+    this.timeSig = timeSig;
+  }
+
+  public List<Note> getNotes() {
+    return notes;
+  }
+
+  public void setNotes(List<Note> notes) {
+    this.notes = notes;
+  }
+
+  public void print() {
+    System.out.println("Exercise: timeSig: " + timeSig[0] + "/" + timeSig[1]);
+    System.out.print("  Notes: ");
+    printNotes();
+    System.out.println("");
+  }
+  
+  private void printNotes() {
     for (Note n : notes) {
-      System.out.println(n);
+      System.out.print(n + ", ");
     }
   }
   
