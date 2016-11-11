@@ -5,10 +5,13 @@ import com.dsabsay.model.VexTabRhythmExercise;
 
 public class SimpleRhythmGraderTester {
   //errorMargin (in beats)
-  private static final float errorMargin = (float) 0.14;
+  private static final float errorMargin = (float) 0.20;
   
   public static void main(String[] args) {
-    testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_120bpm.m4a");
+    testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes.m4a");
+    testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake.m4a");
+    testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake2.m4a");
+    testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_speedup.m4a");
     testGrader("src/main/resources/testRhythm2.txt", "testRhythm2.m4a");
     testGrader("src/main/resources/testRhythmEighthNotes.txt", "testRhythmEighthNotes.m4a");
   }
@@ -19,10 +22,12 @@ public class SimpleRhythmGraderTester {
     //String path = "src/main/resources/testRhythmQuarterNotes.txt";
     VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", exercisePath);
     
-    EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
+    RhythmExtractor extractor = new RhythmExtractor();
+    RhythmExtractorResults results = extractor.processPerformance(performancePath);
+    //EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
     //String string = launcher.processRhythmPerformance("tap_120bpm.m4a");
-    String string = launcher.processRhythmPerformance(performancePath);
-    RhythmExtractorResults results = new RhythmExtractorResults(string);
+    //String string = launcher.processRhythmPerformance(performancePath);
+    //RhythmExtractorResults results = new RhythmExtractorResults(string);
     
     SimpleRhythmGrader grader = new SimpleRhythmGrader();
     

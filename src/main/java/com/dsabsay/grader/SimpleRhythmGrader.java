@@ -62,6 +62,9 @@ public class SimpleRhythmGrader {
       }
     }
     
+    System.out.println("numCorrect: " + numCorrect);
+    System.out.println("numWrong: " + numWrong);
+    
     List<String> comments = new ArrayList<String>();
     comments.add("woohoo!");
     PerformanceScore score = new RhythmScore((numCorrect - numWrong) / (float) numNotesInExercise,
@@ -91,7 +94,7 @@ public class SimpleRhythmGrader {
     return beats;
   }
   
-  private List<Float> getNoteOnsets(RhythmExtractorResults performance) {
+  private List<Float> getTickOnsets(RhythmExtractorResults performance) {
     float bpm = performance.getBpm();
     List<Float> noteOnsets = new ArrayList<Float>();
     
@@ -104,6 +107,25 @@ public class SimpleRhythmGrader {
     
     for (int i = 1; i < ticks.size(); i++) {
       float onset = ticks.get(i) - start;
+      noteOnsets.add(tickToBeats(onset, bpm));
+    }
+    
+    return noteOnsets;
+  }
+  
+  private List<Float> getNoteOnsets(RhythmExtractorResults performance) {
+    float bpm = performance.getBpm();
+    List<Float> noteOnsets = new ArrayList<Float>();
+    
+    //add first note onset = 0;
+    noteOnsets.add((float) 0.0);
+    
+    float start = performance.getOnsets().get(0);
+    
+    List<Float> onsets = performance.getOnsets();
+    
+    for (int i = 1; i < onsets.size(); i++) {
+      float onset = onsets.get(i) - start;
       noteOnsets.add(tickToBeats(onset, bpm));
     }
     

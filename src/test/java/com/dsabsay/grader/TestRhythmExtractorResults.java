@@ -6,10 +6,10 @@ public class TestRhythmExtractorResults {
     
     System.out.println("Process rhythm performance: tap_120bpm.m4a");
     
-    String string = launcher.processRhythmPerformance("tap_120bpm.m4a");
+    //String string = launcher.processRhythmPerformance("tap_120bpm.m4a");
     
     System.out.println("---------------------");
     System.out.println("parse results:\n");
-    RhythmExtractorResults results = new RhythmExtractorResults(string);
+    //RhythmExtractorResults results = new RhythmExtractorResults(string);
   }
 }

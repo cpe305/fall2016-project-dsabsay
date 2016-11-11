@@ -12,17 +12,31 @@ public class EssentiaExtractorLauncher {
   private static final String ESSENTIA_WORKING_DIRECTORY = "essentia/";
   private static final String RHYTHM_EXTRACTOR_PATH
       = "essentia-extractors/essentia_streaming_rhythmextractor_multifeature";
+  private static final String ONSET_EXTRACTOR_PATH
+      = "essentia-extractors/essentia_streaming_onsetrate";
+  private static final String STANDARD_ONSET_EXTRACTOR_PATH
+      = "essentia-extractors/essentia_standard_onsetrate";
   private static final int EXIT_SUCCESS = 0;
   
-  /**
+  public String runRhythmExtractor(String filename) {
+    return processRhythmPerformance(RHYTHM_EXTRACTOR_PATH, filename);
+  }
+  
+  public String runOnsetExtractor(String filename) {
+    //return processRhythmPerformance(ONSET_EXTRACTOR_PATH, filename);
+    return processRhythmPerformance(STANDARD_ONSET_EXTRACTOR_PATH, filename);
+  }
+  
+  /** no it doesn't
    * Runs the Essentia extractor in a new process
    * @param filename Filename of recorded performance.
    *      The path is relative to ESSENTIA_WORKING_DIRECTORY.
    */
-  public String processRhythmPerformance(String filename) {
+  private String processRhythmPerformance(String extractorPath, String filename) {
     Runtime runtime = Runtime.getRuntime();
     String[] cmd = new String[2];
-    cmd[0] = RHYTHM_EXTRACTOR_PATH;
+    //cmd[0] = RHYTHM_EXTRACTOR_PATH;
+    cmd[0] = extractorPath;
     cmd[1] = filename;
     
     File dir = new File(ESSENTIA_WORKING_DIRECTORY);
