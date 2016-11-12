@@ -6,4 +6,5 @@ import com.dsabsay.model.VexTabExercise;
 
 public interface VexTabExercisesRepo {
   public List<VexTabExercise> getExercises();
+  public VexTabExercise getRandomExercise();
 }

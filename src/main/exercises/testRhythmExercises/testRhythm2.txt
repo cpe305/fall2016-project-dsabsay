@@ -1,0 +1,3 @@
+options font-size=14 space=0
+tabstave notation=true tablature=false time=4/4 clef=percussion
+notes :2S Bd/4 Bd/4 | :8S Bd/4 Bu/4 :qS Bd/4 :q ## :qS Bd/4

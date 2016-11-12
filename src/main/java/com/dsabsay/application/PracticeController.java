@@ -15,7 +15,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.dsabsay.model.InvalidVexTabException;
+import com.dsabsay.model.UserConfiguration;
+import com.dsabsay.model.VexTabExercise;
 import com.dsabsay.model.VexTabRhythmExercise;
+import com.dsabsay.repo.VexTabExercisesRepo;
+import com.dsabsay.repo.VexTabRhythmExercisesRepo;
 
 public class PracticeController {
   @FXML // ResourceBundle that was given to the FXMLLoader
@@ -53,8 +57,14 @@ public class PracticeController {
 
     NotationWebView notationWebView = new NotationWebView(webView);
     
-    String path = "src/main/resources/testRhythm2.txt";
-    VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
+    //String path = "src/main/resources/testRhythm2.txt";
+    //VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
+    
+    UserConfiguration config = new UserConfiguration();
+    config.setRhythmsPath("src/main/exercises/rhythmExercises");
+    VexTabExercisesRepo repo = new VexTabRhythmExercisesRepo(config);
+    VexTabExercise exercise = repo.getRandomExercise();
+    
     try {
       notationWebView.displayExercise(exercise);
     } catch (InvalidVexTabException e) {

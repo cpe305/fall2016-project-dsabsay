@@ -20,6 +20,14 @@ public class UserConfiguration {
 
   private String rhythmsPath;
 
+  public String getRhythmsPath() {
+    return rhythmsPath;
+  }
+
+  public void setRhythmsPath(String rhythmsPath) {
+    this.rhythmsPath = rhythmsPath;
+  }
+
   public HashMap<String, String> getMelodyTypes() {
     return melodyTypes;
   }
