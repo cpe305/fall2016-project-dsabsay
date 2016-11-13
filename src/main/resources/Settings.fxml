@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="164.0" layoutY="14.0" text="Settings">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rhythmsPathField" layoutX="216.0" layoutY="92.0" prefHeight="26.0" prefWidth="211.0" />
+      <Label layoutX="28.0" layoutY="97.0" text="Rhythm Exercises Location:" />
+      <Button fx:id="okButton" layoutX="437.0" layoutY="202.0" mnemonicParsing="false" text="OK" />
+      <Button fx:id="rhythmsPathButton" layoutX="436.0" layoutY="91.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@music_folder.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

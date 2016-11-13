@@ -15,6 +15,9 @@ public class MainMenuController {
   private URL location;
   @FXML // fx:id="button"
   private Button rhythmButton; // Value injected by FXMLLoader
+  @FXML
+  private Button settingsButton;
+  
   private MainController mainController;
 
   /**
@@ -25,6 +28,19 @@ public class MainMenuController {
     assert rhythmButton != null
         : "fx:id=\"sightSingButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
+    if (settingsButton != null) {
+      settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          if (mainController == null) {
+            System.out.println("mainController not set in MainMenuController!");
+            System.exit(1);
+          }
+          mainController.startSettings();
+        }
+      });
+    }
+    
     if (rhythmButton != null) {
       rhythmButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override

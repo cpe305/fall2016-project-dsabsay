@@ -8,9 +8,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,6 +40,10 @@ public class PracticeController {
 
   private MainController mainController;
 
+  public PracticeController(MainController mainController) {
+    this.mainController = mainController;
+  }
+  
   /**
    * Initializes the controller class.
    */
@@ -52,17 +59,44 @@ public class PracticeController {
      * System.out.println("Practice sight singing!"); } }); }
      */
     
-    assert recordButton != null
+    assert recordButton != null && optionsButton != null
         : "fx:id=\"recordButton\" was not injected: check your FXML file 'Practice.fxml'.";
 
+    if (optionsButton != null) {
+      optionsButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          if (mainController == null) {
+            System.out.println("mainController not set in MainMenuController!");
+            System.exit(1);
+          }
+          mainController.startMainMenu();
+        }
+      });
+    }
+    
     NotationWebView notationWebView = new NotationWebView(webView);
     
     //String path = "src/main/resources/testRhythm2.txt";
     //VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
     
-    UserConfiguration config = new UserConfiguration();
-    config.setRhythmsPath("src/main/exercises/rhythmExercises");
-    VexTabExercisesRepo repo = new VexTabRhythmExercisesRepo(config);
+    //UserConfiguration config = new UserConfiguration();
+    //config.setRhythmsPath("src/main/exercises/rhythmExercises");
+    VexTabExercisesRepo repo = null;
+    
+    try {
+      repo = new VexTabRhythmExercisesRepo(mainController.getUserConfiguration());
+    } catch (FileNotFoundException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+      Alert alert = new Alert(AlertType.ERROR);
+      alert.setTitle("No exercises found");
+      alert.setHeaderText(null);
+      alert.setContentText("No exercises were found. Make sure the path to your exercises is "
+          + "set correctly.");
+      alert.showAndWait();
+    }
+    
     VexTabExercise exercise = repo.getRandomExercise();
     
     try {
