@@ -2,6 +2,7 @@ package com.dsabsay.grader;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,9 @@ public class TestRhythmExtractor {
   @Test
   public void test() throws ExtractorException {
     String filename = "tap_quarterNotes.m4a";
+    
+    File file = new File("essentia/" + filename);
+    System.out.println("File: " + file.getAbsolutePath());
     
     RhythmExtractor extractor = new RhythmExtractor();
     RhythmExtractorResults results = extractor.processPerformance(filename);

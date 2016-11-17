@@ -54,7 +54,7 @@ public class EssentiaExtractorLauncher {
     //wait for process to terminate
     try {
       if (extractor.waitFor() != EXIT_SUCCESS) {
-        System.out.println("extractor exited with faillure");
+        System.out.println("extractor exited with failure");
       }
     } catch (InterruptedException exception) {
       // TODO Auto-generated catch block
