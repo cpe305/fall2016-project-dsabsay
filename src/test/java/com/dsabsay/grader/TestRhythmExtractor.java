@@ -3,6 +3,7 @@ package com.dsabsay.grader;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,13 @@ public class TestRhythmExtractor {
     
     File file = new File("essentia/" + filename);
     System.out.println("File: " + file.getAbsolutePath());
+    System.out.println("  can read: " + Files.isReadable(file.toPath()));
+    
+    
+    File executable
+      = new File("essentia/essentia-extractors/essentia-extractors/essentia_standard_onsetrate");
+    System.out.println("Executable: " + executable.getAbsolutePath());
+    System.out.println("  can execute: " + Files.isExecutable(executable.toPath()));
     
     RhythmExtractor extractor = new RhythmExtractor();
     RhythmExtractorResults results = extractor.processPerformance(filename);
