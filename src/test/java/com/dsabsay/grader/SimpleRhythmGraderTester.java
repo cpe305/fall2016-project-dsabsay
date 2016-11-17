@@ -1,5 +1,6 @@
 package com.dsabsay.grader;
 
+import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.VexTabRhythmExercise;
 
@@ -7,7 +8,7 @@ public class SimpleRhythmGraderTester {
   //errorMargin (in beats)
   private static final float errorMargin = (float) 0.20;
   
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ExtractorException {
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes.m4a");
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake.m4a");
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake2.m4a");
@@ -16,7 +17,7 @@ public class SimpleRhythmGraderTester {
     testGrader("src/main/resources/testRhythmEighthNotes.txt", "testRhythmEighthNotes.m4a");
   }
   
-  private static void testGrader(String exercisePath, String performancePath) {
+  private static void testGrader(String exercisePath, String performancePath) throws ExtractorException {
     System.out.println("Grading performance: " + performancePath + " for " + exercisePath);
     
     //String path = "src/main/resources/testRhythmQuarterNotes.txt";

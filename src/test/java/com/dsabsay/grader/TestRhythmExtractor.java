@@ -7,10 +7,12 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.dsabsay.model.ExtractorException;
+
 public class TestRhythmExtractor {
 
   @Test
-  public void test() {
+  public void test() throws ExtractorException {
     String filename = "tap_quarterNotes.m4a";
     
     RhythmExtractor extractor = new RhythmExtractor();

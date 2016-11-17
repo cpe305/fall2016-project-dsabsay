@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.dsabsay.model.ExtractorException;
+
 public class RhythmExtractor {
   private RhythmExtractorResults results;
   
@@ -11,7 +13,7 @@ public class RhythmExtractor {
     this.results = new RhythmExtractorResults();
   }
   
-  public RhythmExtractorResults processPerformance(String filename) {
+  public RhythmExtractorResults processPerformance(String filename) throws ExtractorException {
     EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
     String rhythmExtractorOutput = launcher.runRhythmExtractor(filename);
     String onsetExtractorOutput = launcher.runOnsetExtractor(filename);
@@ -23,8 +25,14 @@ public class RhythmExtractor {
     return this.results;
   }
   
-  private void parseRhythmExtractorOutput(String rhythmExtractorOutput) {
+  private void parseRhythmExtractorOutput(String rhythmExtractorOutput) throws ExtractorException {
     String[] lines = rhythmExtractorOutput.split("\\n|\\r");
+    
+    System.out.println("rhythmExtractorOutput: " + rhythmExtractorOutput);
+    
+    if (lines.length != 9) {
+      throw new ExtractorException();
+    }
     
     String bpmLine = lines[4];
     this.results.setBpm(Float.parseFloat(bpmLine.split(":\\s+")[1]));
