@@ -3,6 +3,7 @@
 # script to install essentia (for Linux)
 
 # install dependencies
+sudo apt-get update
 sudo apt-get install build-essential libfftw3-dev libavcodec-dev libavformat-dev libavutil-dev libavresample-dev python-dev libsamplerate0-dev libtag1-dev
 # sudo apt-get install build-essential libavcodec-dev libavformat-dev libavutil-dev libavresample-dev python-dev libsamplerate0-dev libtag1-dev
 
