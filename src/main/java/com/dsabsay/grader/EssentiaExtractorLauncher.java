@@ -50,11 +50,13 @@ public class EssentiaExtractorLauncher {
     }
     
     InputStream output = extractor.getInputStream();
+    InputStream error = extractor.getErrorStream();
 
     //wait for process to terminate
     try {
       if (extractor.waitFor() != EXIT_SUCCESS) {
         System.out.println("extractor exited with failure");
+        System.out.println("error: " + error.toString());
       }
     } catch (InterruptedException exception) {
       // TODO Auto-generated catch block
