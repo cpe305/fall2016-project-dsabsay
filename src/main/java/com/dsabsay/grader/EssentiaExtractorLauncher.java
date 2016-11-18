@@ -19,12 +19,20 @@ public class EssentiaExtractorLauncher {
   private static final int EXIT_SUCCESS = 0;
   
   public String runRhythmExtractor(String filename) {
-    return processRhythmPerformance(RHYTHM_EXTRACTOR_PATH, filename);
+    return processRhythmPerformance(getCommand(RHYTHM_EXTRACTOR_PATH, filename));
   }
   
   public String runOnsetExtractor(String filename) {
     //return processRhythmPerformance(ONSET_EXTRACTOR_PATH, filename);
-    return processRhythmPerformance(STANDARD_ONSET_EXTRACTOR_PATH, filename);
+    return processRhythmPerformance(getCommand(STANDARD_ONSET_EXTRACTOR_PATH, filename));
+  }
+  
+  private String[] getCommand(String extractorPath, String filename) {
+    String[] cmd = new String[2];
+    cmd[0] = extractorPath;
+    cmd[1] = filename;
+    
+    return cmd;
   }
   
   /** no it doesn't
@@ -32,12 +40,8 @@ public class EssentiaExtractorLauncher {
    * @param filename Filename of recorded performance.
    *      The path is relative to ESSENTIA_WORKING_DIRECTORY.
    */
-  private String processRhythmPerformance(String extractorPath, String filename) {
+  protected String processRhythmPerformance(String[] cmd) {
     Runtime runtime = Runtime.getRuntime();
-    String[] cmd = new String[2];
-    //cmd[0] = RHYTHM_EXTRACTOR_PATH;
-    cmd[0] = extractorPath;
-    cmd[1] = filename;
     
     File dir = new File(ESSENTIA_WORKING_DIRECTORY);
     

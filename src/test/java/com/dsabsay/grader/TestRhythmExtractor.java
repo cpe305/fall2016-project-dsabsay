@@ -55,7 +55,7 @@ public class TestRhythmExtractor {
     onsets.add((float) 4.45823);
     expected.setOnsets(onsets);
     
-    assertEquals(results.getBpm(), expected.getBpm(), .0000001);
+    assertEquals(results.getBpm(), expected.getBpm(), .0001);
     assertEquals(results.getTicks(), expected.getTicks());
     assertEquals(results.getOnsets(), expected.getOnsets());
   }

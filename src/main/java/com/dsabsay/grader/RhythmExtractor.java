@@ -14,7 +14,11 @@ public class RhythmExtractor {
   }
   
   public RhythmExtractorResults processPerformance(String filename) throws ExtractorException {
-    EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
+    //EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
+    
+    //try to use python extractors
+    EssentiaExtractorLauncher launcher = new PythonEssentiaExtractorLauncher();
+    
     String rhythmExtractorOutput = launcher.runRhythmExtractor(filename);
     String onsetExtractorOutput = launcher.runOnsetExtractor(filename);
     
