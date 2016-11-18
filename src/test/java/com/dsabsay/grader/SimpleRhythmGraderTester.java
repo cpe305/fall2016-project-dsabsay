@@ -8,6 +8,11 @@ public class SimpleRhythmGraderTester {
   //errorMargin (in beats)
   private static final float errorMargin = (float) 0.20;
   
+  /**
+   * Tester for SimpleRhythmGrader.
+   * @param args args
+   * @throws ExtractorException exception
+   */
   public static void main(String[] args) throws ExtractorException {
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes.m4a");
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake.m4a");
@@ -17,7 +22,8 @@ public class SimpleRhythmGraderTester {
     testGrader("src/main/resources/testRhythmEighthNotes.txt", "testRhythmEighthNotes.m4a");
   }
   
-  private static void testGrader(String exercisePath, String performancePath) throws ExtractorException {
+  private static void testGrader(String exercisePath, String performancePath)
+      throws ExtractorException {
     System.out.println("Grading performance: " + performancePath + " for " + exercisePath);
     
     //String path = "src/main/resources/testRhythmQuarterNotes.txt";

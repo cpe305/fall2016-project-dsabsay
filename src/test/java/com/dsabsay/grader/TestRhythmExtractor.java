@@ -1,15 +1,14 @@
 package com.dsabsay.grader;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import com.dsabsay.model.ExtractorException;
+import org.junit.Test;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Test;
-
-import com.dsabsay.model.ExtractorException;
 
 public class TestRhythmExtractor {
 
@@ -23,12 +22,9 @@ public class TestRhythmExtractor {
     
     
     File executable
-      = new File("essentia/essentia-extractors/essentia-extractors/essentia_standard_onsetrate");
+        = new File("essentia/essentia-extractors/essentia-extractors/essentia_standard_onsetrate");
     System.out.println("Executable: " + executable.getAbsolutePath());
     System.out.println("  can execute: " + Files.isExecutable(executable.toPath()));
-    
-    RhythmExtractor extractor = new RhythmExtractor();
-    RhythmExtractorResults results = extractor.processPerformance(filename);
     
     RhythmExtractorResults expected = new RhythmExtractorResults();
     expected.setBpm((float) 104.414);
@@ -54,6 +50,9 @@ public class TestRhythmExtractor {
     onsets.add((float) 3.86612);
     onsets.add((float) 4.45823);
     expected.setOnsets(onsets);
+    
+    RhythmExtractor extractor = new RhythmExtractor();
+    RhythmExtractorResults results = extractor.processPerformance(filename);
     
     assertEquals(results.getBpm(), expected.getBpm(), .0001);
     assertEquals(results.getTicks(), expected.getTicks());

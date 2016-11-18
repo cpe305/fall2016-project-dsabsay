@@ -1,10 +1,11 @@
 package com.dsabsay.repo;
 
-import java.util.List;
-
 import com.dsabsay.model.VexTabExercise;
+
+import java.util.List;
 
 public interface VexTabExercisesRepo {
   public List<VexTabExercise> getExercises();
+  
   public VexTabExercise getRandomExercise();
 }

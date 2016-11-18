@@ -1,19 +1,23 @@
 package com.dsabsay.repo;
 
-import java.io.FileNotFoundException;
-
 import com.dsabsay.model.UserConfiguration;
 
+import java.io.FileNotFoundException;
+
 public class VexTabRhythmExercisesRepoTester {
+  /**
+   * Tester for VexTabRhythmExercisesRepo.
+   * @param args args
+   */
   public static void main(String[] args) {
     UserConfiguration config = new UserConfiguration();
     config.setRhythmsPath("src/main/exercises/testRhythmExercises");
     
     try {
       VexTabExercisesRepo repo = new VexTabRhythmExercisesRepo(config);
-    } catch (FileNotFoundException e) {
+    } catch (FileNotFoundException exception) {
       // TODO Auto-generated catch block
-      e.printStackTrace();
+      exception.printStackTrace();
     }
   }
 }

@@ -5,7 +5,13 @@ import java.util.List;
 
 public class VexTabRhythmParser {
 
-  public RhythmExercise parseVexTab(String s) 
+  /**
+   * Parses VexTab notation and returns a RhythmExercise representing the exercise.
+   * @param vextab String containing the VexTab notation to be parsed
+   * @return RhythmExercise
+   * @throws InvalidVexTabException if 
+   */
+  public RhythmExercise parseVexTab(String vextab) 
       throws InvalidVexTabException {
     int duration;
     boolean dotted;
@@ -15,23 +21,17 @@ public class VexTabRhythmParser {
     duration = 4;
     dotted = false;
     
-    // parse time signature
-    int index = s.indexOf("time=");
-    if (index == -1) {
-      throw new InvalidVexTabException();
-    }
-    int timeSigNumerator = Integer.parseInt(s.substring(index + 5, index + 6));
-    int timeSigDenominator = Integer.parseInt(s.substring(index + 7, index + 8));
-    
+
+    int index;
     //get lines starting with "notes"
     String noteLine;
-    index = s.indexOf("notes");
-    int indexOfNewline = s.substring(index).indexOf('\n');
+    index = vextab.indexOf("notes");
+    int indexOfNewline = vextab.substring(index).indexOf('\n');
     
     if (indexOfNewline == -1) {
-      noteLine = s.substring(index);
+      noteLine = vextab.substring(index);
     } else {
-      noteLine = s.substring(index).substring(0, s.substring(index).indexOf('\n'));
+      noteLine = vextab.substring(index).substring(0, vextab.substring(index).indexOf('\n'));
     }
     
     //trim off "notes"
@@ -136,6 +136,16 @@ public class VexTabRhythmParser {
     }
     // if newline is read, look for next "notes" line
     */
+    
+    // parse time signature
+    // This code might be duplicated in VexTabRhythmExercise.getTimeSig()
+    index = vextab.indexOf("time=");
+    if (index == -1) {
+      throw new InvalidVexTabException();
+    }
+    
+    int timeSigNumerator = Integer.parseInt(vextab.substring(index + 5, index + 6));
+    int timeSigDenominator = Integer.parseInt(vextab.substring(index + 7, index + 8));
     
     return new RhythmExercise(timeSigNumerator, timeSigDenominator, notes);
     

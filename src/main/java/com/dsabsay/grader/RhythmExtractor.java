@@ -1,10 +1,10 @@
 package com.dsabsay.grader;
 
+import com.dsabsay.model.ExtractorException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.dsabsay.model.ExtractorException;
 
 public class RhythmExtractor {
   private RhythmExtractorResults results;
@@ -13,6 +13,12 @@ public class RhythmExtractor {
     this.results = new RhythmExtractorResults();
   }
   
+  /**
+   * Launches the Essentia extractors to process the performance.
+   * @param filename filename of the performance audio file
+   * @return RhythmExtractorResults
+   * @throws ExtractorException if an error occurs with the extractor(s)
+   */
   public RhythmExtractorResults processPerformance(String filename) throws ExtractorException {
     //EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
     
@@ -22,7 +28,6 @@ public class RhythmExtractor {
     String rhythmExtractorOutput = launcher.runRhythmExtractor(filename);
     String onsetExtractorOutput = launcher.runOnsetExtractor(filename);
     
-    RhythmExtractorResults results = new RhythmExtractorResults();
     parseRhythmExtractorOutput(rhythmExtractorOutput);
     parseOnsetExtractorOutput(onsetExtractorOutput);
     
@@ -54,8 +59,12 @@ public class RhythmExtractor {
     this.results.setTicks(ticks);
   }
   
-  private void parseOnsetExtractorOutput(String onsetExtractorOutput) {
+  private void parseOnsetExtractorOutput(String onsetExtractorOutput) throws ExtractorException {
     String[] lines = onsetExtractorOutput.split("\\n|\\r");
+    
+    if (lines.length != 2) {
+      throw new ExtractorException();
+    }
     
     //String onsetTimes = lines[4];
     String onsetTimes = lines[1];

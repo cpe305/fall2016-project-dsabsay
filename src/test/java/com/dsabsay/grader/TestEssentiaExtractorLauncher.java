@@ -4,6 +4,10 @@ import java.io.File;
 import java.nio.file.Files;
 
 public class TestEssentiaExtractorLauncher {
+  /**
+   * Tester for EssentiaExtractorLauncher.
+   * @param args args
+   */
   public static void main(String[] args) {
     //EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
     
@@ -17,7 +21,7 @@ public class TestEssentiaExtractorLauncher {
     
     
     File executable
-      = new File("essentia/essentia-extractors/essentia-extractors/essentia_standard_onsetrate");
+        = new File("essentia/essentia-extractors/essentia-extractors/essentia_standard_onsetrate");
     System.out.println("Executable: " + executable.getAbsolutePath());
     System.out.println("  can execute: " + Files.isExecutable(executable.toPath()));
   }

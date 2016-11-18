@@ -1,7 +1,5 @@
 package com.dsabsay.grader;
 
-import com.dsabsay.model.Note;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +9,12 @@ public class RhythmExtractorResults {
   private List<Float> ticks;
   private List<Float> onsets;
   
+  /**
+   * Creates a RhythmExtractorResults object.
+   * @param bpm bpm
+   * @param ticks list of ticks
+   * @param onsets list of onsets
+   */
   public RhythmExtractorResults(float bpm, List<Float> ticks, List<Float> onsets) {
     this.bpm = bpm;
     this.ticks = ticks;
@@ -21,6 +25,11 @@ public class RhythmExtractorResults {
     
   }
   
+  /**
+   * Creates RhythmExtractorResults from extractor output.
+   * @param rhythmExtractorOutput output from the rhythm extractor
+   * @param onsetExtractorOutput output from the onset extractor
+   */
   public RhythmExtractorResults(String rhythmExtractorOutput, String onsetExtractorOutput) {
     parseRhythmExtractorOutput(rhythmExtractorOutput);
     parseOnsetExtractorOutput(onsetExtractorOutput);

@@ -1,13 +1,12 @@
 package com.dsabsay.grader;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import com.dsabsay.model.VexTabRhythmExercise;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Test;
-
-import com.dsabsay.model.VexTabRhythmExercise;
 
 public class TestSimpleRhythmGrader {
 

@@ -8,6 +8,13 @@ public class Note {
   private boolean isRest;
   private boolean isDotted;
   
+  /**
+   * Creates a Note object.
+   * @param pitch pitch
+   * @param rhythmicValue rhythm value
+   * @param isDotted is dotted
+   * @param isRest is rest
+   */
   public Note(int pitch, int rhythmicValue, boolean isDotted, boolean isRest) {
     this.pitch = pitch;
     this.rhythmicValue = rhythmicValue;
@@ -16,6 +23,12 @@ public class Note {
     this.tied = null;
   }
   
+  /**
+   * Creates a Note object.
+   * @param rhythmicValue rhythm value
+   * @param isDotted is dotted
+   * @param isRest is rest
+   */
   public Note(int rhythmicValue, boolean isDotted, boolean isRest) {
     this.rhythmicValue = rhythmicValue;
     this.isDotted = isDotted;

@@ -6,6 +6,12 @@ public class RhythmExercise {
   private int[] timeSig;
   private List<Note> notes;
   
+  /**
+   * Creates a new RhythmExercise.
+   * @param timeSigNumerator time signature numerator
+   * @param timeSigDenominator time signature denominator
+   * @param notes list of notes
+   */
   public RhythmExercise(int timeSigNumerator, int timeSigDenominator, List<Note> notes) {
     this.timeSig = new int[2];
     this.timeSig[0] = timeSigNumerator;
@@ -29,6 +35,9 @@ public class RhythmExercise {
     this.notes = notes;
   }
 
+  /**
+   * Prints the exercise.
+   */
   public void print() {
     System.out.println("Exercise: timeSig: " + timeSig[0] + "/" + timeSig[1]);
     System.out.print("  Notes: ");

@@ -69,9 +69,9 @@ public class VexTabRhythmExercise extends VexTabExercise {
     try {
       this.vextabNotation = vextab;
       this.exercise = parser.parseVexTab(vextab);
-    } catch (InvalidVexTabException e) {
+    } catch (InvalidVexTabException exception) {
       // TODO Auto-generated catch block
-      e.printStackTrace();
+      exception.printStackTrace();
     }
   }
 
@@ -80,6 +80,10 @@ public class VexTabRhythmExercise extends VexTabExercise {
   }
 
   //assumes only one line of notes
+  /**
+   * Returns the line in the VexTab notation that contains the notes of the exercise.
+   * Assumes that there is only one line of notes in the VexTab notation.
+   */
   public String getNotesString() {
     
     //get lines starting with "notes"
@@ -97,6 +101,11 @@ public class VexTabRhythmExercise extends VexTabExercise {
     return noteLine;
   }
   
+  /**
+   * Returns the time signature of the VexTab notation.
+   * This code may already be in VexTabRhythmParser.
+   * @throws InvalidVexTabException if no time signature is found in the VexTab notation
+   */
   public String getTimeSig() throws InvalidVexTabException {
     // parse time signature
     int index = this.vextabNotation.indexOf("time=");

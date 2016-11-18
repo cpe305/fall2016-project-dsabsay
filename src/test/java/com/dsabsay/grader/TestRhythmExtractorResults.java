@@ -1,6 +1,10 @@
 package com.dsabsay.grader;
 
 public class TestRhythmExtractorResults {
+  /**
+   * Tester for RhythmExtractorResults.
+   * @param args args
+   */
   public static void main(String[] args) {
     EssentiaExtractorLauncher launcher = new EssentiaExtractorLauncher();
     

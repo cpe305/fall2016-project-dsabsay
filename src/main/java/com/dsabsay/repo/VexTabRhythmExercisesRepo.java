@@ -24,8 +24,16 @@ public class VexTabRhythmExercisesRepo
     return exercises;
   }
   
+  /**
+   * Gets a random exercise from the repo. Returns null if there are no exercises.
+   */
   public VexTabExercise getRandomExercise() {
+    // This should probably check the size of the exercises list
     if (exercises == null) {
+      return null;
+    }
+    
+    if (exercises.size() == 0) {
       return null;
     }
     

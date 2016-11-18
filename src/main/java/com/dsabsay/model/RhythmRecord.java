@@ -30,6 +30,9 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     this.rhythmScore = rhythmScore;
   }
   
+  /**
+   * Prints the RhythmRecord.
+   */
   public void print() {
     System.out.println("RhythmRecord: " + getrhythmId() + ", " + getRhythmType() + ", "
         + getTotalScore() + ", " + getRhythmScore() + ", " + getDate() + ", "

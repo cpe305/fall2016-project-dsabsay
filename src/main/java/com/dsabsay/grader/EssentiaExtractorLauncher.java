@@ -3,9 +3,6 @@ package com.dsabsay.grader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Scanner;
 
 public class EssentiaExtractorLauncher {

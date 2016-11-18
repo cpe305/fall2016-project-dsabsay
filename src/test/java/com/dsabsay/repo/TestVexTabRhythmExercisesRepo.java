@@ -1,12 +1,11 @@
 package com.dsabsay.repo;
 
-import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
-
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import com.dsabsay.model.UserConfiguration;
+import org.junit.Test;
+
+import java.io.FileNotFoundException;
 
 public class TestVexTabRhythmExercisesRepo {
 
@@ -18,9 +17,9 @@ public class TestVexTabRhythmExercisesRepo {
     
     try {
       repo = new VexTabRhythmExercisesRepo(config);
-    } catch (FileNotFoundException e) {
+    } catch (FileNotFoundException exception) {
       // TODO Auto-generated catch block
-      e.printStackTrace();
+      exception.printStackTrace();
     }
     
     assertTrue(repo.getExercises() != null);

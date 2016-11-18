@@ -1,8 +1,10 @@
 package com.dsabsay.application;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker.State;
+import com.dsabsay.model.InvalidVexTabException;
+import com.dsabsay.model.VexTabExercise;
+import com.dsabsay.repo.VexTabExercisesRepo;
+import com.dsabsay.repo.VexTabRhythmExercisesRepo;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,19 +12,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.dsabsay.model.InvalidVexTabException;
-import com.dsabsay.model.UserConfiguration;
-import com.dsabsay.model.VexTabExercise;
-import com.dsabsay.model.VexTabRhythmExercise;
-import com.dsabsay.repo.VexTabExercisesRepo;
-import com.dsabsay.repo.VexTabRhythmExercisesRepo;
 
 public class PracticeController {
   @FXML // ResourceBundle that was given to the FXMLLoader
@@ -101,9 +95,9 @@ public class PracticeController {
     
     try {
       notationWebView.displayExercise(exercise);
-    } catch (InvalidVexTabException e) {
+    } catch (InvalidVexTabException exception) {
       // TODO Auto-generated catch block
-      e.printStackTrace();
+      exception.printStackTrace();
     }
     
     /*

@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VexTabRhythmParserTester {
+  /**
+   * Tester for VexTabRhythmParser.
+   * @param args args
+   */
   public static void main(String[] args) {
-    //String path = TestVexTabRhythmParser.class.getClassLoader().getResource("rhythm1.txt").toString();
+    /*
+    String path
+        = TestVexTabRhythmParser.class.getClassLoader().getResource("rhythm1.txt").toString();
+    */
     //String path = "/resources/rhythm1.txt";
     String path = "src/main/resources/testRhythm1.txt";
     VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);

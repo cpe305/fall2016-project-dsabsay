@@ -1,7 +1,7 @@
 package com.dsabsay.grader;
 
 public class PythonEssentiaExtractorLauncher
-    extends EssentiaExtractorLauncher{
+    extends EssentiaExtractorLauncher {
   private static final String PYTHON_ONSET_EXTRACTOR_PATH
       = "essentia-extractors/standard_onset_rate.py";
   private static final String PYTHON_RHYTHM_EXTRACTOR_PATH

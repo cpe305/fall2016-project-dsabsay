@@ -1,15 +1,17 @@
 package com.dsabsay.grader;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.dsabsay.model.Note;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.RhythmExercise;
 import com.dsabsay.model.RhythmScore;
 import com.dsabsay.model.VexTabRhythmExercise;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SimpleRhythmGrader {
+  
+  /*
   public PerformanceScore evaluatePerformance(VexTabRhythmExercise vextabExercise,
       RhythmExtractorResults performance) {
     
@@ -25,7 +27,15 @@ public class SimpleRhythmGrader {
     return null;
     
   }
+  */
   
+  /**
+   * Evaluates the rhythm performance.
+   * @param vextabExercise the exercise
+   * @param performance the performance (parsed as a RhythmExtractorResults object)
+   * @param errorMargin acceptable margin of error for onsets
+   * @return PerformanceScore containing the calculated score
+   */
   public PerformanceScore evaluatePerformanceSimpler(VexTabRhythmExercise vextabExercise,
       RhythmExtractorResults performance, float errorMargin) {
     int numCorrect = 0;
@@ -33,12 +43,10 @@ public class SimpleRhythmGrader {
     //this gets number of notes including rests!
     //maybe just subtract rests for now
     //int numNotesInExercise = vextabExercise.getExercise().getNotes().size();
-    int numNotesInExercise = numNotesWithoutRests(vextabExercise.getExercise().getNotes());
     
     //note onsets (in beats)
     List<Float> exerciseNoteOnsets = getNoteOnsets(performance.getBpm(),
         vextabExercise.getExercise());
-    List<Float> performanceNoteOnsets = getNoteOnsets(performance);
     
     System.out.print("Exercise Note Onsets: ");
     for (float a : exerciseNoteOnsets) {
@@ -47,6 +55,8 @@ public class SimpleRhythmGrader {
     
     System.out.println();
     
+    List<Float> performanceNoteOnsets = getNoteOnsets(performance);
+
     System.out.print("Performance Note Onsets: ");
     for (float a : performanceNoteOnsets) {
       System.out.print(a + ", ");
@@ -67,6 +77,8 @@ public class SimpleRhythmGrader {
     
     List<String> comments = new ArrayList<String>();
     comments.add("woohoo!");
+    int numNotesInExercise = numNotesWithoutRests(vextabExercise.getExercise().getNotes());
+
     PerformanceScore score = new RhythmScore((numCorrect - numWrong) / (float) numNotesInExercise,
         comments);
     

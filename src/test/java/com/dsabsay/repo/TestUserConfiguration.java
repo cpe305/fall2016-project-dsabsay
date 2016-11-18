@@ -19,7 +19,10 @@ public class TestUserConfiguration {
   @Test
   public void testReadWriteUserConfig() {
     config.readUserConfig();
-    String orig = config.getRhythmRecordsPath();
+    
+    //not sure about this
+    final String orig = config.getRhythmRecordsPath();
+    
     config.setRhythmRecordsPath("test/");
     config.saveUserConfig();
     assertEquals(config.getRhythmRecordsPath(), "test/");

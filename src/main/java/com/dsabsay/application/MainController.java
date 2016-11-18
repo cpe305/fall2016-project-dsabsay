@@ -1,13 +1,13 @@
 package com.dsabsay.application;
 
+import com.dsabsay.model.UserConfiguration;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import com.dsabsay.model.UserConfiguration;
 
 public class MainController {
   private Stage primaryStage;
@@ -25,7 +25,8 @@ public class MainController {
   public void startPracticeView() {
     try {
       // create FXMLLoader
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Practice.fxml"));
+      FXMLLoader fxmlLoader
+          = new FXMLLoader(getClass().getClassLoader().getResource("Practice.fxml"));
       fxmlLoader.setController(new PracticeController(this));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
@@ -69,9 +70,11 @@ public class MainController {
       // AnchorPane mainMenu = (AnchorPane)
       // fxmlLoader.load(Main.class.getResource("MainMenu.fxml"));
 
-      System.out.println("get resource: " + getClass().getClassLoader().getResource("MainMenu.fxml"));
+      System.out.println("get resource: "
+          + getClass().getClassLoader().getResource("MainMenu.fxml"));
       // create FXMLLoader
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MainMenu.fxml"));
+      FXMLLoader fxmlLoader
+          = new FXMLLoader(getClass().getClassLoader().getResource("MainMenu.fxml"));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
       primaryStage.setTitle("SightSinger");
