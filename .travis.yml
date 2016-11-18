@@ -8,6 +8,7 @@ addons:
     packages:
       - oracle-java8-installer
 
+dist: trusty
 sudo: required
 
 install: ./install_essentia.sh
