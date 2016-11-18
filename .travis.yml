@@ -8,6 +8,8 @@ addons:
     packages:
       - oracle-java8-installer
 
+sudo: required
+
 install: ./install_essentia.sh
 
 script:
