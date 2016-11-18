@@ -56,7 +56,10 @@ public class EssentiaExtractorLauncher {
     try {
       if (extractor.waitFor() != EXIT_SUCCESS) {
         System.out.println("extractor exited with failure");
-        System.out.println("error: " + error.toString());
+        Scanner scanner = new Scanner(error).useDelimiter("\\A");
+        String string = scanner.hasNext() ? scanner.next() : "";
+        scanner.close();
+        System.out.println("error: " + string);
       }
     } catch (InterruptedException exception) {
       // TODO Auto-generated catch block
