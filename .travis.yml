@@ -8,10 +8,12 @@ addons:
     packages:
       - oracle-java8-installer
 
-dist: trusty
-sudo: required
+os: osx
 
-install: ./install_essentia.sh
+# dist: trusty
+# sudo: required
+
+# install: ./install_essentia.sh
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis

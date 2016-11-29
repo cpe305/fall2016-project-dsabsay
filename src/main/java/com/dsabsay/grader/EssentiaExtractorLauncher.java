@@ -8,11 +8,11 @@ import java.util.Scanner;
 public class EssentiaExtractorLauncher {
   private static final String ESSENTIA_WORKING_DIRECTORY = "essentia/";
   private static final String RHYTHM_EXTRACTOR_PATH
-      = "essentia-extractors/essentia_streaming_rhythmextractor_multifeature";
+      = "essentia-extractors/osx-x86_64/essentia_streaming_rhythmextractor_multifeature";
   private static final String ONSET_EXTRACTOR_PATH
-      = "essentia-extractors/essentia_streaming_onsetrate";
+      = "essentia-extractors/osx-x86_64/essentia_streaming_onsetrate";
   private static final String STANDARD_ONSET_EXTRACTOR_PATH
-      = "essentia-extractors/essentia_standard_onsetrate";
+      = "essentia-extractors/osx-x86_64/essentia_standard_onsetrate";
   private static final int EXIT_SUCCESS = 0;
   
   public String runRhythmExtractor(String filename) {
