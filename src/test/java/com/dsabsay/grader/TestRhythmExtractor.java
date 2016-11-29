@@ -8,10 +8,13 @@ import org.junit.Test;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TestRhythmExtractor {
-
+  private static final double BPM_DELTA = 0.5;
+  private static final double ONSETS_DELTA = 0.1;
+  
   @Test
   public void test() throws ExtractorException {
     String filename = "tap_quarterNotes.m4a";
@@ -55,9 +58,27 @@ public class TestRhythmExtractor {
     RhythmExtractorResults results = extractor.processPerformance(filename);
     
     //assertEquals(results.getBpm(), expected.getBpm(), .0001);
-    assertEquals(results.getBpm(), expected.getBpm(), .5);
-    assertEquals(results.getTicks(), expected.getTicks());
-    assertEquals(results.getOnsets(), expected.getOnsets());
+    assertEquals(results.getBpm(), expected.getBpm(), BPM_DELTA);
+    //assertEquals(results.getTicks(), expected.getTicks());
+    //assertEquals(results.getOnsets(), expected.getOnsets());
+    
+    //check ticks
+    Iterator<Float> resultsTicksIterator = results.getTicks().iterator();
+    Iterator<Float> expectedTicksIterator = expected.getTicks().iterator();
+    
+    while (expectedTicksIterator.hasNext()) {
+      assertEquals(expectedTicksIterator.next(), resultsTicksIterator.next(), ONSETS_DELTA);
+    }
+    
+    //check onsets
+    Iterator<Float> resultsOnsetsIterator = results.getOnsets().iterator();
+    Iterator<Float> expectedOnsetsIterator = expected.getOnsets().iterator();
+    
+    while (expectedOnsetsIterator.hasNext()) {
+      assertEquals(expectedOnsetsIterator.next(), resultsOnsetsIterator.next(), ONSETS_DELTA);
+    }
+    
+    
   }
 
 }
