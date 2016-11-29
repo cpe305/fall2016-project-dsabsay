@@ -28,7 +28,7 @@ public class EssentiaExtractorLauncher {
     
     System.out.println(System.getProperty("os.arch"));
     if (!System.getProperty("os.arch").contains("x86")
-        || !System.getProperty("os.arch").contains("64")) {
+        && !System.getProperty("os.arch").contains("64")) {
       throw new ExtractorException("The extractor binaries only work on an x86_64 architecture.");
     }
     
