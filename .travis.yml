@@ -8,7 +8,7 @@ addons:
     packages:
       - oracle-java8-installer
 
-os: osx
+# os: osx
 
 # dist: trusty
 # sudo: required

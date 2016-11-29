@@ -1,9 +1,13 @@
 package com.dsabsay.grader;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
+
+import com.dsabsay.model.ExtractorException;
 
 public class EssentiaExtractorLauncher {
   private static final String ESSENTIA_WORKING_DIRECTORY = "essentia/";
@@ -13,15 +17,48 @@ public class EssentiaExtractorLauncher {
       = "essentia-extractors/osx-x86_64/essentia_streaming_onsetrate";
   private static final String STANDARD_ONSET_EXTRACTOR_PATH
       = "essentia-extractors/osx-x86_64/essentia_standard_onsetrate";
+  private static final String STANDARD_ONSET_EXTRACTOR_NAME = "essentia_standard_onsetrate";
+  private static final String RHYTHM_EXTRACTOR_NAME
+      = "essentia_streaming_rhythmextractor_multifeature";
+  private static final String OSX_EXTRACTOR_FOLDER = "essentia-extractors/osx_x86_64/";
+  private static final String LINUX_EXTRACTOR_FOLDER = "essentia-extractors/linux_x86_64/";
   private static final int EXIT_SUCCESS = 0;
   
-  public String runRhythmExtractor(String filename) {
-    return processRhythmPerformance(getCommand(RHYTHM_EXTRACTOR_PATH, filename));
+  private String getExtractorFolder() throws ExtractorException {
+    
+    if (!System.getProperty("os.arch").contains("x86_64")) {
+      throw new ExtractorException("The extractor binaries only work on an x86_64 architecture.");
+    }
+    
+    /*
+    String os = System.getProperty("os.name");
+    
+    if (System.getProperty("os.name") == "Mac OS X") {
+      return OSX_EXTRACTOR_FOLDER;
+    }
+    */
+    
+    if (SystemUtils.IS_OS_MAC_OSX) {
+      return OSX_EXTRACTOR_FOLDER;
+    } else if (SystemUtils.IS_OS_LINUX) {
+      return LINUX_EXTRACTOR_FOLDER;
+    } else {
+      throw new ExtractorException("The " + SystemUtils.OS_NAME + " is not supported.");
+    }
+
   }
   
-  public String runOnsetExtractor(String filename) {
+  public String runRhythmExtractor(String filename) throws ExtractorException {
+    //return processRhythmPerformance(getCommand(RHYTHM_EXTRACTOR_PATH, filename));
+    return processRhythmPerformance(getCommand(getExtractorFolder()
+        + RHYTHM_EXTRACTOR_NAME, filename));
+  }
+  
+  public String runOnsetExtractor(String filename) throws ExtractorException {
     //return processRhythmPerformance(ONSET_EXTRACTOR_PATH, filename);
-    return processRhythmPerformance(getCommand(STANDARD_ONSET_EXTRACTOR_PATH, filename));
+    //return processRhythmPerformance(getCommand(STANDARD_ONSET_EXTRACTOR_PATH, filename));
+    return processRhythmPerformance(getCommand(getExtractorFolder()
+        + STANDARD_ONSET_EXTRACTOR_NAME, filename));
   }
   
   private String[] getCommand(String extractorPath, String filename) {
