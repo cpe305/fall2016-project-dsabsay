@@ -1,0 +1,12 @@
+.recording {
+	-fx-background-color: #ff0000;
+}
+
+.circle {
+	/* -fx-effect: innershadow(three-pass-box, black, 20, 0, 0, 0) */
+}
+.circle:hover {
+	/* -fx-background-color: #ff0000; */
+	-fx-effect: innershadow(three-pass-box, black, 20, 0, 0, 0) 
+	
+}

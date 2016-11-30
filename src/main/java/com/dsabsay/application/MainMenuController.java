@@ -50,7 +50,7 @@ public class MainMenuController {
             System.out.println("mainController not set in MainMenuController!");
             System.exit(1);
           }
-          mainController.startPracticeView();
+          mainController.startRhythmPracticeView();
         }
       });
     }

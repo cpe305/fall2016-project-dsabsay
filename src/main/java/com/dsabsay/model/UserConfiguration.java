@@ -19,6 +19,10 @@ public class UserConfiguration {
   private String pathToConfig = "src/main/resources/userConfiguration";
 
   private String rhythmsPath;
+  
+  public UserConfiguration() {
+    readUserConfig();
+  }
 
   public String getRhythmsPath() {
     return rhythmsPath;
@@ -69,7 +73,8 @@ public class UserConfiguration {
     try {
       FileReader file = new FileReader(pathToConfig);
       BufferedReader reader = new BufferedReader(file);
-      this.rhythmRecordsPath = reader.readLine();
+      //this.rhythmRecordsPath = reader.readLine();
+      this.rhythmsPath = reader.readLine();
       reader.close();
     } catch (IOException exception) {
       exception.printStackTrace();
@@ -83,7 +88,8 @@ public class UserConfiguration {
     try {
       FileWriter file = new FileWriter(pathToConfig);
       BufferedWriter writer = new BufferedWriter(file);
-      writer.write(rhythmRecordsPath);
+      //writer.write(rhythmRecordsPath);
+      writer.write(rhythmsPath);
       writer.close();
     } catch (IOException exception) {
       exception.printStackTrace();

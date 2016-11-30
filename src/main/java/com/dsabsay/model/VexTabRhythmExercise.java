@@ -13,6 +13,7 @@ public class VexTabRhythmExercise extends VexTabExercise {
   private String pathToExercise;
   private RhythmExercise exercise;
   private String vextabNotation;
+  private String name;
 
   /**
    * Creates a RhythmExercise object.
@@ -28,6 +29,14 @@ public class VexTabRhythmExercise extends VexTabExercise {
     this.rhythmId = rhythmId;
     this.rhythmType = rhythmType;
     this.pathToExercise = pathToExercise;
+    read();
+  }
+  
+  public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise, String name) {
+    this.rhythmId = rhythmId;
+    this.rhythmType = rhythmType;
+    this.pathToExercise = pathToExercise;
+    this.name = name;
     read();
   }
 

@@ -1,5 +1,6 @@
 package com.dsabsay.application;
 
+import com.dsabsay.grader.SimpleRhythmGrader;
 import com.dsabsay.model.UserConfiguration;
 
 import javafx.fxml.FXMLLoader;
@@ -22,12 +23,12 @@ public class MainController {
    * Starts the practice view.
    * 
    */
-  public void startPracticeView() {
+  public void startRhythmPracticeView() {
     try {
       // create FXMLLoader
       FXMLLoader fxmlLoader
           = new FXMLLoader(getClass().getClassLoader().getResource("Practice.fxml"));
-      fxmlLoader.setController(new PracticeController(this));
+      fxmlLoader.setController(new PracticeController(this, new SimpleRhythmGrader()));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
 

@@ -5,7 +5,7 @@ import com.dsabsay.model.RhythmScore;
 
 import java.util.ArrayList;
 
-public class RhythmGrader 
+public abstract class RhythmGrader 
     implements PerformanceGrader {
 
   public RhythmGrader() {

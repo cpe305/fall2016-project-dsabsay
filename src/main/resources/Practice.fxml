@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
@@ -17,7 +19,7 @@
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font></Label>
-      <Button fx:id="recordButton" layoutX="322.0" layoutY="282.0" mnemonicParsing="false">
+      <Button fx:id="recordButton" layoutX="575.0" layoutY="281.0" mnemonicParsing="false">
          <graphic>
             <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -34,5 +36,21 @@
             </ImageView>
          </graphic></Button>
       <Label fx:id="melodyTypeLabel1" layoutX="61.0" layoutY="307.0" text="Rhythm 1" />
+      <Group layoutX="-153.0" layoutY="-2.0">
+         <children>
+            <Circle fx:id="recordCircle" fill="#f8b4b4" layoutX="503.0" layoutY="325.0" onMouseClicked="#recordCircleMouseClicked" onMouseEntered="#recordCircleMouseEntered" onMouseExited="#recordCircleMouseExited" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle" />
+            <ImageView fitHeight="57.0" fitWidth="33.0" layoutX="489.0" layoutY="297.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@mic.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <ProgressIndicator fx:id="progressIndicator" layoutX="324.0" layoutY="210.0" />
+      <Label fx:id="scoreLabel" layoutX="293.0" layoutY="175.0" prefHeight="51.0" prefWidth="115.0" text="100%" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

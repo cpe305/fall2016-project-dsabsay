@@ -1,15 +1,17 @@
 package com.dsabsay.grader;
 
+import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.Note;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.RhythmExercise;
 import com.dsabsay.model.RhythmScore;
+import com.dsabsay.model.VexTabExercise;
 import com.dsabsay.model.VexTabRhythmExercise;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleRhythmGrader {
+public class SimpleRhythmGrader implements PerformanceGrader {
   
   /*
   public PerformanceScore evaluatePerformance(VexTabRhythmExercise vextabExercise,
@@ -28,6 +30,41 @@ public class SimpleRhythmGrader {
     
   }
   */
+  
+  public SimpleRhythmGrader() {
+    
+  }
+  
+  public PerformanceScore evaluatePerformance(VexTabExercise exercise, ExtractorResults results,
+      float rhythmErrorMargin) {
+    
+    // not sure what will happen if this is called with a VexTabExercise
+    // that is not a VexTabRhythmExercise,
+    // or an ExtractorResults that is not a RhythmExtractorResults
+    return evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
+        (RhythmExtractorResults) results, rhythmErrorMargin);
+  }
+  
+  public PerformanceScore evaluatePerformance(VexTabExercise exercise, String performanceFilename,
+      float rhythmErrorMargin) throws ExtractorException {
+    //errorMargin (in beats)
+    final float errorMargin = (float) 0.20;
+    
+    RhythmExtractor extractor = new RhythmExtractor();
+    RhythmExtractorResults results;
+
+    results = extractor.processPerformance(performanceFilename);
+    //showAlertAndWait("Extractor Exception", "An error occured while processing the performance.");
+
+    
+    SimpleRhythmGrader grader = new SimpleRhythmGrader();
+    
+    // not sure what will happen if the VexTabExercise is not a VexTabRhythmExercise
+    PerformanceScore score = grader.evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
+        results, errorMargin);
+    
+    return score;
+  }
   
   /**
    * Evaluates the rhythm performance.

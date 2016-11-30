@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RhythmExtractorResults {
+public class RhythmExtractorResults extends ExtractorResults {
   private float bpm;
   private List<Float> ticks;
   private List<Float> onsets;

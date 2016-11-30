@@ -1,6 +1,14 @@
 package com.dsabsay.application;
 
+import com.dsabsay.grader.PerformanceGrader;
+import com.dsabsay.grader.RhythmExtractor;
+import com.dsabsay.grader.RhythmExtractorResults;
+import com.dsabsay.grader.SimpleRhythmGrader;
+import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.InvalidVexTabException;
+import com.dsabsay.model.PerformanceScore;
+import com.dsabsay.model.Recorder;
+import com.dsabsay.model.RecorderException;
 import com.dsabsay.model.VexTabExercise;
 import com.dsabsay.repo.VexTabExercisesRepo;
 import com.dsabsay.repo.VexTabRhythmExercisesRepo;
@@ -12,11 +20,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.web.WebView;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.sound.sampled.LineUnavailableException;
 
 public class PracticeController {
   @FXML // ResourceBundle that was given to the FXMLLoader
@@ -31,11 +47,22 @@ public class PracticeController {
   private WebView webView;
   @FXML
   private Label melodyTypeLabel;
+  @FXML
+  private ProgressIndicator progressIndicator;
+  @FXML
+  private Label scoreLabel;
+  @FXML
+  private Circle recordCircle;
 
   private MainController mainController;
+  private Recorder recorder;
+  
+  private VexTabExercise currentExercise;
+  private PerformanceGrader grader;
 
-  public PracticeController(MainController mainController) {
+  public PracticeController(MainController mainController, PerformanceGrader grader) {
     this.mainController = mainController;
+    this.grader = grader;
   }
   
   /**
@@ -53,6 +80,8 @@ public class PracticeController {
      * System.out.println("Practice sight singing!"); } }); }
      */
     
+    this.recorder = new Recorder();
+    
     assert recordButton != null && optionsButton != null
         : "fx:id=\"recordButton\" was not injected: check your FXML file 'Practice.fxml'.";
 
@@ -65,6 +94,27 @@ public class PracticeController {
             System.exit(1);
           }
           mainController.startMainMenu();
+        }
+      });
+    }
+    
+    if (recordButton != null) {
+      recordButton.getStylesheets().add(getClass().getClassLoader()
+          .getResource("practiceController.css").toExternalForm());
+      
+      recordButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          if (mainController == null) {
+            System.out.println("mainController not set in MainMenuController!");
+            System.exit(1);
+          }
+          
+          if (!recorder.isRecording()) {
+            startRecording();
+          } else {
+            stopRecording();
+          }
         }
       });
     }
@@ -91,10 +141,11 @@ public class PracticeController {
       alert.showAndWait();
     }
     
-    VexTabExercise exercise = repo.getRandomExercise();
+    this.currentExercise = repo.getRandomExercise();
     
     try {
-      notationWebView.displayExercise(exercise);
+      notationWebView.displayExercise(this.currentExercise);
+      //change label
     } catch (InvalidVexTabException exception) {
       // TODO Auto-generated catch block
       exception.printStackTrace();
@@ -138,9 +189,118 @@ public class PracticeController {
       .load("/Users/danielsabsay/Documents/workspace/javafxtest/src/application/notation.html");
     */
   }
+  
+  private void startRecording() {
+    try {
+      recorder.startRecording();
+      //recordButton.setStyle("-fx-background-color: #ff0000");
+      recordButton.getStyleClass().add("recording");
+      //recordButton.
+      System.out.println("recordButton styleClasses: " + recordButton.getStyleClass());
+      System.out.println("recordButton styleSheets: " + recordButton.getStylesheets());
+    //} catch (IOException | LineUnavailableException | RecorderException ex) {
+    } catch (Throwable ex) {
+      // TODO Auto-generated catch block
+      ex.printStackTrace();
+      showAlertAndWait("Recorder Error", "An error occured trying to record audio.");
+    }
+  }
 
+  private void stopRecording() {
+    progressIndicator.setVisible(true);
+    String performanceFilename = null;
+    try {
+      performanceFilename = recorder.stopRecording();
+    } catch (Throwable th) {
+      th.printStackTrace();
+      showAlertAndWait("Throwable thrown", "An error occured in the recording thread.");
+    }
+    
+    //recordButton.setStyle(null);
+    recordButton.getStyleClass().remove("recording");
+    
+    PerformanceScore score = null;
+    try {
+      score = grader.evaluatePerformance(currentExercise, performanceFilename,
+          (float) 0.20);
+    } catch (ExtractorException ex) {
+      // TODO Auto-generated catch block
+      ex.printStackTrace();
+      showAlertAndWait("ExtractorExcpetion",
+          "An error occured while evaluating the performance.");
+    }
+    
+    progressIndicator.setVisible(false);
+    scoreLabel.setText(score.getScore() * 100 + "%");
+    scoreLabel.setVisible(true);
+  }
+  
   public void setMainController(MainController mainController) {
     this.mainController = mainController;
   }
+  
+  private void showAlertAndWait(String title, String content) {
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(content);
+    alert.showAndWait();
+  }
+  
+  /*
+  private void gradePerformance(String filename) {
+    //errorMargin (in beats)
+    final float errorMargin = (float) 0.20;
+    
+    RhythmExtractor extractor = new RhythmExtractor();
+    RhythmExtractorResults results;
+    
+    try {
+      results = extractor.processPerformance(filename);
+    } catch (ExtractorException ex) {
+      // TODO Auto-generated catch block
+      ex.printStackTrace();
+      showAlertAndWait("Extractor Exception", "An error occured while processing the performance.");
+    }
+    
+    SimpleRhythmGrader grader = new SimpleRhythmGrader();
+    PerformanceScore score = grader.evaluatePerformanceSimpler(this.currentExercise,
+        results, errorMargin);
+  }
+  */
+  
+  @FXML
+  private void recordCircleMouseEntered() {
+    recordCircle.setFill(Paint.valueOf("#cc7c7c"));
+  }
+  
+  @FXML
+  private void recordCircleMouseExited() {
+    recordCircle.setFill(Paint.valueOf("#f8b4b4"));
+  }
+  
+  @FXML
+  private void recordCircleMouseClicked() {
+    if (!recorder.isRecording()) {
+      recordCircle.setFill(Paint.valueOf("#ff6464"));
+      DropShadow dropShadow = new DropShadow();
+      dropShadow.setWidth(70);
+      dropShadow.setWidth(70);
+      dropShadow.setRadius(35);
+      dropShadow.setColor(Color.valueOf("#d31414"));
+      
+      recordCircle.setEffect(dropShadow);
+      recordCircle.setFill(Paint.valueOf("#d31414"));
+      
+      startRecording();
+    } else {
+      recordCircle.setEffect(null);
+      recordCircle.setFill(Paint.valueOf("#f8b4b4"));
+      
+      stopRecording();
+    }
+    
+  }
+  
 
 }
