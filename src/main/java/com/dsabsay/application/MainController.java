@@ -107,7 +107,7 @@ public class MainController {
           = new FXMLLoader(getClass().getClassLoader().getResource("MainMenu.fxml"));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
-      primaryStage.setTitle("SightSinger");
+      primaryStage.setTitle("RhythmTrainer");
       primaryStage.show();
     } catch (IOException exception) {
       logger.log(Level.SEVERE, "Error loading main menu.", exception);

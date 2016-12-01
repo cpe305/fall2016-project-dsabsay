@@ -184,7 +184,7 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     List<Float> noteOnsets = new ArrayList<Float>();
     
     //add first note onset = 0;
-    noteOnsets.add((float) 0.0);
+    noteOnsets.add((float) 1.0);
     
     float start = performance.getOnsets().get(0);
     
@@ -192,22 +192,23 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     
     for (int i = 1; i < onsets.size(); i++) {
       float onset = onsets.get(i) - start;
-      noteOnsets.add(tickToBeats(onset, bpm));
+      noteOnsets.add(tickToBeats(onset, bpm) + 1);
     }
     
     return noteOnsets;
   }
   
   //gets onsets (in beats) for the notes in the exercise
-  private List<Float> getNoteOnsets(float bpm, RhythmExercise exercise) {
+  //make public to test it
+  public List<Float> getNoteOnsets(float bpm, RhythmExercise exercise) {
     List<Float> noteOnsets = new ArrayList<Float>();
     
     //add first note onset = 0
-    noteOnsets.add((float) 0.0);
+    //noteOnsets.add((float) 0.0);
     //int timeSigNumerator = exercise.getTimeSig()[0];
     int timeSigDenominator = exercise.getTimeSig()[1];
     
-    float totalBeats = 0;
+    float totalBeats = 1;
     
     //need to skip last note, or remember there is an onset for the next beat
     //after the end of the rhythm
@@ -217,16 +218,18 @@ public class SimpleRhythmGrader implements PerformanceGrader {
       //get number of beats for this note
       //float beats = rhythmicValue / (float) timeSigDenominator;
       float beats = timeSigDenominator / (float) rhythmicValue;
-      totalBeats += beats;
+      
       
       //only add if note is not a rest
       if (!note.getIsRest()) {
         noteOnsets.add(totalBeats);
       }
+      
+      totalBeats += beats;
     }
     
     //remove last onset
-    noteOnsets.remove(noteOnsets.size() - 1);
+    //noteOnsets.remove(noteOnsets.size() - 1);
     
     return noteOnsets;
   }
