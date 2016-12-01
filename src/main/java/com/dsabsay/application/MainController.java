@@ -16,7 +16,7 @@ public class MainController {
   private Stage primaryStage;
   private UserConfiguration userConfig;
   
-  private Logger logger = Logger.getLogger("come.dsabsay.application.MainController");
+  private Logger logger = Logger.getLogger("com.dsabsay.application.MainController");
 
   public MainController(Stage primaryStage) {
     this.primaryStage = primaryStage;
@@ -38,7 +38,6 @@ public class MainController {
 
       PracticeController practiceCtrl = (PracticeController) fxmlLoader.getController();
       practiceCtrl.setMainController(this);
-      throw new IOException();
     } catch (IOException exception) {
       // TODO Auto-generated catch block
       //exception.printStackTrace();
@@ -94,7 +93,7 @@ public class MainController {
       primaryStage.show();
     } catch (IOException exception) {
       // TODO Auto-generated catch block
-      exception.printStackTrace();
+      //exception.printStackTrace();
       logger.log(Level.SEVERE, "Error loading main menu.", exception);
     }
 
