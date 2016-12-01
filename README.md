@@ -4,6 +4,8 @@
 
 RhythmTrainer is an application that will help you practice sight-reading rhythms.
 
+More documentation here: https://cpe305.github.io/fall2016-project-dsabsay/
+
 ## Description
 RhythmTrainer presents rhythms in standard music notation. You can then record yourself performing the rhythms using the microphone in your computer. You can perform the rhythm by clapping, snapping, tapping a pencil on a desk, or doing anything else that produces distinct attacks. RhythmTrainer will then grade your performance and give you a score.
 
