@@ -13,7 +13,7 @@ import javafx.scene.web.WebView;
 public class NotationWebView extends Region {
   private WebView webView;
   private WebEngine webEngine;
-  private VexTabExercise exercise;
+  //private VexTabExercise exercise;
 
   /**
    * Creates a NotationWebView object.
@@ -30,7 +30,7 @@ public class NotationWebView extends Region {
   }
   
   public void setVexTabExercise(VexTabExercise exercise) {
-    this.exercise = exercise;
+    //this.exercise = exercise;
   }
   
   /**

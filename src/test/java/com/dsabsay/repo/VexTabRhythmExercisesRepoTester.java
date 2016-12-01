@@ -10,7 +10,7 @@ public class VexTabRhythmExercisesRepoTester {
   /**
    * Tester for VexTabRhythmExercisesRepo.
    * @param args args
-   * @throws IOException 
+   * @throws IOException if IO error occurs
    */
   public static void main(String[] args) throws IOException {
     UserConfiguration config = new UserConfiguration();

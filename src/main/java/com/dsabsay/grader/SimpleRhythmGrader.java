@@ -35,6 +35,13 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     
   }
   
+  /**
+   * Evaluates the performance and returns the PerformanceScore object containing the results.
+   * @param exercise the exercise being graded
+   * @param results the performance information from processing the extractor output
+   * @param rhythmErrorMargin amount of allowable error
+   * @return the score for the performance
+   */
   public PerformanceScore evaluatePerformance(VexTabExercise exercise, ExtractorResults results,
       float rhythmErrorMargin) {
     
@@ -44,7 +51,14 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     return evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
         (RhythmExtractorResults) results, rhythmErrorMargin);
   }
-  
+
+  /**
+   * Evaluates the performance and returns the PerformanceScore object containing the results.
+   * @param exercise the exercise being graded
+   * @param performanceFilename the filename of the audio file of the performance
+   * @param rhythmErrorMargin amount of allowable error
+   * @return the score for the performance
+   */
   public PerformanceScore evaluatePerformance(VexTabExercise exercise, String performanceFilename,
       float rhythmErrorMargin) throws ExtractorException {
     //errorMargin (in beats)
@@ -54,8 +68,9 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     RhythmExtractorResults results;
 
     results = extractor.processPerformance(performanceFilename);
-    //showAlertAndWait("Extractor Exception", "An error occurred while processing the performance.");
-
+    /*
+    showAlertAndWait("Extractor Exception", "An error occurred while processing the performance.");
+    */
     
     SimpleRhythmGrader grader = new SimpleRhythmGrader();
     
@@ -143,6 +158,7 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     return beats;
   }
   
+  /*
   private List<Float> getTickOnsets(RhythmExtractorResults performance) {
     float bpm = performance.getBpm();
     List<Float> noteOnsets = new ArrayList<Float>();
@@ -161,6 +177,7 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     
     return noteOnsets;
   }
+  */
   
   private List<Float> getNoteOnsets(RhythmExtractorResults performance) {
     float bpm = performance.getBpm();

@@ -34,7 +34,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
   /**
    * Creates a DefaultPerformanceRecordRepo, and trues to read records from the disk.
    * @param config user configuration
-   * @throws ClassNotFoundException 
+   * @throws ClassNotFoundException if a ClassNotFoundException is thrown
    */
   public DefaultPerformanceRecordRepo(UserConfiguration config) throws IOException,
       ClassNotFoundException {
@@ -157,7 +157,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     this.rhythmRecords = new ArrayList<RhythmRecord>();
     
     //try {
-      /*
+    /*
       File file = new File(this.config.getRhythmRecordsPath());
       if (!file.exists()) {
         System.out.println("createNewFile()");
@@ -165,7 +165,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
         System.out.println("created new file");
       }
       */
-      /*
+    /*
       InputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
       //InputStream stream = new FileInputStream(file);
       //InputStream buffer = new BufferedInputStream(stream);
@@ -207,7 +207,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     this.sightSingingRecords = new ArrayList<SightSingingRecord>();
 
     //try { 
-      /*
+    /*
       File file = new File(this.config.getSightSingingRecordsPath());
       if (!file.exists()) {
         System.out.println("createNewFile()");
@@ -216,7 +216,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
 
       }
       */
-      /*
+    /*
       InputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
       //InputStream stream = new FileInputStream(file);
       //InputStream buffer = new BufferedInputStream(stream);

@@ -1,5 +1,7 @@
 package com.dsabsay.grader;
 
+import com.dsabsay.model.ExtractorException;
+
 import org.apache.commons.lang3.SystemUtils;
 
 import java.io.File;
@@ -7,16 +9,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.dsabsay.model.ExtractorException;
-
 public class EssentiaExtractorLauncher {
   private static final String ESSENTIA_WORKING_DIRECTORY = "essentia/";
+  /*
   private static final String RHYTHM_EXTRACTOR_PATH
       = "essentia-extractors/osx-x86_64/essentia_streaming_rhythmextractor_multifeature";
   private static final String ONSET_EXTRACTOR_PATH
       = "essentia-extractors/osx-x86_64/essentia_streaming_onsetrate";
   private static final String STANDARD_ONSET_EXTRACTOR_PATH
       = "essentia-extractors/osx-x86_64/essentia_standard_onsetrate";
+      */
   private static final String STANDARD_ONSET_EXTRACTOR_NAME = "essentia_standard_onsetrate";
   private static final String RHYTHM_EXTRACTOR_NAME
       = "essentia_streaming_rhythmextractor_multifeature";
@@ -50,6 +52,14 @@ public class EssentiaExtractorLauncher {
 
   }
   
+  /**
+   * Runs the rhythm extractor.
+   * @param filename filename of the audio file to analyze
+   * @return the output of the rhythm extractor
+   * @throws ExtractorException if an extractor binary does not exist for the operating system
+   * @throws IOException if an IO error occurs
+   * @throws InterruptedException if the thread interrupted
+   */
   public String runRhythmExtractor(String filename) throws ExtractorException, IOException,
       InterruptedException {
     //return processRhythmPerformance(getCommand(RHYTHM_EXTRACTOR_PATH, filename));
@@ -57,6 +67,14 @@ public class EssentiaExtractorLauncher {
         + RHYTHM_EXTRACTOR_NAME, filename));
   }
   
+  /**
+   * Runs the onset extractor.
+   * @param filename filename of the audio file to analyze
+   * @return the output of the onset extractor
+   * @throws ExtractorException if an extractor binary does not exist for the operating system
+   * @throws IOException if an IO error occurs
+   * @throws InterruptedException if the thread is interrupted
+   */
   public String runOnsetExtractor(String filename) throws ExtractorException, IOException,
       InterruptedException {
     //return processRhythmPerformance(ONSET_EXTRACTOR_PATH, filename);
@@ -97,6 +115,8 @@ public class EssentiaExtractorLauncher {
       System.out.println("error: " + string);
     }
     
+    error.close();
+    
     //get output
     /*
     StringWriter writer = new StringWriter();
@@ -107,7 +127,8 @@ public class EssentiaExtractorLauncher {
     Scanner scanner = new Scanner(output).useDelimiter("\\A");
     String string = scanner.hasNext() ? scanner.next() : "";
     scanner.close();
-    
+    output.close();
+
     //System.out.println("output of extractor:\n" + string);
     
     return string;

@@ -1,12 +1,12 @@
 package com.dsabsay.grader;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.VexTabRhythmExercise;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class SimpleRhythmGraderTester {
   //errorMargin (in beats)
@@ -16,9 +16,9 @@ public class SimpleRhythmGraderTester {
    * Tester for SimpleRhythmGrader.
    * @param args args
    * @throws ExtractorException exception
-   * @throws InvalidVexTabException 
-   * @throws IOException 
-   * @throws FileNotFoundException 
+   * @throws InvalidVexTabException if InvalidVexTabException is thrown
+   * @throws IOException if IO error occurs
+   * @throws FileNotFoundException  if file not found
    */
   public static void main(String[] args) throws ExtractorException, FileNotFoundException,
       IOException, InvalidVexTabException {

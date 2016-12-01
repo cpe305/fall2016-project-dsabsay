@@ -16,17 +16,13 @@ public class VexTabRhythmExercise extends VexTabExercise {
   private String name;
 
   /**
-   * Creates a RhythmExercise object.
-   * 
-   * @param rhythmId
-   *          rhythm id
-   * @param rhythmType
-   *          rhythm type
-   * @param pathToExercise
-   *          path to exercise on disk
-   * @throws InvalidVexTabException 
-   * @throws IOException 
-   * @throws FileNotFoundException 
+   * Creates a VexTabRhythmExercise object.
+   * @param rhythmId rhythm id
+   * @param rhythmType rhythm type
+   * @param pathToExercise path to exercise on disk
+   * @throws FileNotFoundException if exercise file is not found
+   * @throws IOException if IO error occurs
+   * @throws InvalidVexTabException if the VexTab is invalid
    */
   public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise)
       throws FileNotFoundException, IOException, InvalidVexTabException {
@@ -36,6 +32,16 @@ public class VexTabRhythmExercise extends VexTabExercise {
     read();
   }
   
+  /**
+   * Creates a VexTabRhythmExercise object.
+   * @param rhythmId rhythmId
+   * @param rhythmType rhythmType
+   * @param pathToExercise pathToExercise
+   * @param name name of exercise
+   * @throws FileNotFoundException if exercise file is not found
+   * @throws IOException if IO error occurs
+   * @throws InvalidVexTabException if the VexTab is invalid
+   */
   public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise, String name)
       throws FileNotFoundException, IOException, InvalidVexTabException {
     this.rhythmId = rhythmId;
@@ -54,7 +60,6 @@ public class VexTabRhythmExercise extends VexTabExercise {
   }
 
   private void read() throws FileNotFoundException, IOException, InvalidVexTabException {
-    VexTabRhythmParser parser = new VexTabRhythmParser();
 
     // read file
     File file = new File(pathToExercise);
@@ -104,6 +109,7 @@ public class VexTabRhythmExercise extends VexTabExercise {
     */
     
     this.vextabNotation = vextab;
+    VexTabRhythmParser parser = new VexTabRhythmParser();
     this.exercise = parser.parseVexTab(vextab);
     
   }

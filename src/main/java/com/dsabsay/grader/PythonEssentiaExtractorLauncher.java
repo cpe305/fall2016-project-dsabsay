@@ -1,8 +1,8 @@
 package com.dsabsay.grader;
 
-import java.io.IOException;
-
 import com.dsabsay.model.ExtractorException;
+
+import java.io.IOException;
 
 public class PythonEssentiaExtractorLauncher
     extends EssentiaExtractorLauncher {

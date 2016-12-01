@@ -2,12 +2,12 @@ package com.dsabsay.repo;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
-
 import com.dsabsay.model.UserConfiguration;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 public class TestUserConfiguration {
 

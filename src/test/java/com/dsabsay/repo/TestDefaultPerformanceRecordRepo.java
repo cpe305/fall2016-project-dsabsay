@@ -23,7 +23,7 @@ public class TestDefaultPerformanceRecordRepo {
 
   /**
    * Set up test suite.
-   * @throws IOException 
+   * @throws IOException if IO error occurs
    */
   @BeforeClass
   public static void setupSuite() throws IOException {

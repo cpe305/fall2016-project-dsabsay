@@ -1,5 +1,7 @@
 package com.dsabsay.application;
 
+import com.dsabsay.model.ControllerException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -14,8 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.dsabsay.model.ControllerException;
 
 public class SettingsController {
   @FXML // ResourceBundle that was given to the FXMLLoader

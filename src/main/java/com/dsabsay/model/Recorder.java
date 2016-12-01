@@ -111,7 +111,6 @@ public class Recorder {
     // Begin audio capture
     FileOutputStream outputFile;
     outputFile = new FileOutputStream(new File(ESSENTIA_WORKING_DIRECTORY + PERFORMANCE_FILENAME));
-    AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
     
     line.start();
     
@@ -161,6 +160,7 @@ public class Recorder {
         = new AudioInputStream(new ByteArrayInputStream(data), format, data.length);
     
     System.out.println("data.length: " + data.length);
+    AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
     AudioSystem.write(audioInputStream, fileType, outputFile);
     
     

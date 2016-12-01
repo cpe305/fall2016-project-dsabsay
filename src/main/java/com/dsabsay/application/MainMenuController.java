@@ -1,5 +1,7 @@
 package com.dsabsay.application;
 
+import com.dsabsay.model.ControllerException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,8 +11,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.dsabsay.model.ControllerException;
 
 public class MainMenuController {
   @FXML // ResourceBundle that was given to the FXMLLoader

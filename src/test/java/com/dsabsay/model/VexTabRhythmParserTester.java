@@ -9,9 +9,9 @@ public class VexTabRhythmParserTester {
   /**
    * Tester for VexTabRhythmParser.
    * @param args args
-   * @throws InvalidVexTabException 
-   * @throws IOException 
-   * @throws FileNotFoundException 
+   * @throws InvalidVexTabException if InvalidVexTabException is thrown
+   * @throws IOException if IO error occurs
+   * @throws FileNotFoundException if file not found
    */
   public static void main(String[] args) throws FileNotFoundException, IOException,
       InvalidVexTabException {

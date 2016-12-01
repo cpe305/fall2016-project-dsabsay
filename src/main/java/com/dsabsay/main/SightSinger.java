@@ -13,7 +13,7 @@ public class SightSinger {
    * May not be used.
    * @param args arguments
    * @throws IOException if repo.savePerformanceRecord() throws IOException
-   * @throws ClassNotFoundException 
+   * @throws ClassNotFoundException if a ClassNotFoundException is thrown
    */
   public static void main(String[] args) throws IOException, ClassNotFoundException {
     UserConfiguration config = new UserConfiguration();

@@ -32,12 +32,22 @@ public class MainController {
     instance = this;
   }
   
+  /**
+   * Initializes the MainController. Should only be called once, when the application starts.
+   * @param primaryStage the primary stage of the JavaFX application
+   * @return the instantiated MainController object
+   */
   public static MainController createInstance(Stage primaryStage) {
     instance = new MainController(primaryStage);
     
     return instance;
   }
   
+  /**
+   * Returns the instance of MainController for the application.
+   * @return the instance of MainController for the application
+   * @throws ControllerException if the MainController has not been instantiated
+   */
   public static MainController getInstance() throws ControllerException {
     if (instance == null) {
       throw new ControllerException("The MainController has not been instantiated.");

@@ -1,9 +1,6 @@
 package com.dsabsay.application;
 
 import com.dsabsay.grader.PerformanceGrader;
-import com.dsabsay.grader.RhythmExtractor;
-import com.dsabsay.grader.RhythmExtractorResults;
-import com.dsabsay.grader.SimpleRhythmGrader;
 import com.dsabsay.model.ControllerException;
 import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.InvalidVexTabException;
@@ -28,7 +25,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.web.WebView;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -211,7 +207,6 @@ public class PracticeController {
       System.out.println("recordButton styleClasses: " + recordButton.getStyleClass());
       System.out.println("recordButton styleSheets: " + recordButton.getStylesheets());
     } catch (IOException | LineUnavailableException | RecorderException ex) {
-    //} catch (Throwable ex) {
       logger.log(Level.SEVERE, "Error starting recording.", ex);
       showAlertAndWait("Recorder Error", "An error occured trying to record audio.");
     }
