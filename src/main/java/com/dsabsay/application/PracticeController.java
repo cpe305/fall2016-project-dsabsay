@@ -284,6 +284,16 @@ public class PracticeController {
   @FXML
   private void recordCircleMouseClicked() {
     if (!recorder.isRecording()) {
+      // put a delay here to effectively start the recording after the user's
+      // click sound (if any)
+      // still need to deal with user's click sound at end of recording
+      try {
+        Thread.sleep(500);
+      } catch (InterruptedException ex) {
+        // TODO Auto-generated catch block
+        ex.printStackTrace();
+      }
+      
       recordCircle.setFill(Paint.valueOf("#ff6464"));
       DropShadow dropShadow = new DropShadow();
       dropShadow.setWidth(70);
@@ -299,6 +309,7 @@ public class PracticeController {
       recordCircle.setEffect(null);
       recordCircle.setFill(Paint.valueOf("#f8b4b4"));
       
+      // need to deal with user's click sound at end of recording
       stopRecording();
     }
     
