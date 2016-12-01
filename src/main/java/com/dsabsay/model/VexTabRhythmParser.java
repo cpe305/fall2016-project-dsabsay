@@ -69,7 +69,7 @@ public class VexTabRhythmParser {
           duration = Integer.parseInt(token.substring(1, 2));
         }
         //check for dotted note
-        if (token.indexOf("d") > 1) {
+        if (token.indexOf('d') > 1) {
           dotted = true;
         } else {
           dotted = false;

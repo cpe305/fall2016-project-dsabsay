@@ -22,7 +22,7 @@ public class UserConfiguration {
   
   // to use singleton pattern, the constructor needs to be private
   // the instance of this class is retrieved via a getInstance() method
-  public UserConfiguration() {
+  public UserConfiguration() throws IOException {
     readUserConfig();
   }
 
@@ -70,31 +70,47 @@ public class UserConfiguration {
    * Reads user configuration settings from the disk
    * and loads them into this instance of UserConfiguration.
    */
-  public void readUserConfig() {
+  public void readUserConfig() throws IOException {
 
+    /*
     try {
       FileReader file = new FileReader(pathToConfig);
       BufferedReader reader = new BufferedReader(file);
       //this.rhythmRecordsPath = reader.readLine();
       this.rhythmsPath = reader.readLine();
       reader.close();
+      file.close();
     } catch (IOException exception) {
       exception.printStackTrace();
     }
+    */
+    
+    BufferedReader reader = new BufferedReader(new FileReader(pathToConfig));
+    //this.rhythmRecordsPath = reader.readLine();
+    this.rhythmsPath = reader.readLine();
+    reader.close();
   }
 
   /**
    * Saves user configuration settings stored in this instance of UserConfiguration to disk.
    */
-  public void saveUserConfig() {
+  public void saveUserConfig() throws IOException {
+    /*
     try {
       FileWriter file = new FileWriter(pathToConfig);
       BufferedWriter writer = new BufferedWriter(file);
       //writer.write(rhythmRecordsPath);
       writer.write(rhythmsPath);
       writer.close();
+      file.close();
     } catch (IOException exception) {
       exception.printStackTrace();
     }
+    */
+    
+    BufferedWriter writer = new BufferedWriter(new FileWriter(pathToConfig));
+    //writer.write(rhythmRecordsPath);
+    writer.write(rhythmsPath);
+    writer.close();    
   }
 }

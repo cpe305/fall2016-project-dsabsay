@@ -13,8 +13,9 @@ public class SightSinger {
    * May not be used.
    * @param args arguments
    * @throws IOException if repo.savePerformanceRecord() throws IOException
+   * @throws ClassNotFoundException 
    */
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, ClassNotFoundException {
     UserConfiguration config = new UserConfiguration();
     config.setRhythmRecordsPath("rhythmRecords.ser");
     config.setSightSingingRecordsPath("sightSingingRecords.ser");

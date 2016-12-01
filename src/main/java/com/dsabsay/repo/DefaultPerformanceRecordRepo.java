@@ -7,7 +7,9 @@ import com.dsabsay.model.UserConfiguration;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,10 +34,13 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
   /**
    * Creates a DefaultPerformanceRecordRepo, and trues to read records from the disk.
    * @param config user configuration
+   * @throws ClassNotFoundException 
    */
-  public DefaultPerformanceRecordRepo(UserConfiguration config) {
+  public DefaultPerformanceRecordRepo(UserConfiguration config) throws IOException,
+      ClassNotFoundException {
     this.config = Objects.requireNonNull(config, "The 'config' argument must not be null.");
 
+    /*
     try {
       this.readRhythmRecordsFromDisk();
     } catch (IOException exception) {
@@ -43,7 +48,11 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
           + ": " + exception.getMessage());
       this.rhythmRecords = new ArrayList<RhythmRecord>();
     }
+    */
+    
+    this.readRhythmRecordsFromDisk();
 
+    /*
     try {
       this.readSightSingingRecordsFromDisk();
     } catch (IOException exception) {
@@ -51,6 +60,10 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
           + this.config.getSightSingingRecordsPath() + ": " + exception.getMessage());
       this.sightSingingRecords = new ArrayList<SightSingingRecord>();
     }
+    */
+    
+    this.readSightSingingRecordsFromDisk();
+    
   }
 
   @Override
@@ -68,7 +81,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     Map<String, List<SightSingingRecord>> recordsByCategory = new HashMap<>();
 
     for (SightSingingRecord record : this.getSightSingingRecords()) {
-      List<SightSingingRecord> previous = null;
+      List<SightSingingRecord> previous;
       if (recordsByCategory.containsKey(record.getMelodyType())) {
         previous = recordsByCategory.get(record.getMelodyType());
       } else {
@@ -87,7 +100,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     Map<String, List<RhythmRecord>> recordsByCategory = new HashMap<>();
 
     for (RhythmRecord record : this.getRhythmRecords()) {
-      List<RhythmRecord> previous = null;
+      List<RhythmRecord> previous;
       if (recordsByCategory.containsKey(record.getRhythmType())) {
         previous = recordsByCategory.get(record.getRhythmType());
       } else {
@@ -118,6 +131,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
       throw new IllegalArgumentException("Unknown rhythm record type: " + record.getClass());
     }
 
+    /*
     ObjectOutput output = null;
     try {
       OutputStream file = new FileOutputStream(filePath);
@@ -127,13 +141,22 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     } finally {
       output.close();
     }
+    */
+    
+    OutputStream file = new FileOutputStream(filePath);
+    OutputStream buffer = new BufferedOutputStream(file);
+    ObjectOutput output = new ObjectOutputStream(buffer);
+    output.writeObject(listToWrite);
+    output.close();
 
   }
 
-  private void readRhythmRecordsFromDisk() throws IOException {
+  private void readRhythmRecordsFromDisk() throws IOException, ClassNotFoundException {
     ObjectInput input = null;
     
-    try {
+    this.rhythmRecords = new ArrayList<RhythmRecord>();
+    
+    //try {
       /*
       File file = new File(this.config.getRhythmRecordsPath());
       if (!file.exists()) {
@@ -142,7 +165,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
         System.out.println("created new file");
       }
       */
-      
+      /*
       InputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
       //InputStream stream = new FileInputStream(file);
       //InputStream buffer = new BufferedInputStream(stream);
@@ -154,13 +177,36 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     } catch (ClassNotFoundException exception) {
       exception.printStackTrace();
     }
+    */
+    
+    //InputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
+    FileInputStream file = null;
+    try {
+      //file = new File(this.config.getRhythmRecordsPath());
+      file = new FileInputStream(this.config.getRhythmRecordsPath());
+    } catch (FileNotFoundException ex) {
+      System.out.println("No rhythm records found.");
+      ex.printStackTrace();
+      return;
+    }
+    
+    InputStream buffer
+        = new BufferedInputStream(file);
+
+    input = new ObjectInputStream(buffer);
+    this.rhythmRecords = (List<RhythmRecord>) input.readObject();
+    input.close();
+    buffer.close();
+    file.close();
+    
   }
 
-  private void readSightSingingRecordsFromDisk() throws IOException {
+  private void readSightSingingRecordsFromDisk() throws IOException, ClassNotFoundException {
     ObjectInput input = null;
+    
+    this.sightSingingRecords = new ArrayList<SightSingingRecord>();
 
-    try {
-      
+    //try { 
       /*
       File file = new File(this.config.getSightSingingRecordsPath());
       if (!file.exists()) {
@@ -170,7 +216,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
 
       }
       */
-      
+      /*
       InputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
       //InputStream stream = new FileInputStream(file);
       //InputStream buffer = new BufferedInputStream(stream);
@@ -183,6 +229,28 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     } catch (ClassNotFoundException exception) {
       exception.printStackTrace();
     }
+    */
+    
+    FileInputStream file = null;
+    try {
+      //file = new File(this.config.getRhythmRecordsPath());
+      file = new FileInputStream(this.config.getSightSingingRecordsPath());
+    } catch (FileNotFoundException ex) {
+      System.out.println("No sight singing records found.");
+      ex.printStackTrace();
+      return;
+    }
+    
+    //InputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
+    InputStream buffer
+        = new BufferedInputStream(file);
+
+    input = new ObjectInputStream(buffer);
+    this.sightSingingRecords = (List<SightSingingRecord>) input.readObject();
+    input.close();
+    buffer.close();
+    file.close();
+    
   }
   
 }

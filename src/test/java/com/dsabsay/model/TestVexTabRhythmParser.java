@@ -5,13 +5,16 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestVexTabRhythmParser {
 
   @Test
-  public void testVexTabRhythmParser1() {
+  public void testVexTabRhythmParser1() throws FileNotFoundException, IOException,
+      InvalidVexTabException {
     String path = "src/main/resources/testRhythm1.txt";
     VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
     
@@ -34,7 +37,8 @@ public class TestVexTabRhythmParser {
   }
   
   @Test
-  public void testVexTabRhythmParser2() {
+  public void testVexTabRhythmParser2() throws FileNotFoundException, IOException,
+      InvalidVexTabException {
     String path = "src/main/resources/testRhythm2.txt";
     VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
     

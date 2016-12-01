@@ -24,15 +24,20 @@ public class VexTabRhythmExercise extends VexTabExercise {
    *          rhythm type
    * @param pathToExercise
    *          path to exercise on disk
+   * @throws InvalidVexTabException 
+   * @throws IOException 
+   * @throws FileNotFoundException 
    */
-  public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise) {
+  public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise)
+      throws FileNotFoundException, IOException, InvalidVexTabException {
     this.rhythmId = rhythmId;
     this.rhythmType = rhythmType;
     this.pathToExercise = pathToExercise;
     read();
   }
   
-  public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise, String name) {
+  public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise, String name)
+      throws FileNotFoundException, IOException, InvalidVexTabException {
     this.rhythmId = rhythmId;
     this.rhythmType = rhythmType;
     this.pathToExercise = pathToExercise;
@@ -48,7 +53,7 @@ public class VexTabRhythmExercise extends VexTabExercise {
     return exercise;
   }
 
-  private void read() {
+  private void read() throws FileNotFoundException, IOException, InvalidVexTabException {
     VexTabRhythmParser parser = new VexTabRhythmParser();
 
     // read file
@@ -57,6 +62,7 @@ public class VexTabRhythmExercise extends VexTabExercise {
     String vextab = "";
     String buffer = null;
 
+    /*
     try {
       reader = new BufferedReader(new FileReader(file));
 
@@ -74,7 +80,20 @@ public class VexTabRhythmExercise extends VexTabExercise {
     } catch (IOException exception) {
       exception.printStackTrace();
     }
+    */
+    
+    reader = new BufferedReader(new FileReader(file));
 
+    while ((buffer = reader.readLine()) != null) {
+      vextab += buffer;
+    }
+
+    reader.close();
+
+    System.out.println("Read file");
+    System.out.println(vextab);
+
+    /*
     try {
       this.vextabNotation = vextab;
       this.exercise = parser.parseVexTab(vextab);
@@ -82,6 +101,11 @@ public class VexTabRhythmExercise extends VexTabExercise {
       // TODO Auto-generated catch block
       exception.printStackTrace();
     }
+    */
+    
+    this.vextabNotation = vextab;
+    this.exercise = parser.parseVexTab(vextab);
+    
   }
 
   public String getVextabNotation() {

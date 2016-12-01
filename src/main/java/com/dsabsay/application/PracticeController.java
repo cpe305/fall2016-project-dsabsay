@@ -143,7 +143,7 @@ public class PracticeController {
     
     try {
       repo = new VexTabRhythmExercisesRepo(MainController.getInstance().getUserConfiguration());
-    } catch (FileNotFoundException | ControllerException ex) {
+    } catch (ControllerException | IOException | InvalidVexTabException ex) {
       logger.log(Level.SEVERE, "Error initializing VexTabRhythmExercisesRepo.", ex);
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("No exercises found");
@@ -210,8 +210,8 @@ public class PracticeController {
       //recordButton.
       System.out.println("recordButton styleClasses: " + recordButton.getStyleClass());
       System.out.println("recordButton styleSheets: " + recordButton.getStylesheets());
-    //} catch (IOException | LineUnavailableException | RecorderException ex) {
-    } catch (Throwable ex) {
+    } catch (IOException | LineUnavailableException | RecorderException ex) {
+    //} catch (Throwable ex) {
       logger.log(Level.SEVERE, "Error starting recording.", ex);
       showAlertAndWait("Recorder Error", "An error occured trying to record audio.");
     }
@@ -222,8 +222,8 @@ public class PracticeController {
     String performanceFilename = null;
     try {
       performanceFilename = recorder.stopRecording();
-    } catch (Throwable th) {
-      logger.log(Level.SEVERE, "Error stopping recording.", th);
+    } catch (RecorderException ex) {
+      logger.log(Level.SEVERE, "Error stopping recording.", ex);
       showAlertAndWait("Throwable thrown", "An error occured in the recording thread.");
     }
     

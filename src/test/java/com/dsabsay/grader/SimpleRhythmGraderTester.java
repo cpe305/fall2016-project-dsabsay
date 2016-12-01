@@ -1,6 +1,10 @@
 package com.dsabsay.grader;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import com.dsabsay.model.ExtractorException;
+import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.VexTabRhythmExercise;
 
@@ -12,8 +16,12 @@ public class SimpleRhythmGraderTester {
    * Tester for SimpleRhythmGrader.
    * @param args args
    * @throws ExtractorException exception
+   * @throws InvalidVexTabException 
+   * @throws IOException 
+   * @throws FileNotFoundException 
    */
-  public static void main(String[] args) throws ExtractorException {
+  public static void main(String[] args) throws ExtractorException, FileNotFoundException,
+      IOException, InvalidVexTabException {
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes.m4a");
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake.m4a");
     testGrader("src/main/resources/testRhythmQuarterNotes.txt", "tap_quarterNotes_mistake2.m4a");
@@ -23,7 +31,7 @@ public class SimpleRhythmGraderTester {
   }
   
   private static void testGrader(String exercisePath, String performancePath)
-      throws ExtractorException {
+      throws ExtractorException, FileNotFoundException, IOException, InvalidVexTabException {
     System.out.println("Grading performance: " + performancePath + " for " + exercisePath);
     
     //String path = "src/main/resources/testRhythmQuarterNotes.txt";

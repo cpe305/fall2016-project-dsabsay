@@ -1,13 +1,16 @@
 package com.dsabsay.repo;
 
+import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.UserConfiguration;
 import com.dsabsay.model.VexTabExercise;
 import com.dsabsay.model.VexTabRhythmExercise;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class VexTabRhythmExercisesRepo
     implements VexTabExercisesRepo {
@@ -15,7 +18,7 @@ public class VexTabRhythmExercisesRepo
   List<VexTabExercise> exercises;
   
   public VexTabRhythmExercisesRepo(UserConfiguration config) 
-      throws FileNotFoundException {
+      throws IOException, InvalidVexTabException {
     this.rhythmsPath = config.getRhythmsPath();
     loadExercisesFromDisk();
   }
@@ -33,15 +36,18 @@ public class VexTabRhythmExercisesRepo
       return null;
     }
     
-    if (exercises.size() == 0) {
+    if (exercises.isEmpty()) {
       return null;
     }
     
-    return this.exercises.get((int) (Math.random() * this.exercises.size()));
+    Random random = new Random();
+    
+    //return this.exercises.get((int) (Math.random() * this.exercises.size()));
+    return this.exercises.get((int) (random.nextFloat() * this.exercises.size()));
   }
   
   private void loadExercisesFromDisk() 
-      throws FileNotFoundException {
+      throws IOException, InvalidVexTabException {
     
     if (rhythmsPath == null) {
       throw new FileNotFoundException("userConfig.rhythmsPath is null");
@@ -63,7 +69,7 @@ public class VexTabRhythmExercisesRepo
       exercises.add(new VexTabRhythmExercise(1, "test", fileEntry.getPath()));
     }
     
-    if (this.exercises.size() == 0) {
+    if (this.exercises.isEmpty()) {
       throw new FileNotFoundException();
     }
   }

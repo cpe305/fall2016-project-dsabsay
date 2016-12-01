@@ -22,7 +22,13 @@ public class MainController {
 
   private MainController(Stage primaryStage) {
     this.primaryStage = primaryStage;
-    this.userConfig = new UserConfiguration();
+    
+    try {
+      this.userConfig = new UserConfiguration();
+    } catch (IOException ex) {
+      logger.log(Level.SEVERE, "Error loading user configuration.", ex);
+    }
+    
     instance = this;
   }
   

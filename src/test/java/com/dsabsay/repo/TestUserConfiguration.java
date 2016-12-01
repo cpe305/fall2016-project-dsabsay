@@ -2,6 +2,8 @@ package com.dsabsay.repo;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import com.dsabsay.model.UserConfiguration;
 
 import org.junit.Before;
@@ -12,12 +14,12 @@ public class TestUserConfiguration {
   UserConfiguration config;
 
   @Before
-  public void setup() {
+  public void setup() throws IOException {
     config = new UserConfiguration();
   }
 
   @Test
-  public void testReadWriteUserConfig() {
+  public void testReadWriteUserConfig() throws IOException {
     config.readUserConfig();
     
     //not sure about this

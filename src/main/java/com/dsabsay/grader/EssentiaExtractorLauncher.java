@@ -83,16 +83,7 @@ public class EssentiaExtractorLauncher {
     
     File dir = new File(ESSENTIA_WORKING_DIRECTORY);
     
-    Process extractor = null;
-    extractor = runtime.exec(cmd, null, dir);
-    /*
-    try {
-      extractor = runtime.exec(cmd, null, dir);
-    } catch (IOException exception) {
-      // TODO Auto-generated catch block
-      exception.printStackTrace();
-    }
-    */
+    Process extractor = runtime.exec(cmd, null, dir);
     
     InputStream output = extractor.getInputStream();
     InputStream error = extractor.getErrorStream();
@@ -105,20 +96,6 @@ public class EssentiaExtractorLauncher {
       scanner.close();
       System.out.println("error: " + string);
     }
-    /*
-    try {
-      if (extractor.waitFor() != EXIT_SUCCESS) {
-        System.out.println("extractor exited with failure");
-        Scanner scanner = new Scanner(error).useDelimiter("\\A");
-        String string = scanner.hasNext() ? scanner.next() : "";
-        scanner.close();
-        System.out.println("error: " + string);
-      }
-    } catch (InterruptedException exception) {
-      // TODO Auto-generated catch block
-      exception.printStackTrace();
-    }
-    */
     
     //get output
     /*

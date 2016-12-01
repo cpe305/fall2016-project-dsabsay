@@ -1,5 +1,7 @@
 package com.dsabsay.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,12 @@ public class VexTabRhythmParserTester {
   /**
    * Tester for VexTabRhythmParser.
    * @param args args
+   * @throws InvalidVexTabException 
+   * @throws IOException 
+   * @throws FileNotFoundException 
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException, IOException,
+      InvalidVexTabException {
     /*
     String path
         = TestVexTabRhythmParser.class.getClassLoader().getResource("rhythm1.txt").toString();

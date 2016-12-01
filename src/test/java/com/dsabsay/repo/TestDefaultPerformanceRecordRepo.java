@@ -23,16 +23,17 @@ public class TestDefaultPerformanceRecordRepo {
 
   /**
    * Set up test suite.
+   * @throws IOException 
    */
   @BeforeClass
-  public static void setupSuite() {
+  public static void setupSuite() throws IOException {
     config = new UserConfiguration();
     config.setRhythmRecordsPath(RHYTHM_RECORD_PATH);
     config.setSightSingingRecordsPath(SIGHT_SINGING_RECORD_PATH);
   }
 
   @Before
-  public void setup() {
+  public void setup() throws ClassNotFoundException, IOException {
     this.repo = new DefaultPerformanceRecordRepo(config);
   }
 
@@ -43,7 +44,7 @@ public class TestDefaultPerformanceRecordRepo {
   }
 
   @Test
-  public void testSaveSightSingingRecord() throws IOException {
+  public void testSaveSightSingingRecord() throws IOException, ClassNotFoundException {
     System.out.println("testSaveSightSingingRecord");
     SightSingingRecord record = new SightSingingRecord(1, "melodyType", 1, 1, 1, new Date(), 10);
     this.repo.savePerformanceRecord(record);
@@ -63,7 +64,7 @@ public class TestDefaultPerformanceRecordRepo {
   }
 
   @Test
-  public void testSaveRhythmRecord() throws IOException {
+  public void testSaveRhythmRecord() throws IOException, ClassNotFoundException {
     System.out.println("testSaveRhythmRecord");
     RhythmRecord record = new RhythmRecord(1, "rhythmType", 1, 1, new Date(), 10);
     this.repo.savePerformanceRecord(record);

@@ -40,7 +40,7 @@ public class Recorder {
   
   /**
    * Stops the current recording, if any.
-   * @throws Throwable 
+   * @throws RecorderException if there was an exception thrown in the recording thread
    */
   public String stopRecording() throws RecorderException {
     if (line != null) {
