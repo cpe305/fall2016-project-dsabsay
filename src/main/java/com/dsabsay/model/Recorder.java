@@ -183,7 +183,12 @@ public class Recorder {
         outputFile
             = new FileOutputStream(new File(ESSENTIA_WORKING_DIRECTORY + PERFORMANCE_FILENAME));
       } catch (FileNotFoundException ex) {
+        // might want to throw exception here, but not sure how to handle throwing an exception
+        // in a different thread
+        // ideally, the exception should be handled in the controller's thread
         logger.log(Level.SEVERE, "Error starting audio capture.", ex);
+        // just return if the output file cannot be opened
+        return;
       }
       AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
       
