@@ -13,7 +13,8 @@ public class TestRecorder {
   private static final String ESSENTIA_WORKING_DIRECTORY = "essentia/";
   private static final String PERFORMANCE_FILENAME = "performance.wav";
   
-  //@Test
+  /*
+  @Test
   public void test() throws IOException, LineUnavailableException, RecorderException, Throwable {
     //delete old file
     File oldFile = new File(ESSENTIA_WORKING_DIRECTORY + PERFORMANCE_FILENAME);
@@ -32,5 +33,6 @@ public class TestRecorder {
     assertTrue(file.length() > 100000);
     
   }
+  */
 
 }

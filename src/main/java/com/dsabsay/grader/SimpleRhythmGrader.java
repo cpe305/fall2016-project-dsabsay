@@ -54,7 +54,7 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     RhythmExtractorResults results;
 
     results = extractor.processPerformance(performanceFilename);
-    //showAlertAndWait("Extractor Exception", "An error occured while processing the performance.");
+    //showAlertAndWait("Extractor Exception", "An error occurred while processing the performance.");
 
     
     SimpleRhythmGrader grader = new SimpleRhythmGrader();

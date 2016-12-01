@@ -9,10 +9,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainController {
   private Stage primaryStage;
   private UserConfiguration userConfig;
+  
+  private Logger logger = Logger.getLogger("come.dsabsay.application.MainController");
 
   public MainController(Stage primaryStage) {
     this.primaryStage = primaryStage;
@@ -34,9 +38,11 @@ public class MainController {
 
       PracticeController practiceCtrl = (PracticeController) fxmlLoader.getController();
       practiceCtrl.setMainController(this);
+      throw new IOException();
     } catch (IOException exception) {
       // TODO Auto-generated catch block
-      exception.printStackTrace();
+      //exception.printStackTrace();
+      logger.log(Level.SEVERE, "Error starting practice rhythm view.", exception);
     }
   }
   
@@ -58,7 +64,8 @@ public class MainController {
       settingsCtrl.setMainController(this);
     } catch (IOException exception) {
       // TODO Auto-generated catch block
-      exception.printStackTrace();
+      //exception.printStackTrace();
+      logger.log(Level.SEVERE, "Error loading settings page.", exception);
     }
   }
 
@@ -88,6 +95,7 @@ public class MainController {
     } catch (IOException exception) {
       // TODO Auto-generated catch block
       exception.printStackTrace();
+      logger.log(Level.SEVERE, "Error loading main menu.", exception);
     }
 
   }

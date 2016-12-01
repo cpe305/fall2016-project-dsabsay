@@ -20,6 +20,8 @@ public class UserConfiguration {
 
   private String rhythmsPath;
   
+  // to use singleton pattern, the constructor needs to be private
+  // the instance of this class is retrieved via a getInstance() method
   public UserConfiguration() {
     readUserConfig();
   }
