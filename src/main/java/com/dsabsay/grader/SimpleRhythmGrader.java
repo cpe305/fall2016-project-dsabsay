@@ -187,7 +187,7 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     
     //add first note onset = 0
     noteOnsets.add((float) 0.0);
-    int timeSigNumerator = exercise.getTimeSig()[0];
+    //int timeSigNumerator = exercise.getTimeSig()[0];
     int timeSigDenominator = exercise.getTimeSig()[1];
     
     float totalBeats = 0;

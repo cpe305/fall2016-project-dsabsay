@@ -34,7 +34,6 @@ public class MainController {
   
   public static MainController getInstance() throws ControllerException {
     if (instance == null) {
-      // throw exception
       throw new ControllerException("The MainController has not been instantiated.");
     }
     
@@ -53,9 +52,6 @@ public class MainController {
       fxmlLoader.setController(new PracticeController(this, new SimpleRhythmGrader()));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
-
-      PracticeController practiceCtrl = (PracticeController) fxmlLoader.getController();
-      //practiceCtrl.setMainController(this);
     } catch (IOException exception) {
       logger.log(Level.SEVERE, "Error starting practice rhythm view.", exception);
     }
@@ -74,9 +70,6 @@ public class MainController {
       fxmlLoader.setController(new SettingsController(this));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
-      
-      SettingsController settingsCtrl = (SettingsController) fxmlLoader.getController();
-      //settingsCtrl.setMainController(this);
     } catch (IOException exception) {
       logger.log(Level.SEVERE, "Error loading settings page.", exception);
     }
@@ -99,11 +92,6 @@ public class MainController {
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
       primaryStage.setTitle("SightSinger");
-
-      // add reference to this MainController to the MainMenuController
-      MainMenuController mainMenuCtrl = (MainMenuController) fxmlLoader.getController();
-      //mainMenuCtrl.setMainController(this);
-
       primaryStage.show();
     } catch (IOException exception) {
       logger.log(Level.SEVERE, "Error loading main menu.", exception);

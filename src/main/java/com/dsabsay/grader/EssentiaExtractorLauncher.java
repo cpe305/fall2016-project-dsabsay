@@ -50,13 +50,15 @@ public class EssentiaExtractorLauncher {
 
   }
   
-  public String runRhythmExtractor(String filename) throws ExtractorException {
+  public String runRhythmExtractor(String filename) throws ExtractorException, IOException,
+      InterruptedException {
     //return processRhythmPerformance(getCommand(RHYTHM_EXTRACTOR_PATH, filename));
     return processRhythmPerformance(getCommand(getExtractorFolder()
         + RHYTHM_EXTRACTOR_NAME, filename));
   }
   
-  public String runOnsetExtractor(String filename) throws ExtractorException {
+  public String runOnsetExtractor(String filename) throws ExtractorException, IOException,
+      InterruptedException {
     //return processRhythmPerformance(ONSET_EXTRACTOR_PATH, filename);
     //return processRhythmPerformance(getCommand(STANDARD_ONSET_EXTRACTOR_PATH, filename));
     return processRhythmPerformance(getCommand(getExtractorFolder()
@@ -76,23 +78,34 @@ public class EssentiaExtractorLauncher {
    * @param filename Filename of recorded performance.
    *      The path is relative to ESSENTIA_WORKING_DIRECTORY.
    */
-  protected String processRhythmPerformance(String[] cmd) {
+  protected String processRhythmPerformance(String[] cmd) throws IOException, InterruptedException {
     Runtime runtime = Runtime.getRuntime();
     
     File dir = new File(ESSENTIA_WORKING_DIRECTORY);
     
     Process extractor = null;
+    extractor = runtime.exec(cmd, null, dir);
+    /*
     try {
       extractor = runtime.exec(cmd, null, dir);
     } catch (IOException exception) {
       // TODO Auto-generated catch block
       exception.printStackTrace();
     }
+    */
     
     InputStream output = extractor.getInputStream();
     InputStream error = extractor.getErrorStream();
 
     //wait for process to terminate
+    if (extractor.waitFor() != EXIT_SUCCESS) {
+      System.out.println("extractor exited with failure");
+      Scanner scanner = new Scanner(error).useDelimiter("\\A");
+      String string = scanner.hasNext() ? scanner.next() : "";
+      scanner.close();
+      System.out.println("error: " + string);
+    }
+    /*
     try {
       if (extractor.waitFor() != EXIT_SUCCESS) {
         System.out.println("extractor exited with failure");
@@ -105,6 +118,7 @@ public class EssentiaExtractorLauncher {
       // TODO Auto-generated catch block
       exception.printStackTrace();
     }
+    */
     
     //get output
     /*

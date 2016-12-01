@@ -57,9 +57,7 @@ public class PracticeController {
   @FXML
   private Circle recordCircle;
 
-  //private MainController mainController;
   private Recorder recorder;
-  
   private VexTabExercise currentExercise;
   private PerformanceGrader grader;
   
@@ -153,6 +151,7 @@ public class PracticeController {
       alert.setContentText("No exercises were found. Make sure the path to your exercises is "
           + "set correctly.");
       alert.showAndWait();
+      return;
     }
     
     this.currentExercise = repo.getRandomExercise();
@@ -239,18 +238,13 @@ public class PracticeController {
       logger.log(Level.SEVERE, "Error evaluating performance.", ex);
       showAlertAndWait("ExtractorExcpetion",
           "An error occured while evaluating the performance.");
+      return;
     }
     
     progressIndicator.setVisible(false);
     scoreLabel.setText(score.getScore() * 100 + "%");
     scoreLabel.setVisible(true);
   }
-  
-  /*
-  public void setMainController(MainController mainController) {
-    this.mainController = mainController;
-  }
-  */
   
   private void showAlertAndWait(String title, String content) {
     Alert alert = new Alert(AlertType.ERROR);

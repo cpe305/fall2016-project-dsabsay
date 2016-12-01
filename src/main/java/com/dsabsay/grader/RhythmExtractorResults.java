@@ -30,11 +30,13 @@ public class RhythmExtractorResults extends ExtractorResults {
    * @param rhythmExtractorOutput output from the rhythm extractor
    * @param onsetExtractorOutput output from the onset extractor
    */
+  /*
   public RhythmExtractorResults(String rhythmExtractorOutput, String onsetExtractorOutput) {
     parseRhythmExtractorOutput(rhythmExtractorOutput);
     parseOnsetExtractorOutput(onsetExtractorOutput);
     //System.out.println("ticks: " + this.ticks);
   }
+  */
   
   public List<Float> getOnsets() {
     return onsets;
@@ -48,6 +50,7 @@ public class RhythmExtractorResults extends ExtractorResults {
     this.ticks = ticks;
   }
 
+  /*
   private void parseRhythmExtractorOutput(String rhythmExtractorOutput) {
     String[] lines = rhythmExtractorOutput.split("\\n|\\r");
     
@@ -64,7 +67,9 @@ public class RhythmExtractorResults extends ExtractorResults {
       this.ticks.add(Float.parseFloat(s));
     }
   }
+  */
   
+  /*
   private void parseOnsetExtractorOutput(String onsetExtractorOutput) {
     String[] lines = onsetExtractorOutput.split("\\n|\\r");
     
@@ -78,6 +83,7 @@ public class RhythmExtractorResults extends ExtractorResults {
       this.onsets.add(Float.parseFloat(s));
     }
   }
+  */
   
   public float getBpm() {
     return bpm;
@@ -91,6 +97,7 @@ public class RhythmExtractorResults extends ExtractorResults {
    * Converts the ticks to a list of Note.
    * @return list of Note objects representing the notes of the performance
    */
+  /*
   public List<Float> ticksToNotes() {
     //List<Note> notes = new ArrayList<Note>();
     List<Float> notes = new ArrayList<Float>();
@@ -110,9 +117,11 @@ public class RhythmExtractorResults extends ExtractorResults {
     
     return notes;
   }
+  */
   
   //converts a float duration to number of beats (based on the bpm)
   //assumes duration is measured in seconds
+  /*
   private int tickToBeats(float duration) {
     float beatsPerSecond = this.bpm / 60;
     float beats = duration * beatsPerSecond;
@@ -122,6 +131,7 @@ public class RhythmExtractorResults extends ExtractorResults {
     
     return roundedBeats;
   }
+  */
 
   public List<Float> getTicks() {
     return ticks;

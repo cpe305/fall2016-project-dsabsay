@@ -30,9 +30,7 @@ public class SettingsController {
   private Button rhythmsPathButton;
   @FXML
   private TextField rhythmsPathField;
-  
-  //private MainController mainController;
-  
+    
   private Logger logger = Logger.getLogger("com.dsabsay.application.SettingsController");
   
   public SettingsController(MainController mainController) {
@@ -147,18 +145,5 @@ public class SettingsController {
       rhythmsPathField.setText(directory.getAbsolutePath());
     }
   }
-  
-  /** 
-   * Sets the main controller for this MainMenuController.
-   * 
-   * @param mainController the mainController
-   */
-  /*
-  public void setMainController(MainController mainController) {
-    this.mainController = mainController;
-    System.out.println("setMainController");
-    System.out.println("mainController:" + this.mainController);
-  }
-  */
 
 }

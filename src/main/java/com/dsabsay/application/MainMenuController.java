@@ -21,9 +21,7 @@ public class MainMenuController {
   private Button rhythmButton; // Value injected by FXMLLoader
   @FXML
   private Button settingsButton;
-  
-  //private MainController mainController;
-  
+    
   private Logger logger = Logger.getLogger("com.dsabsay.application.MainMenuController");
 
   /**
@@ -76,18 +74,5 @@ public class MainMenuController {
       });
     }
   }
-
-  /** 
-   * Sets the main controller for this MainMenuController.
-   * 
-   * @param mainController the mainController
-   */
-  /*
-  public void setMainController(MainController mainController) {
-    this.mainController = mainController;
-    System.out.println("setMainController");
-    System.out.println("mainController:" + this.mainController);
-  }
-  */
 
 }

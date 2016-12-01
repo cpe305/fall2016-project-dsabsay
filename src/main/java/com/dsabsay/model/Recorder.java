@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -25,6 +27,8 @@ public class Recorder {
   
   private volatile Throwable exceptionInThread;
   
+  private Logger logger = Logger.getLogger("com.dsabsay.model.Recorder");
+  
   public Recorder() {
     this.isRecording = false;
     this.exceptionInThread = null;
@@ -38,7 +42,7 @@ public class Recorder {
    * Stops the current recording, if any.
    * @throws Throwable 
    */
-  public String stopRecording() throws Throwable {
+  public String stopRecording() throws RecorderException {
     if (line != null) {
       //line.stop();
       //line.drain();
@@ -52,7 +56,8 @@ public class Recorder {
     
     //check for exception
     if (this.exceptionInThread != null) {
-      throw this.exceptionInThread;
+      //throw this.exceptionInThread;
+      throw new RecorderException("Exception in recording thread.");
     }
     
     return PERFORMANCE_FILENAME;
@@ -64,8 +69,7 @@ public class Recorder {
    * @throws LineUnavailableException if the line is unavailable
    * @throws RecorderException if system does not support the Line
    */
-  public void startRecording() throws IOException, LineUnavailableException, RecorderException,
-      Throwable {
+  public void startRecording() throws IOException, LineUnavailableException, RecorderException {
     this.isRecording = true;
     
     AudioFormat format = new AudioFormat(44100, 16, 1, true, true);
@@ -179,8 +183,7 @@ public class Recorder {
         outputFile
             = new FileOutputStream(new File(ESSENTIA_WORKING_DIRECTORY + PERFORMANCE_FILENAME));
       } catch (FileNotFoundException ex) {
-        // TODO Auto-generated catch block
-        ex.printStackTrace();
+        logger.log(Level.SEVERE, "Error starting audio capture.", ex);
       }
       AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
       
@@ -225,8 +228,7 @@ public class Recorder {
       try {
         AudioSystem.write(audioInputStream, fileType, outputFile);
       } catch (IOException ex) {
-        // TODO Auto-generated catch block
-        ex.printStackTrace();
+        logger.log(Level.SEVERE, "Error writing audio file.", ex);
       }
       
       
@@ -235,8 +237,7 @@ public class Recorder {
       try {
         outputFile.close();
       } catch (IOException ex) {
-        // TODO Auto-generated catch block
-        ex.printStackTrace();
+        logger.log(Level.SEVERE, "Error writing audio file.", ex);
       }
       
     }

@@ -2,12 +2,17 @@ package com.dsabsay.grader;
 
 import com.dsabsay.model.ExtractorException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RhythmExtractor {
   private RhythmExtractorResults results;
+  
+  private Logger logger = Logger.getLogger("com.dsabsay.grader.RhythmExtractor");
   
   public RhythmExtractor() {
     this.results = new RhythmExtractorResults();
@@ -25,8 +30,16 @@ public class RhythmExtractor {
     //try to use python extractors
     //EssentiaExtractorLauncher launcher = new PythonEssentiaExtractorLauncher();
     
-    String rhythmExtractorOutput = launcher.runRhythmExtractor(filename);
-    String onsetExtractorOutput = launcher.runOnsetExtractor(filename);
+    String rhythmExtractorOutput;
+    String onsetExtractorOutput;
+    try {
+      rhythmExtractorOutput = launcher.runRhythmExtractor(filename);
+      onsetExtractorOutput = launcher.runOnsetExtractor(filename);
+
+    } catch (IOException | InterruptedException ex) {
+      logger.log(Level.SEVERE, "Error running extractor.", ex);
+      throw new ExtractorException();
+    }
     
     parseRhythmExtractorOutput(rhythmExtractorOutput);
     parseOnsetExtractorOutput(onsetExtractorOutput);
