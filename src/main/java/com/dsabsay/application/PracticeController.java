@@ -31,6 +31,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.LineUnavailableException;
 
@@ -59,6 +61,8 @@ public class PracticeController {
   
   private VexTabExercise currentExercise;
   private PerformanceGrader grader;
+  
+  private Logger logger = Logger.getLogger("com.dsabsay.application.PracticeController");
 
   public PracticeController(MainController mainController, PerformanceGrader grader) {
     this.mainController = mainController;
@@ -147,8 +151,7 @@ public class PracticeController {
       notationWebView.displayExercise(this.currentExercise);
       //change label
     } catch (InvalidVexTabException exception) {
-      // TODO Auto-generated catch block
-      exception.printStackTrace();
+      logger.log(Level.SEVERE, "Error displaying exercise.", exception);
     }
     
     /*
@@ -200,8 +203,7 @@ public class PracticeController {
       System.out.println("recordButton styleSheets: " + recordButton.getStylesheets());
     //} catch (IOException | LineUnavailableException | RecorderException ex) {
     } catch (Throwable ex) {
-      // TODO Auto-generated catch block
-      ex.printStackTrace();
+      logger.log(Level.SEVERE, "Error starting recording.", ex);
       showAlertAndWait("Recorder Error", "An error occured trying to record audio.");
     }
   }
@@ -212,7 +214,7 @@ public class PracticeController {
     try {
       performanceFilename = recorder.stopRecording();
     } catch (Throwable th) {
-      th.printStackTrace();
+      logger.log(Level.SEVERE, "Error stopping recording.", th);
       showAlertAndWait("Throwable thrown", "An error occured in the recording thread.");
     }
     
@@ -224,8 +226,7 @@ public class PracticeController {
       score = grader.evaluatePerformance(currentExercise, performanceFilename,
           (float) 0.20);
     } catch (ExtractorException ex) {
-      // TODO Auto-generated catch block
-      ex.printStackTrace();
+      logger.log(Level.SEVERE, "Error evaluating performance.", ex);
       showAlertAndWait("ExtractorExcpetion",
           "An error occured while evaluating the performance.");
     }

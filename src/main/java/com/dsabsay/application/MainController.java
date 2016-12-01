@@ -39,8 +39,6 @@ public class MainController {
       PracticeController practiceCtrl = (PracticeController) fxmlLoader.getController();
       practiceCtrl.setMainController(this);
     } catch (IOException exception) {
-      // TODO Auto-generated catch block
-      //exception.printStackTrace();
       logger.log(Level.SEVERE, "Error starting practice rhythm view.", exception);
     }
   }
@@ -62,8 +60,6 @@ public class MainController {
       SettingsController settingsCtrl = (SettingsController) fxmlLoader.getController();
       settingsCtrl.setMainController(this);
     } catch (IOException exception) {
-      // TODO Auto-generated catch block
-      //exception.printStackTrace();
       logger.log(Level.SEVERE, "Error loading settings page.", exception);
     }
   }
@@ -92,8 +88,6 @@ public class MainController {
 
       primaryStage.show();
     } catch (IOException exception) {
-      // TODO Auto-generated catch block
-      //exception.printStackTrace();
       logger.log(Level.SEVERE, "Error loading main menu.", exception);
     }
 
