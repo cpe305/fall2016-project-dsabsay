@@ -4,6 +4,7 @@ import com.dsabsay.grader.PerformanceGrader;
 import com.dsabsay.grader.RhythmExtractor;
 import com.dsabsay.grader.RhythmExtractorResults;
 import com.dsabsay.grader.SimpleRhythmGrader;
+import com.dsabsay.model.ControllerException;
 import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.PerformanceScore;
@@ -56,7 +57,7 @@ public class PracticeController {
   @FXML
   private Circle recordCircle;
 
-  private MainController mainController;
+  //private MainController mainController;
   private Recorder recorder;
   
   private VexTabExercise currentExercise;
@@ -65,7 +66,7 @@ public class PracticeController {
   private Logger logger = Logger.getLogger("com.dsabsay.application.PracticeController");
 
   public PracticeController(MainController mainController, PerformanceGrader grader) {
-    this.mainController = mainController;
+    //this.mainController = mainController;
     this.grader = grader;
   }
   
@@ -93,11 +94,19 @@ public class PracticeController {
       optionsButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+          /*
           if (mainController == null) {
             System.out.println("mainController not set in MainMenuController!");
             System.exit(1);
           }
           mainController.startMainMenu();
+          */
+          
+          try {
+            MainController.getInstance().startMainMenu();
+          } catch (ControllerException ex) {
+            logger.log(Level.SEVERE, "Error loading main menu.", ex);
+          }
         }
       });
     }
@@ -109,10 +118,12 @@ public class PracticeController {
       recordButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+          /*
           if (mainController == null) {
             System.out.println("mainController not set in MainMenuController!");
             System.exit(1);
           }
+          */
           
           if (!recorder.isRecording()) {
             startRecording();
@@ -133,10 +144,9 @@ public class PracticeController {
     VexTabExercisesRepo repo = null;
     
     try {
-      repo = new VexTabRhythmExercisesRepo(mainController.getUserConfiguration());
-    } catch (FileNotFoundException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
+      repo = new VexTabRhythmExercisesRepo(MainController.getInstance().getUserConfiguration());
+    } catch (FileNotFoundException | ControllerException ex) {
+      logger.log(Level.SEVERE, "Error initializing VexTabRhythmExercisesRepo.", ex);
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("No exercises found");
       alert.setHeaderText(null);
@@ -236,9 +246,11 @@ public class PracticeController {
     scoreLabel.setVisible(true);
   }
   
+  /*
   public void setMainController(MainController mainController) {
     this.mainController = mainController;
   }
+  */
   
   private void showAlertAndWait(String title, String content) {
     Alert alert = new Alert(AlertType.ERROR);
@@ -302,6 +314,5 @@ public class PracticeController {
     }
     
   }
-  
 
 }

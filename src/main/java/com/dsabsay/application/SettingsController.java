@@ -12,6 +12,10 @@ import javafx.stage.DirectoryChooser;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.dsabsay.model.ControllerException;
 
 public class SettingsController {
   @FXML // ResourceBundle that was given to the FXMLLoader
@@ -27,10 +31,12 @@ public class SettingsController {
   @FXML
   private TextField rhythmsPathField;
   
-  private MainController mainController;
+  //private MainController mainController;
+  
+  private Logger logger = Logger.getLogger("com.dsabsay.application.SettingsController");
   
   public SettingsController(MainController mainController) {
-    this.mainController = mainController;
+    //this.mainController = mainController;
   }
 
   /**
@@ -46,10 +52,12 @@ public class SettingsController {
     rhythmsPathButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        /*
         if (mainController == null) {
           System.out.println("mainController not set in MainMenuController!");
           System.exit(1);
         }
+        */
         chooseRhythmsPath();
       }
     });
@@ -57,42 +65,79 @@ public class SettingsController {
     okButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        /*
         if (mainController == null) {
           System.out.println("mainController not set in MainMenuController!");
           System.exit(1);
         }
         mainController.startMainMenu();
+        */
+        try {
+          MainController.getInstance().startMainMenu();
+        } catch (ControllerException ex) {
+          logger.log(Level.SEVERE, "Error loading main menu.", ex);
+        }
       }
     });
     
     rhythmsPathField.textProperty().addListener(new ChangeListener<String>() {
       public void changed(ObservableValue<? extends String> observable, String oldValue,
           String newValue) {
+        /*
         if (mainController == null) {
           System.out.println("mainController not set in MainMenuController!");
           System.exit(1);
         }
         mainController.getUserConfiguration().setRhythmsPath(rhythmsPathField.getText());
+        */
+        try {
+          MainController.getInstance().getUserConfiguration()
+              .setRhythmsPath(rhythmsPathField.getText());
+        } catch (ControllerException ex) {
+          logger.log(Level.SEVERE, "Error setting rhythms path.", ex);
+        }
       }
     });
     
     rhythmsPathField.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        /*
         if (mainController == null) {
           System.out.println("mainController not set in MainMenuController!");
           System.exit(1);
         }
         mainController.getUserConfiguration().setRhythmsPath(rhythmsPathField.getText());
+        */
+        try {
+          MainController.getInstance().getUserConfiguration()
+              .setRhythmsPath(rhythmsPathField.getText());
+        } catch (ControllerException ex) {
+          logger.log(Level.SEVERE, "Error setting rhythms path.", ex);
+        }
       }
     });
     
     //set path field
-    rhythmsPathField.setText(this.mainController.getUserConfiguration().getRhythmsPath());
+    //rhythmsPathField.setText(this.mainController.getUserConfiguration().getRhythmsPath());
+    try {
+      rhythmsPathField.setText(MainController.getInstance().getUserConfiguration()
+          .getRhythmsPath());
+    } catch (ControllerException ex) {
+      logger.log(Level.SEVERE, "Error getting rhythms path.", ex);
+    }
     
   }
 
   private void chooseRhythmsPath() {
+    MainController mainController;
+    try {
+      mainController = MainController.getInstance();
+    } catch (ControllerException ex) {
+      logger.log(Level.SEVERE, "Error getting main controller.", ex);
+      return;
+    }
+    
     DirectoryChooser directoryChooser = new DirectoryChooser();
     directoryChooser.setTitle("Select rhythms path");
     File directory = directoryChooser.showDialog(mainController.getStage());
@@ -108,10 +153,12 @@ public class SettingsController {
    * 
    * @param mainController the mainController
    */
+  /*
   public void setMainController(MainController mainController) {
     this.mainController = mainController;
     System.out.println("setMainController");
     System.out.println("mainController:" + this.mainController);
   }
+  */
 
 }

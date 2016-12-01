@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.dsabsay.model.ControllerException;
 
 public class MainMenuController {
   @FXML // ResourceBundle that was given to the FXMLLoader
@@ -18,7 +22,9 @@ public class MainMenuController {
   @FXML
   private Button settingsButton;
   
-  private MainController mainController;
+  //private MainController mainController;
+  
+  private Logger logger = Logger.getLogger("com.dsabsay.application.MainMenuController");
 
   /**
    * Initializes the controller class.
@@ -32,11 +38,19 @@ public class MainMenuController {
       settingsButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+          /*
           if (mainController == null) {
             System.out.println("mainController not set in MainMenuController!");
             System.exit(1);
           }
           mainController.startSettings();
+          */
+          
+          try {
+            MainController.getInstance().startSettings();
+          } catch (ControllerException ex) {
+            logger.log(Level.SEVERE, "Error loading settings page.", ex);
+          }
         }
       });
     }
@@ -46,11 +60,18 @@ public class MainMenuController {
         @Override
         public void handle(ActionEvent event) {
           System.out.println("Practice sight singing!");
+          /*
           if (mainController == null) {
             System.out.println("mainController not set in MainMenuController!");
             System.exit(1);
           }
           mainController.startRhythmPracticeView();
+          */
+          try {
+            MainController.getInstance().startRhythmPracticeView();
+          } catch (ControllerException ex) {
+            logger.log(Level.SEVERE, "Error starting practice view.", ex);
+          }
         }
       });
     }
@@ -61,10 +82,12 @@ public class MainMenuController {
    * 
    * @param mainController the mainController
    */
+  /*
   public void setMainController(MainController mainController) {
     this.mainController = mainController;
     System.out.println("setMainController");
     System.out.println("mainController:" + this.mainController);
   }
+  */
 
 }

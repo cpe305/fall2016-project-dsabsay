@@ -7,8 +7,12 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) {
+    /*
     MainController mainController = new MainController(primaryStage);
     mainController.startMainMenu();
+    */
+    
+    MainController.createInstance(primaryStage).startMainMenu();
   }
 
   public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package com.dsabsay.application;
 
 import com.dsabsay.grader.SimpleRhythmGrader;
+import com.dsabsay.model.ControllerException;
 import com.dsabsay.model.UserConfiguration;
 
 import javafx.fxml.FXMLLoader;
@@ -13,14 +14,31 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainController {
+  private static MainController instance = null;
   private Stage primaryStage;
   private UserConfiguration userConfig;
   
   private Logger logger = Logger.getLogger("com.dsabsay.application.MainController");
 
-  public MainController(Stage primaryStage) {
+  private MainController(Stage primaryStage) {
     this.primaryStage = primaryStage;
     this.userConfig = new UserConfiguration();
+    instance = this;
+  }
+  
+  public static MainController createInstance(Stage primaryStage) {
+    instance = new MainController(primaryStage);
+    
+    return instance;
+  }
+  
+  public static MainController getInstance() throws ControllerException {
+    if (instance == null) {
+      // throw exception
+      throw new ControllerException("The MainController has not been instantiated.");
+    }
+    
+    return instance;
   }
 
   /**
@@ -37,7 +55,7 @@ public class MainController {
       primaryStage.setScene(scene);
 
       PracticeController practiceCtrl = (PracticeController) fxmlLoader.getController();
-      practiceCtrl.setMainController(this);
+      //practiceCtrl.setMainController(this);
     } catch (IOException exception) {
       logger.log(Level.SEVERE, "Error starting practice rhythm view.", exception);
     }
@@ -58,7 +76,7 @@ public class MainController {
       primaryStage.setScene(scene);
       
       SettingsController settingsCtrl = (SettingsController) fxmlLoader.getController();
-      settingsCtrl.setMainController(this);
+      //settingsCtrl.setMainController(this);
     } catch (IOException exception) {
       logger.log(Level.SEVERE, "Error loading settings page.", exception);
     }
@@ -84,7 +102,7 @@ public class MainController {
 
       // add reference to this MainController to the MainMenuController
       MainMenuController mainMenuCtrl = (MainMenuController) fxmlLoader.getController();
-      mainMenuCtrl.setMainController(this);
+      //mainMenuCtrl.setMainController(this);
 
       primaryStage.show();
     } catch (IOException exception) {
