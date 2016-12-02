@@ -73,6 +73,31 @@
 <li>Recorder has an enclosed class RecordAudio that implements Runnable. This is used to capture audio in a separate thread.</li>
 </ul>
 </li>
+<li>
+<p><strong>Factory Method Pattern:</strong> PerformanceScore</p>
+
+<ul>
+<li>PerformanceScore has an abstract method that creates a PerformanceRecord object.</li>
+</ul>
+
+<pre><code>public abstract class PerformanceScore {
+...
+public abstract PerformanceRecord createPerformanceRecord();
+...
+}
+</code></pre>
+
+<p>The subclasses of PerformanceScore implement this factory method.</p>
+
+<pre><code>public PerformanceRecord createPerformanceRecord() {
+ RhythmRecord record = new RhythmRecord(this.getExercise().getId(), this.getExercise().getType(),
+    this.getExercise().getName(), this.getScore(), this.getScore(),
+    new Date(), 0);
+
+return (PerformanceRecord) record;
+}
+</code></pre>
+</li>
 </ul>
       </section>
     </div>
