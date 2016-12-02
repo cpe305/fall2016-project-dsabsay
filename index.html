@@ -104,25 +104,24 @@ public class MainController {
 <li>
 <p>PerformanceScore has an abstract method that creates a PerformanceRecord object.</p>
 
-<pre><code>
+<p><code><pre>
 public abstract class PerformanceScore {
 ...
   public abstract PerformanceRecord <b>createPerformanceRecord</b>();
 ...
 }
-</code></pre>
+</pre></code></p>
 
-<p>The subclasses of PerformanceScore implement this factory method.</p>
-
-<pre><code>
+<p>The subclasses of PerformanceScore implement this factory method.
+<code><pre>
 public PerformanceRecord <b>createPerformanceRecord()</b> {
   RhythmRecord record = new RhythmRecord(this.getExercise().getId(), this.getExercise().getType(),
     this.getExercise().getName(), this.getScore(), this.getScore(),
-    new Date(), 0);
+    new Date(), 0);</pre></code></p>
 
-  return (PerformanceRecord) record;
+<p>return (PerformanceRecord) record;
 }
-</code></pre>
+</p>
 </li>
 </ul>
 </li>
