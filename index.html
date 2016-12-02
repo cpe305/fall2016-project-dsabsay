@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>RhythmTrainer by cpe305</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">RhythmTrainer</h1>
-      <h2 class="project-tagline">An application to help you practice sight-reading rhythms</h2>
-      <a href="https://github.com/cpe305/fall2016-project-dsabsay" class="btn">View on GitHub</a>
-      <a href="https://github.com/cpe305/fall2016-project-dsabsay/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/cpe305/fall2016-project-dsabsay/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<html>
 
-    <section class="main-content">
-      <h1>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="RhythmTrainer : An application to help you practice sight-reading rhythms">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>RhythmTrainer</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/cpe305/fall2016-project-dsabsay">View on GitHub</a>
+
+          <h1 id="project_title">RhythmTrainer</h1>
+          <h2 id="project_tagline">An application to help you practice sight-reading rhythms</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/cpe305/fall2016-project-dsabsay/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/cpe305/fall2016-project-dsabsay/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a id="rhythmtrainer" class="anchor" href="#rhythmtrainer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RhythmTrainer</h1>
 
 <p><a href="https://travis-ci.org/cpe305/fall2016-project-dsabsay"><img src="https://travis-ci.org/cpe305/fall2016-project-dsabsay.svg?branch=master" alt="Build Status"></a></p>
@@ -54,26 +66,22 @@
 <li>
 <p>Only one instance of MainController for the entire application. Using the Singleton Pattern eliminates the need to pass around a reference to the MainController instance.</p>
 
-<pre><code>
-  this is <b>bold</b>
-</code></pre>
-<pre><code>
-public class MainController {
+<pre><code>public class MainController {
   private static MainController instance = null;
   ...
-  public static MainController <b>createInstance(Stage primaryStage,</b>
-      <b>PerformanceRecordRepo recordRepo)</b> {
+  public static MainController &lt;b&gt;createInstance(Stage primaryStage,&lt;/b&gt;
+      &lt;b&gt;PerformanceRecordRepo recordRepo)&lt;/b&gt; {
     instance = new MainController(primaryStage, recordRepo);
 
     return instance;
   }
 
-  public static MainController <b>getInstance()</b> throws ControllerException {
+  public static MainController &lt;b&gt;getInstance()&lt;/b&gt; throws ControllerException {
     if (instance == null) {
       throw new ControllerException("The MainController has not been instantiated.");
     }
 
-    <b>return instance;</b>
+    &lt;b&gt;return instance;&lt;/b&gt;
   }
   ...
 }
@@ -93,25 +101,25 @@ public class MainController {
 
 <ul>
 <li>
-<p>PerformanceScore has an abstract method that creates a PerformanceRecord object.
-<code><pre>
-public abstract class PerformanceScore {
+<p>PerformanceScore has an abstract method that creates a PerformanceRecord object.</p>
+
+<pre><code>public abstract class PerformanceScore {
 ...
-  public abstract PerformanceRecord <b>createPerformanceRecord</b>();
+  public abstract PerformanceRecord &lt;b&gt;createPerformanceRecord&lt;/b&gt;();
 ...
 }
-</pre></code></p>
+</code></pre>
 
-<p>The subclasses of PerformanceScore implement this factory method.
-<code><pre>
-public PerformanceRecord <b>createPerformanceRecord()</b> {
+<p>The subclasses of PerformanceScore implement this factory method.</p>
+
+<pre><code>public PerformanceRecord &lt;b&gt;createPerformanceRecord()&lt;/b&gt; {
   RhythmRecord record = new RhythmRecord(this.getExercise().getId(), this.getExercise().getType(),
     this.getExercise().getName(), this.getScore(), this.getScore(),
-    new Date(), 0);</pre></code></p>
+    new Date(), 0);
 
-<p>return (PerformanceRecord) record;
+  return (PerformanceRecord) record;
 }
-</p>
+</code></pre>
 </li>
 </ul>
 </li>
@@ -129,32 +137,34 @@ public PerformanceRecord <b>createPerformanceRecord()</b> {
 <li>
 <p>The grading algorithms implement PerformanceGrader. A grading algorithm can be passed as an object to the PracticeController. This allows the PracticeController to use any grading algorithm without much modification.</p>
 
-<pre><code>
-public interface PerformanceGrader {
-  public PerformanceScore <b>evaluatePerformance(...)</b>;
+<pre><code>public interface PerformanceGrader {
+  public PerformanceScore &lt;b&gt;evaluatePerformance(...)&lt;/b&gt;;
 }
 
-public abstract class RhythmGrader <b>implements PerformanceGrader</b> {
+public abstract class RhythmGrader &lt;b&gt;implements PerformanceGrader&lt;/b&gt; {
 ...
 }
 
 public class SimpleRhythmGrader extends RhythmGrader {
-  public PerformanceScore <b>evaluatePerformance(...)</b>;
+  public PerformanceScore &lt;b&gt;evaluatePerformance(...)&lt;/b&gt;;
 }
 </code></pre>
 </li>
 </ul>
 </li>
 </ul>
+      </section>
+    </div>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/cpe305/fall2016-project-dsabsay">RhythmTrainer</a> is maintained by <a href="https://github.com/cpe305">cpe305</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">RhythmTrainer maintained by <a href="https://github.com/cpe305">cpe305</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
+    </div>
 
-    </section>
+    
 
-  
   </body>
 </html>
