@@ -66,7 +66,14 @@ public class VexTabRhythmParser {
         } else if (token.charAt(1) == 'q') {
           duration = 4;
         } else {
-          duration = Integer.parseInt(token.substring(1, 2));
+          //what if the duration is more than 1 digit?
+          int endOfDuration = 2;
+          for (int i = 2; i < token.length(); i++) {
+            if (Character.isDigit(token.charAt(i))) {
+              endOfDuration++;
+            }
+          }
+          duration = Integer.parseInt(token.substring(1, endOfDuration));
         }
         //check for dotted note
         if (token.indexOf('d') > 1) {

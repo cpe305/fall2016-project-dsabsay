@@ -46,6 +46,7 @@ public class Recorder {
     if (line != null) {
       //line.stop();
       //line.drain();
+      line.close();
     }
     
     this.isRecording = false;

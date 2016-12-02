@@ -222,6 +222,7 @@ public class SimpleRhythmGrader extends RhythmGrader {
   
   //gets onsets (in beats) for the notes in the exercise
   //make public to test it
+  // this doesn't work for 16th notes?
   public List<Float> getNoteOnsets(float bpm, RhythmExercise exercise) {
     List<Float> noteOnsets = new ArrayList<Float>();
     
@@ -240,6 +241,7 @@ public class SimpleRhythmGrader extends RhythmGrader {
       //get number of beats for this note
       //float beats = rhythmicValue / (float) timeSigDenominator;
       float beats = timeSigDenominator / (float) rhythmicValue;
+      //System.out.println("rhythmValue: " + rhythmicValue + " beats: " + beats);
       
       
       //only add if note is not a rest
