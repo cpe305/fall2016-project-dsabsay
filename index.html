@@ -66,6 +66,9 @@
 <li>
 <p>Only one instance of MainController for the entire application. Using the Singleton Pattern eliminates the need to pass around a reference to the MainController instance.</p>
 
+<pre><code>  this is `**`bold`**`
+</code></pre>
+
 <pre><code>
 public class MainController {
   private static MainController instance = null;
@@ -102,9 +105,8 @@ public class MainController {
 
 <ul>
 <li>
-<p>PerformanceScore has an abstract method that creates a PerformanceRecord object.</p>
-
-<p><code><pre>
+<p>PerformanceScore has an abstract method that creates a PerformanceRecord object.
+<code><pre>
 public abstract class PerformanceScore {
 ...
   public abstract PerformanceRecord <b>createPerformanceRecord</b>();
