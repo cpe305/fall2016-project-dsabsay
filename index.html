@@ -77,19 +77,19 @@
 <pre><code>public class MainController {
   private static MainController instance = null;
   ...
-  public static MainController &lt;b&gt;createInstance(Stage primaryStage,&lt;/b&gt;
-      &lt;b&gt;PerformanceRecordRepo recordRepo)&lt;/b&gt; {
+  public static MainController createInstance(Stage primaryStage,
+      PerformanceRecordRepo recordRepo) {
     instance = new MainController(primaryStage, recordRepo);
 
     return instance;
   }
 
-  public static MainController &lt;b&gt;getInstance()&lt;/b&gt; throws ControllerException {
+  public static MainController getInstance() throws ControllerException {
     if (instance == null) {
       throw new ControllerException("The MainController has not been instantiated.");
     }
 
-    &lt;b&gt;return instance;&lt;/b&gt;
+    return instance;
   }
   ...
 }
@@ -113,14 +113,14 @@
 
 <pre><code>public abstract class PerformanceScore {
 ...
-  public abstract PerformanceRecord &lt;b&gt;createPerformanceRecord&lt;/b&gt;();
+  public abstract PerformanceRecord createPerformanceRecord();
 ...
 }
 </code></pre>
 
 <p>The subclasses of PerformanceScore implement this factory method.</p>
 
-<pre><code>public PerformanceRecord &lt;b&gt;createPerformanceRecord()&lt;/b&gt; {
+<pre><code>public PerformanceRecord createPerformanceRecord() {
   RhythmRecord record = new RhythmRecord(this.getExercise().getId(), this.getExercise().getType(),
     this.getExercise().getName(), this.getScore(), this.getScore(),
     new Date(), 0);
@@ -146,15 +146,15 @@
 <p>The grading algorithms implement PerformanceGrader. A grading algorithm can be passed as an object to the PracticeController. This allows the PracticeController to use any grading algorithm without much modification.</p>
 
 <pre><code>public interface PerformanceGrader {
-  public PerformanceScore &lt;b&gt;evaluatePerformance(...)&lt;/b&gt;;
+  public PerformanceScore evaluatePerformance(...);
 }
 
-public abstract class RhythmGrader &lt;b&gt;implements PerformanceGrader&lt;/b&gt; {
+public abstract class RhythmGrader implements PerformanceGrader {
 ...
 }
 
 public class SimpleRhythmGrader extends RhythmGrader {
-  public PerformanceScore &lt;b&gt;evaluatePerformance(...)&lt;/b&gt;;
+  public PerformanceScore evaluatePerformance(...);
 }
 </code></pre>
 </li>
