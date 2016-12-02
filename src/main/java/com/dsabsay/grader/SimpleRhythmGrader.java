@@ -12,7 +12,8 @@ import com.dsabsay.model.VexTabRhythmExercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleRhythmGrader extends VexTabRhythmGrader {
+//public class SimpleRhythmGrader extends VexTabRhythmGrader {
+public class SimpleRhythmGrader extends RhythmGrader {
   
   /*
   public PerformanceScore evaluatePerformance(VexTabRhythmExercise vextabExercise,

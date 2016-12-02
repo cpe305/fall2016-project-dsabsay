@@ -5,8 +5,8 @@ import com.dsabsay.model.VexTabExerciseAbstractClass;
 
 import java.util.List;
 
-public interface VexTabExercisesRepo {
-  public List<VexTabExercise> getExercises();
+public abstract class VexTabExercisesRepo implements ExercisesRepo {
+  //public abstract List<VexTabExercise> getExercises();
   
-  public VexTabExercise getRandomExercise();
+  //public abstract VexTabExercise getRandomExercise();
 }

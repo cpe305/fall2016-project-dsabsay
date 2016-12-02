@@ -12,6 +12,7 @@ import com.dsabsay.model.Recorder;
 import com.dsabsay.model.RecorderException;
 import com.dsabsay.model.RhythmRecord;
 import com.dsabsay.model.VexTabExercise;
+import com.dsabsay.repo.ExercisesRepo;
 import com.dsabsay.repo.VexTabExercisesRepo;
 import com.dsabsay.repo.VexTabRhythmExercisesRepo;
 
@@ -58,7 +59,8 @@ public class PracticeController {
   private Circle recordCircle;
 
   private Recorder recorder;
-  private VexTabExercise currentExercise;
+  //private VexTabExercise currentExercise;
+  private Exercise currentExercise;
   private PerformanceGrader grader;
   
   private Logger logger = Logger.getLogger("com.dsabsay.application.PracticeController");
@@ -139,7 +141,11 @@ public class PracticeController {
     
     //UserConfiguration config = new UserConfiguration();
     //config.setRhythmsPath("src/main/exercises/rhythmExercises");
-    VexTabExercisesRepo repo = null;
+    
+    //TODO
+    //this should be an ExercisesRepo to make it more flexible
+    //VexTabExercisesRepo repo = null;
+    ExercisesRepo repo = null;
     
     try {
       repo = new VexTabRhythmExercisesRepo(MainController.getInstance().getUserConfiguration());
@@ -157,7 +163,8 @@ public class PracticeController {
     this.currentExercise = repo.getRandomExercise();
     
     try {
-      notationWebView.displayExercise(this.currentExercise);
+      //this only works for VexTab exercises
+      notationWebView.displayExercise((VexTabExercise) this.currentExercise);
       //change label
     } catch (InvalidVexTabException exception) {
       logger.log(Level.SEVERE, "Error displaying exercise.", exception);

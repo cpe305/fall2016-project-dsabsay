@@ -1,5 +1,6 @@
 package com.dsabsay.repo;
 
+import com.dsabsay.model.Exercise;
 import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.UserConfiguration;
 import com.dsabsay.model.VexTabExercise;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 public class VexTabRhythmExercisesRepo
-    implements VexTabExercisesRepo {
+    extends VexTabExercisesRepo implements ExercisesRepo {
   private String rhythmsPath;
   List<VexTabExercise> exercises;
   
@@ -24,14 +25,31 @@ public class VexTabRhythmExercisesRepo
     loadExercisesFromDisk();
   }
   
+  /*
   public List<VexTabExercise> getExercises() {
     return exercises;
+  }
+  */
+  
+  private List<Exercise> convertExerciseList() {
+    List<Exercise> list = new ArrayList<Exercise>();
+    
+    for (VexTabExercise vtExercise : this.exercises) {
+      list.add((Exercise) vtExercise);
+    }
+    
+    return list;
+  }
+  
+  public List<Exercise> getExercises() {
+    return convertExerciseList();
   }
   
   /**
    * Gets a random exercise from the repo. Returns null if there are no exercises.
    */
-  public VexTabExercise getRandomExercise() {
+  //public VexTabExercise getRandomExercise() {
+  public Exercise getRandomExercise() {
     // This should probably check the size of the exercises list
     if (exercises == null) {
       return null;
@@ -44,7 +62,8 @@ public class VexTabRhythmExercisesRepo
     Random random = new Random();
     
     //return this.exercises.get((int) (Math.random() * this.exercises.size()));
-    return this.exercises.get((int) (random.nextFloat() * this.exercises.size()));
+    //return this.exercises.get((int) (random.nextFloat() * this.exercises.size()));
+    return (Exercise) this.exercises.get((int) (random.nextFloat() * this.exercises.size()));
   }
   
   private void loadExercisesFromDisk() 
