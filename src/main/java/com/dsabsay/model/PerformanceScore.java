@@ -5,10 +5,14 @@ import java.util.List;
 public abstract class PerformanceScore {
   private float score;
   private List<String> comments;
+  private Exercise exercise;
   
-  public PerformanceScore(float score, List<String> comments) {
+  public abstract PerformanceRecord createPerformanceRecord();
+  
+  public PerformanceScore(float score, List<String> comments, Exercise exercise) {
     this.score = score;
     this.comments = comments;
+    this.exercise = exercise;
   }
 
   public float getScore() {
@@ -17,5 +21,9 @@ public abstract class PerformanceScore {
 
   public List<String> getComments() {
     return comments;
+  }
+  
+  public Exercise getExercise() {
+    return exercise;
   }
 }

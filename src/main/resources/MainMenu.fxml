@@ -14,6 +14,7 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Button fx:id="settingsButton" layoutX="217.0" layoutY="152.0" mnemonicParsing="false" text="Settings" />
+      <Button fx:id="settingsButton" layoutX="216.0" layoutY="196.0" mnemonicParsing="false" text="Settings" />
+      <Button fx:id="viewProgressButton" layoutX="199.0" layoutY="154.0" mnemonicParsing="false" text="View Progress" />
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package com.dsabsay.repo;
 
 import com.dsabsay.model.VexTabExercise;
+import com.dsabsay.model.VexTabExerciseAbstractClass;
 
 import java.util.List;
 

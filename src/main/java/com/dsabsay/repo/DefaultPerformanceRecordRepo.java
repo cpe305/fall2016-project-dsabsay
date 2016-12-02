@@ -50,8 +50,13 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     }
     */
     
-    this.readRhythmRecordsFromDisk();
-
+    //if there are no saved records, just continue without throwing exception
+    try {
+      this.readRhythmRecordsFromDisk();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    
     /*
     try {
       this.readSightSingingRecordsFromDisk();
@@ -62,7 +67,12 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     }
     */
     
-    this.readSightSingingRecordsFromDisk();
+    //if there are no saved records, just continue without throwing exception
+    try {
+      this.readSightSingingRecordsFromDisk();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
     
   }
 

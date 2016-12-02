@@ -21,6 +21,8 @@ public class MainMenuController {
   private Button rhythmButton; // Value injected by FXMLLoader
   @FXML
   private Button settingsButton;
+  @FXML
+  private Button viewProgressButton;
     
   private Logger logger = Logger.getLogger("com.dsabsay.application.MainMenuController");
 
@@ -69,6 +71,19 @@ public class MainMenuController {
             MainController.getInstance().startRhythmPracticeView();
           } catch (ControllerException ex) {
             logger.log(Level.SEVERE, "Error starting practice view.", ex);
+          }
+        }
+      });
+    }
+    
+    if (viewProgressButton != null) {
+      viewProgressButton.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          try {
+            MainController.getInstance().startProgressView();
+          } catch (ControllerException ex) {
+            logger.log(Level.SEVERE, "Error loading progress view.", ex);
           }
         }
       });

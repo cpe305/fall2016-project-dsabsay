@@ -1,17 +1,18 @@
 package com.dsabsay.grader;
 
+import com.dsabsay.model.Exercise;
 import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.Note;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.RhythmExercise;
 import com.dsabsay.model.RhythmScore;
-import com.dsabsay.model.VexTabExercise;
+import com.dsabsay.model.VexTabExerciseAbstractClass;
 import com.dsabsay.model.VexTabRhythmExercise;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleRhythmGrader implements PerformanceGrader {
+public class SimpleRhythmGrader extends VexTabRhythmGrader {
   
   /*
   public PerformanceScore evaluatePerformance(VexTabRhythmExercise vextabExercise,
@@ -42,8 +43,9 @@ public class SimpleRhythmGrader implements PerformanceGrader {
    * @param rhythmErrorMargin amount of allowable error
    * @return the score for the performance
    */
-  public PerformanceScore evaluatePerformance(VexTabExercise exercise, ExtractorResults results,
-      float rhythmErrorMargin) {
+  /*
+  public PerformanceScore evaluatePerformance(VexTabExerciseAbstractClass exercise,
+      ExtractorResults results, float rhythmErrorMargin) {
     
     // not sure what will happen if this is called with a VexTabExercise
     // that is not a VexTabRhythmExercise,
@@ -51,6 +53,7 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     return evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
         (RhythmExtractorResults) results, rhythmErrorMargin);
   }
+  */
 
   /**
    * Evaluates the performance and returns the PerformanceScore object containing the results.
@@ -58,10 +61,21 @@ public class SimpleRhythmGrader implements PerformanceGrader {
    * @param performanceFilename the filename of the audio file of the performance
    * @param rhythmErrorMargin amount of allowable error
    * @return the score for the performance
+   * @throws GraderException if the exercise given is not a VexTabRhythmExercise
    */
-  public PerformanceScore evaluatePerformance(VexTabExercise exercise, String performanceFilename,
-      float rhythmErrorMargin) throws ExtractorException {
+  /*
+  public PerformanceScore evaluatePerformance(VexTabRhythmExerciseAbstractClass exercise,
+      String performanceFilename, float rhythmErrorMargin) throws ExtractorException {
+  */
+  public PerformanceScore evaluatePerformance(Exercise exercise, String performanceFilename,
+      float rhythmErrorMargin) throws ExtractorException, GraderException {
     //errorMargin (in beats)
+    
+    // check if exercise is the right type
+    if (!(exercise instanceof VexTabRhythmExercise)) {
+      throw new GraderException("Invalid Exercise type!");
+    }
+    
     final float errorMargin = (float) 0.20;
     
     RhythmExtractor extractor = new RhythmExtractor();
@@ -75,6 +89,11 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     SimpleRhythmGrader grader = new SimpleRhythmGrader();
     
     // not sure what will happen if the VexTabExercise is not a VexTabRhythmExercise
+    /*
+    PerformanceScore score = grader.evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
+        results, errorMargin);
+    */
+    //still not sure what will happen if the exercise is not a VexTabRhythmExercise
     PerformanceScore score = grader.evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
         results, errorMargin);
     
@@ -131,8 +150,10 @@ public class SimpleRhythmGrader implements PerformanceGrader {
     comments.add("woohoo!");
     int numNotesInExercise = numNotesWithoutRests(vextabExercise.getExercise().getNotes());
 
+    // the score calculation might be improved by factoring how "wrong" the wrong notes were
+    // maybe calculate the number of notes in the exercise that are missing in the performance?
     PerformanceScore score = new RhythmScore((numCorrect - numWrong) / (float) numNotesInExercise,
-        comments);
+        comments, vextabExercise);
     
     return score;
   }

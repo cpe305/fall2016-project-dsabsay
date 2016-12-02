@@ -63,7 +63,16 @@ public class RhythmExtractor {
     
     String ticksLine = lines[5];
     ArrayList<Float> ticks = new ArrayList<Float>();
-    String ticksList = ticksLine.split("\\[|\\]")[1];
+    
+    //this can throw an ArrayIndexOutOfBoundsException
+    //String ticksList = ticksLine.split("\\[|\\]")[1];
+    String[] ticksListLine = ticksLine.split("\\[|\\]");
+    if (ticksListLine.length < 2) {
+      throw new ExtractorException("No ticks found in extractor output.");
+    }
+    
+    String ticksList = ticksListLine[1];
+    
     List<String> ticksListString = Arrays.asList(ticksList.split(",\\s*+"));
     for (String s : ticksListString) {
       ticks.add(Float.parseFloat(s));

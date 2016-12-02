@@ -3,6 +3,7 @@ package com.dsabsay.repo;
 import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.UserConfiguration;
 import com.dsabsay.model.VexTabExercise;
+import com.dsabsay.model.VexTabExerciseAbstractClass;
 import com.dsabsay.model.VexTabRhythmExercise;
 
 import java.io.File;

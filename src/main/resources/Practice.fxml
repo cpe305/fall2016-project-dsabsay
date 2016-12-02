@@ -46,8 +46,8 @@
             </ImageView>
          </children>
       </Group>
-      <ProgressIndicator fx:id="progressIndicator" layoutX="324.0" layoutY="210.0" />
-      <Label fx:id="scoreLabel" layoutX="293.0" layoutY="175.0" prefHeight="51.0" prefWidth="115.0" text="100%" textAlignment="CENTER">
+      <ProgressIndicator fx:id="progressIndicator" layoutX="324.0" layoutY="210.0" visible="false" />
+      <Label fx:id="scoreLabel" alignment="CENTER" layoutX="293.0" layoutY="175.0" prefHeight="51.0" prefWidth="115.0" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

@@ -14,8 +14,8 @@ import java.util.HashMap;
 public class UserConfiguration {
   private HashMap<String, String> melodyTypes;
   private HashMap<String, String> rhythmTypes;
-  private String sightSingingRecordsPath;
-  private String rhythmRecordsPath;
+  private String sightSingingRecordsPath = "src/main/records/sightSingingRecords.ser";
+  private String rhythmRecordsPath = "src/main/records/rhythmRecords.ser";
   private String pathToConfig = "src/main/resources/userConfiguration";
 
   private String rhythmsPath;

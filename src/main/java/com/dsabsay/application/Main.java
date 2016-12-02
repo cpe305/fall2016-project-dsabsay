@@ -1,5 +1,10 @@
 package com.dsabsay.application;
 
+import java.io.IOException;
+
+import com.dsabsay.model.UserConfiguration;
+import com.dsabsay.repo.DefaultPerformanceRecordRepo;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -12,7 +17,21 @@ public class Main extends Application {
     mainController.startMainMenu();
     */
     
-    MainController.createInstance(primaryStage).startMainMenu();
+    UserConfiguration userConfig = null;
+    try {
+      userConfig = new UserConfiguration();
+    } catch (IOException ex) {
+      // TODO Auto-generated catch block
+      ex.printStackTrace();
+    }
+    
+    try {
+      MainController.createInstance(primaryStage,
+          new DefaultPerformanceRecordRepo(userConfig)).startMainMenu();
+    } catch (ClassNotFoundException | IOException ex) {
+      // TODO Auto-generated catch block
+      ex.printStackTrace();
+    }
   }
 
   public static void main(String[] args) {

@@ -66,7 +66,7 @@ public class TestDefaultPerformanceRecordRepo {
   @Test
   public void testSaveRhythmRecord() throws IOException, ClassNotFoundException {
     System.out.println("testSaveRhythmRecord");
-    RhythmRecord record = new RhythmRecord(1, "rhythmType", 1, 1, new Date(), 10);
+    RhythmRecord record = new RhythmRecord(1, "rhythmType", "rhythmName", 1, 1, new Date(), 10);
     this.repo.savePerformanceRecord(record);
 
     List<RhythmRecord> records = repo.getRhythmRecords();

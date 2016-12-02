@@ -5,15 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
 
-public class VexTabRhythmExercise extends VexTabExercise {
-
-  private int rhythmId;
-  private String rhythmType;
-  private String pathToExercise;
+public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
   private RhythmExercise exercise;
   private String vextabNotation;
-  private String name;
 
   /**
    * Creates a VexTabRhythmExercise object.
@@ -26,9 +22,7 @@ public class VexTabRhythmExercise extends VexTabExercise {
    */
   public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise)
       throws FileNotFoundException, IOException, InvalidVexTabException {
-    this.rhythmId = rhythmId;
-    this.rhythmType = rhythmType;
-    this.pathToExercise = pathToExercise;
+    super(rhythmId, rhythmType, pathToExercise, pathToExercise);
     read();
   }
   
@@ -44,10 +38,7 @@ public class VexTabRhythmExercise extends VexTabExercise {
    */
   public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise, String name)
       throws FileNotFoundException, IOException, InvalidVexTabException {
-    this.rhythmId = rhythmId;
-    this.rhythmType = rhythmType;
-    this.pathToExercise = pathToExercise;
-    this.name = name;
+    super(rhythmId, rhythmType, pathToExercise, pathToExercise);
     read();
   }
 

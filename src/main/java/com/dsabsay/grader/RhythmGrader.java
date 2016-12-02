@@ -12,7 +12,9 @@ public abstract class RhythmGrader
     
   }
   
+  /*
   public PerformanceScore evaluatePerformance() {
     return new RhythmScore(1, new ArrayList<String>());
   }
+  */
 }

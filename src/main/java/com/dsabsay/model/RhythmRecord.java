@@ -22,8 +22,8 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
    * @param date date of performance
    * @param elapsedTimeSeconds time spent on performance
    */
-  public RhythmRecord(int rhythmId, String rhythmType, float totalScore, float rhythmScore,
-      Date date, int elapsedTimeSeconds) {
+  public RhythmRecord(int rhythmId, String rhythmType, String rhythmName, float totalScore,
+      float rhythmScore, Date date, int elapsedTimeSeconds) {
     super(totalScore, date, elapsedTimeSeconds);
     this.rhythmId = rhythmId;
     this.rhythmType = rhythmType;

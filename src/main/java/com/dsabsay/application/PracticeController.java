@@ -1,12 +1,16 @@
 package com.dsabsay.application;
 
+import com.dsabsay.grader.GraderException;
 import com.dsabsay.grader.PerformanceGrader;
 import com.dsabsay.model.ControllerException;
+import com.dsabsay.model.Exercise;
 import com.dsabsay.model.ExtractorException;
 import com.dsabsay.model.InvalidVexTabException;
+import com.dsabsay.model.PerformanceRecord;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.Recorder;
 import com.dsabsay.model.RecorderException;
+import com.dsabsay.model.RhythmRecord;
 import com.dsabsay.model.VexTabExercise;
 import com.dsabsay.repo.VexTabExercisesRepo;
 import com.dsabsay.repo.VexTabRhythmExercisesRepo;
@@ -227,18 +231,27 @@ public class PracticeController {
     
     PerformanceScore score = null;
     try {
-      score = grader.evaluatePerformance(currentExercise, performanceFilename,
+      score = grader.evaluatePerformance((Exercise) currentExercise, performanceFilename,
           (float) 0.20);
-    } catch (ExtractorException ex) {
+    } catch (ExtractorException | GraderException ex) {
       logger.log(Level.SEVERE, "Error evaluating performance.", ex);
-      showAlertAndWait("ExtractorExcpetion",
+      showAlertAndWait("ExtractorExcpetion or GraderException",
           "An error occured while evaluating the performance.");
       return;
     }
     
     progressIndicator.setVisible(false);
-    scoreLabel.setText(score.getScore() * 100 + "%");
+    scoreLabel.setText(Math.round(score.getScore() * 100) + "%");
     scoreLabel.setVisible(true);
+    
+    //save record
+    PerformanceRecord record = score.createPerformanceRecord();
+
+    try {
+      MainController.getInstance().getRecordRepo().savePerformanceRecord(record);
+    } catch (IOException | ControllerException ex) {
+      logger.log(Level.SEVERE, "Error saving performance record.", ex);
+    }
   }
   
   private void showAlertAndWait(String title, String content) {
