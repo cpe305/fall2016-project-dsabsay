@@ -1,13 +1,11 @@
 package com.dsabsay.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
 
 public class TestVexTabRhythmExercise {
 
