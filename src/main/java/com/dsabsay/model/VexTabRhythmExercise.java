@@ -43,7 +43,7 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
   }
 
   public String getVexTabNotation() {
-    return "";
+    return vextabNotation;
   }
 
   public RhythmExercise getExercise() {
@@ -105,9 +105,11 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
     
   }
 
+  /*
   public String getVextabNotation() {
     return vextabNotation;
   }
+  */
 
   //assumes only one line of notes
   /**

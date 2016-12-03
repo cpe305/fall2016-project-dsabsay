@@ -64,6 +64,8 @@ public class PracticeController {
   private PerformanceGrader grader;
   
   private Logger logger = Logger.getLogger("com.dsabsay.application.PracticeController");
+  
+  private static final float rhythmErrorMargin = (float) 0.20;
 
   public PracticeController(MainController mainController, PerformanceGrader grader) {
     //this.mainController = mainController;
@@ -239,7 +241,7 @@ public class PracticeController {
     PerformanceScore score = null;
     try {
       score = grader.evaluatePerformance((Exercise) currentExercise, performanceFilename,
-          (float) 0.20);
+          rhythmErrorMargin);
     } catch (ExtractorException | GraderException ex) {
       logger.log(Level.SEVERE, "Error evaluating performance.", ex);
       showAlertAndWait("ExtractorExcpetion or GraderException",
