@@ -64,12 +64,12 @@ public class SimpleRhythmGrader extends RhythmGrader {
    * @return the score for the performance
    * @throws GraderException if the exercise given is not a VexTabRhythmExercise
    */
-  /*
-  public PerformanceScore evaluatePerformance(VexTabRhythmExerciseAbstractClass exercise,
-      String performanceFilename, float rhythmErrorMargin) throws ExtractorException {
-  */
   public PerformanceScore evaluatePerformance(Exercise exercise, String performanceFilename,
       float rhythmErrorMargin) throws ExtractorException, GraderException {
+    /*
+    public PerformanceScore evaluatePerformance(VexTabRhythmExerciseAbstractClass exercise,
+        String performanceFilename, float rhythmErrorMargin) throws ExtractorException {
+    */
     //errorMargin (in beats)
     
     // check if exercise is the right type
@@ -223,6 +223,12 @@ public class SimpleRhythmGrader extends RhythmGrader {
   //gets onsets (in beats) for the notes in the exercise
   //make public to test it
   // this doesn't work for 16th notes?
+  /**
+   * Get list of note onsets. Only public for testing purposes.
+   * @param bpm bpm of the performance
+   * @param exercise the exercise
+   * @return list of floats representing the onset time of each note in the exercise
+   */
   public List<Float> getNoteOnsets(float bpm, RhythmExercise exercise) {
     List<Float> noteOnsets = new ArrayList<Float>();
     

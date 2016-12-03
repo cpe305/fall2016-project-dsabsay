@@ -9,6 +9,12 @@ public abstract class PerformanceScore {
   
   public abstract PerformanceRecord createPerformanceRecord();
   
+  /**
+   * Constructor for PerformanceScore.
+   * @param score score
+   * @param comments comments
+   * @param exercise exercise the score is calculated for
+   */
   public PerformanceScore(float score, List<String> comments, Exercise exercise) {
     this.score = score;
     this.comments = comments;

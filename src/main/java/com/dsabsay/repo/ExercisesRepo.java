@@ -1,9 +1,9 @@
 package com.dsabsay.repo;
 
-import java.util.List;
-
 import com.dsabsay.model.Exercise;
 import com.dsabsay.model.VexTabExercise;
+
+import java.util.List;
 
 public interface ExercisesRepo {
   public List<Exercise> getExercises();

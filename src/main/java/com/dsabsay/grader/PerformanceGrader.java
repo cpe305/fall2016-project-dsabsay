@@ -12,8 +12,8 @@ public interface PerformanceGrader {
   */
   
   /*
-  public PerformanceScore evaluatePerformance(VexTabExerciseAbstractClass exercise, String performanceFilename,
-      float rhythmErrorMargin) throws ExtractorException;
+  public PerformanceScore evaluatePerformance(VexTabExerciseAbstractClass exercise,
+    String performanceFilename, float rhythmErrorMargin) throws ExtractorException;
   */
   public PerformanceScore evaluatePerformance(Exercise exercise, String performanceFilename,
       float rhythmErrorMargin) throws ExtractorException, GraderException;

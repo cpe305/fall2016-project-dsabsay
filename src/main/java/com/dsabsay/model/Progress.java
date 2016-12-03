@@ -1,11 +1,16 @@
 package com.dsabsay.model;
 
+import com.dsabsay.repo.PerformanceRecordRepo;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dsabsay.repo.PerformanceRecordRepo;
-
 public class Progress {
+  /**
+   * Get default stats for rhythm.
+   * @param repo repo
+   * @return list of strings containing stats for the records stored in the repo
+   */
   public List<String> getDefaultStatsForRhythm(PerformanceRecordRepo repo) {
     System.out.println("repo: " + repo);
     List<RhythmRecord> records = repo.getRhythmRecords();

@@ -1,12 +1,12 @@
 package com.dsabsay.application;
 
-import java.io.IOException;
-
 import com.dsabsay.model.UserConfiguration;
 import com.dsabsay.repo.DefaultPerformanceRecordRepo;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
