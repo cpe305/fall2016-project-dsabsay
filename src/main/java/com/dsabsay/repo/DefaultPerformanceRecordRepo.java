@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
 
@@ -30,6 +32,8 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
   private UserConfiguration config;
   private List<RhythmRecord> rhythmRecords;
   private List<SightSingingRecord> sightSingingRecords;
+  
+  private Logger logger = Logger.getLogger("com.dsabsay.application.DefaultPerformanceRecordRepo");
 
   /**
    * Creates a DefaultPerformanceRecordRepo, and trues to read records from the disk.
@@ -53,8 +57,10 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     //if there are no saved records, just continue without throwing exception
     try {
       this.readRhythmRecordsFromDisk();
+    } catch (FileNotFoundException ex) {
+      logger.log(Level.WARNING, "No saved rhythm records found.", ex);
     } catch (IOException ex) {
-      ex.printStackTrace();
+      logger.log(Level.WARNING, "Error reading rhythm records from disk.", ex);
     }
     
     /*
@@ -70,8 +76,10 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     //if there are no saved records, just continue without throwing exception
     try {
       this.readSightSingingRecordsFromDisk();
+    } catch (FileNotFoundException ex) {
+      logger.log(Level.WARNING, "No saved sight-singing records found.", ex);
     } catch (IOException ex) {
-      ex.printStackTrace();
+      logger.log(Level.WARNING, "Error reading sight-singing records from disk.", ex);
     }
     
   }
@@ -191,14 +199,22 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     
     //InputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
     FileInputStream file = null;
+    
+    // need to catch this exception, or just throw it?
+    
+    //just throw this exception
+    /*
     try {
       //file = new File(this.config.getRhythmRecordsPath());
       file = new FileInputStream(this.config.getRhythmRecordsPath());
     } catch (FileNotFoundException ex) {
-      System.out.println("No rhythm records found.");
-      ex.printStackTrace();
+      //System.out.println("No rhythm records found.");
+      logger.log(Level.WARNING, "No rhythm records found.", ex);
       return;
     }
+    */
+    
+    file = new FileInputStream(this.config.getRhythmRecordsPath());
     
     InputStream buffer
         = new BufferedInputStream(file);
@@ -242,14 +258,21 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     */
     
     FileInputStream file = null;
+    
+    // need to catch this exception, or just throw it?
+    
+    // just throw it
+    /*
     try {
       //file = new File(this.config.getRhythmRecordsPath());
       file = new FileInputStream(this.config.getSightSingingRecordsPath());
     } catch (FileNotFoundException ex) {
-      System.out.println("No sight singing records found.");
-      ex.printStackTrace();
+      //System.out.println("No sight singing records found.");
+      logger.log(Level.WARNING, "No sight-singing records found.", ex);
       return;
     }
+    */
+    file = new FileInputStream(this.config.getSightSingingRecordsPath());
     
     //InputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
     InputStream buffer

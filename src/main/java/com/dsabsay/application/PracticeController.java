@@ -304,7 +304,7 @@ public class PracticeController {
   }
   
   @FXML
-  private void recordCircleMouseClicked() {
+  private void recordCircleMouseClicked() throws InterruptedException {
     if (!recorder.isRecording()) {
       // put a delay here to effectively start the recording after the user's
       // click sound (if any)
@@ -312,8 +312,8 @@ public class PracticeController {
       try {
         Thread.sleep(500);
       } catch (InterruptedException ex) {
-        // TODO Auto-generated catch block
-        ex.printStackTrace();
+        logger.log(Level.SEVERE, "Error loading main menu.", ex);
+        throw ex;
       }
       
       recordCircle.setFill(Paint.valueOf("#ff6464"));
