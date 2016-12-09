@@ -54,11 +54,12 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
 
     // read file
     File file = new File(pathToExercise);
-    BufferedReader reader = null;
     String vextab = "";
-    String buffer = null;
 
     /*
+    BufferedReader reader = null;
+    String buffer = null;
+
     try {
       reader = new BufferedReader(new FileReader(file));
 
@@ -78,8 +79,9 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
     }
     */
     
-    reader = new BufferedReader(new FileReader(file));
+    BufferedReader reader = new BufferedReader(new FileReader(file));
 
+    String buffer;
     while ((buffer = reader.readLine()) != null) {
       vextab += buffer;
     }

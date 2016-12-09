@@ -135,7 +135,8 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
   @Override
   public void savePerformanceRecord(PerformanceRecord record) throws IOException {
     String filePath;
-    Object listToWrite = null;
+    //Object listToWrite = null;
+    Object listToWrite;
 
     if (record instanceof RhythmRecord) {
       this.rhythmRecords.add((RhythmRecord) record);
@@ -170,7 +171,8 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
   }
 
   private void readRhythmRecordsFromDisk() throws IOException, ClassNotFoundException {
-    ObjectInput input = null;
+    //ObjectInput input = null;
+    ObjectInput input;
     
     this.rhythmRecords = new ArrayList<RhythmRecord>();
     
@@ -198,7 +200,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     */
     
     //InputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
-    FileInputStream file = null;
+    //FileInputStream file = null;
     
     // need to catch this exception, or just throw it?
     
@@ -214,7 +216,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     }
     */
     
-    file = new FileInputStream(this.config.getRhythmRecordsPath());
+    FileInputStream file = new FileInputStream(this.config.getRhythmRecordsPath());
     
     InputStream buffer
         = new BufferedInputStream(file);
@@ -228,7 +230,8 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
   }
 
   private void readSightSingingRecordsFromDisk() throws IOException, ClassNotFoundException {
-    ObjectInput input = null;
+    //ObjectInput input = null;
+    ObjectInput input;
     
     this.sightSingingRecords = new ArrayList<SightSingingRecord>();
 
@@ -257,7 +260,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
     }
     */
     
-    FileInputStream file = null;
+    //FileInputStream file = null;
     
     // need to catch this exception, or just throw it?
     
@@ -272,7 +275,7 @@ public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
       return;
     }
     */
-    file = new FileInputStream(this.config.getSightSingingRecordsPath());
+    FileInputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
     
     //InputStream file = new FileInputStream(this.config.getSightSingingRecordsPath());
     InputStream buffer
