@@ -18,10 +18,6 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    /*
-    MainController mainController = new MainController(primaryStage);
-    mainController.startMainMenu();
-    */
     
     UserConfiguration userConfig = null;
     try {

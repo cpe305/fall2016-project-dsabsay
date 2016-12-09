@@ -14,7 +14,6 @@ import javafx.scene.web.WebView;
 public class NotationWebView extends Region {
   private WebView webView;
   private WebEngine webEngine;
-  //private VexTabExercise exercise;
 
   /**
    * Creates a NotationWebView object.
@@ -30,17 +29,12 @@ public class NotationWebView extends Region {
     this.webEngine = webView.getEngine();
   }
   
-  public void setVexTabExercise(VexTabExercise exercise) {
-    //this.exercise = exercise;
-  }
-  
   /**
    * Displays exercise in the WebView.
    * @param exercise  the exercise to display
    * @throws InvalidVexTabException If VexTab notation for the exercise is invalid.
    */
   public void displayExercise(VexTabExercise exercise) throws InvalidVexTabException {
-    setVexTabExercise(exercise);
     String timeSig = exercise.getTimeSig();
     String notes = exercise.getNotesString();
     

@@ -74,7 +74,8 @@ public class MainController {
       // create FXMLLoader
       FXMLLoader fxmlLoader
           = new FXMLLoader(getClass().getClassLoader().getResource("Practice.fxml"));
-      fxmlLoader.setController(new PracticeController(this, new SimpleRhythmGrader()));
+      //set controller here to specify the grader
+      fxmlLoader.setController(new PracticeController(new SimpleRhythmGrader()));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
     } catch (IOException exception) {
@@ -90,9 +91,6 @@ public class MainController {
       // create FXMLLoader
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader()
           .getResource("Settings.fxml"));
-      //need to instantiate controller before calling fxmlLoader.load() because the controller needs
-      //a reference to the main controller
-      fxmlLoader.setController(new SettingsController(this));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
     } catch (IOException exception) {
@@ -108,9 +106,6 @@ public class MainController {
       // create FXMLLoader
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader()
           .getResource("ProgressView.fxml"));
-      //need to instantiate controller before calling fxmlLoader.load() because the controller needs
-      //a reference to the main controller
-      //fxmlLoader.setController(new SettingsController(this));
       Scene scene = new Scene((AnchorPane) fxmlLoader.load());
       primaryStage.setScene(scene);
     } catch (IOException exception) {
@@ -127,8 +122,6 @@ public class MainController {
       // AnchorPane mainMenu = (AnchorPane)
       // fxmlLoader.load(Main.class.getResource("MainMenu.fxml"));
 
-      System.out.println("get resource: "
-          + getClass().getClassLoader().getResource("MainMenu.fxml"));
       // create FXMLLoader
       FXMLLoader fxmlLoader
           = new FXMLLoader(getClass().getClassLoader().getResource("MainMenu.fxml"));

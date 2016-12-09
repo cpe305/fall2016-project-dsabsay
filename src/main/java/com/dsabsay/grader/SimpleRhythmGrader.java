@@ -147,14 +147,21 @@ public class SimpleRhythmGrader extends RhythmGrader {
     System.out.println("numCorrect: " + numCorrect);
     System.out.println("numWrong: " + numWrong);
     
-    List<String> comments = new ArrayList<String>();
-    comments.add("woohoo!");
     int numNotesInExercise = numNotesWithoutRests(vextabExercise.getExercise().getNotes());
+    float rhythmScore = (numCorrect - numWrong) / (float) numNotesInExercise;
+    
+    List<String> comments = new ArrayList<String>();
+    if (rhythmScore > .8) {
+      comments.add("Great job!");
+    } else {
+      comments.add("Try again.");
+    }
+    comments.add("Correct Notes: " + numCorrect);
+    comments.add("Wrong Notes: " + numWrong);
 
     // the score calculation might be improved by factoring how "wrong" the wrong notes were
     // maybe calculate the number of notes in the exercise that are missing in the performance?
-    PerformanceScore score = new RhythmScore((numCorrect - numWrong) / (float) numNotesInExercise,
-        comments, vextabExercise);
+    PerformanceScore score = new RhythmScore(rhythmScore, comments, vextabExercise);
     
     return score;
   }
@@ -275,10 +282,5 @@ public class SimpleRhythmGrader extends RhythmGrader {
     
     return num;
   }
-  
-  /*
-  private float beatsToSeconds(float beats) {
-  }
-  */
   
 }

@@ -26,7 +26,7 @@ public class Progress {
     
     List<String> stats = new ArrayList<String>();
     stats.add("Total number of attempts:     " + numberAttempts);
-    stats.add("Total number attempts passed:     " + numberPassed);
+    stats.add("Total number attempts passed (at least 80%):     " + numberPassed);
     
     return stats;
   }

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Date;
 
 public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
   private RhythmExercise exercise;
@@ -38,7 +37,7 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
    */
   public VexTabRhythmExercise(int rhythmId, String rhythmType, String pathToExercise, String name)
       throws FileNotFoundException, IOException, InvalidVexTabException {
-    super(rhythmId, rhythmType, pathToExercise, pathToExercise);
+    super(rhythmId, rhythmType, pathToExercise, name);
     read();
   }
 

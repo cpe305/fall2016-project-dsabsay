@@ -22,7 +22,7 @@ public class SettingsController {
   private ResourceBundle resources;
   @FXML // URL location of the FXML file that was given to the FXMLLoader
   private URL location;
-  @FXML // fx:id="button"
+  @FXML
   private Button okButton; // Value injected by FXMLLoader
   @FXML
   private Button cancelButton;
@@ -32,10 +32,6 @@ public class SettingsController {
   private TextField rhythmsPathField;
     
   private Logger logger = Logger.getLogger("com.dsabsay.application.SettingsController");
-  
-  public SettingsController(MainController mainController) {
-    //this.mainController = mainController;
-  }
 
   /**
    * Initializes the controller class.
@@ -50,12 +46,6 @@ public class SettingsController {
     rhythmsPathButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        /*
-        if (mainController == null) {
-          System.out.println("mainController not set in MainMenuController!");
-          System.exit(1);
-        }
-        */
         chooseRhythmsPath();
       }
     });
@@ -63,13 +53,6 @@ public class SettingsController {
     okButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        /*
-        if (mainController == null) {
-          System.out.println("mainController not set in MainMenuController!");
-          System.exit(1);
-        }
-        mainController.startMainMenu();
-        */
         try {
           MainController.getInstance().startMainMenu();
         } catch (ControllerException ex) {
@@ -81,13 +64,6 @@ public class SettingsController {
     rhythmsPathField.textProperty().addListener(new ChangeListener<String>() {
       public void changed(ObservableValue<? extends String> observable, String oldValue,
           String newValue) {
-        /*
-        if (mainController == null) {
-          System.out.println("mainController not set in MainMenuController!");
-          System.exit(1);
-        }
-        mainController.getUserConfiguration().setRhythmsPath(rhythmsPathField.getText());
-        */
         try {
           MainController.getInstance().getUserConfiguration()
               .setRhythmsPath(rhythmsPathField.getText());
@@ -100,13 +76,6 @@ public class SettingsController {
     rhythmsPathField.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        /*
-        if (mainController == null) {
-          System.out.println("mainController not set in MainMenuController!");
-          System.exit(1);
-        }
-        mainController.getUserConfiguration().setRhythmsPath(rhythmsPathField.getText());
-        */
         try {
           MainController.getInstance().getUserConfiguration()
               .setRhythmsPath(rhythmsPathField.getText());
@@ -117,7 +86,6 @@ public class SettingsController {
     });
     
     //set path field
-    //rhythmsPathField.setText(this.mainController.getUserConfiguration().getRhythmsPath());
     try {
       rhythmsPathField.setText(MainController.getInstance().getUserConfiguration()
           .getRhythmsPath());

@@ -118,12 +118,6 @@ public class EssentiaExtractorLauncher {
     error.close();
     
     //get output
-    /*
-    StringWriter writer = new StringWriter();
-    IOUtils.copy(output, writer, null);
-    String string = writer.toString();
-    */
-    
     Scanner scanner = new Scanner(output).useDelimiter("\\A");
     String string = scanner.hasNext() ? scanner.next() : "";
     scanner.close();

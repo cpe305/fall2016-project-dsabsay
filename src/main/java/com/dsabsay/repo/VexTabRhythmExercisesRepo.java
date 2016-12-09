@@ -86,7 +86,9 @@ public class VexTabRhythmExercisesRepo
     for (File fileEntry : folder.listFiles()) {
       System.out.println("Exercise: " + fileEntry.getName());
       //need to deal with exercise id and exercise type
-      exercises.add(new VexTabRhythmExercise(1, "test", fileEntry.getPath()));
+      String name = fileEntry.getName();
+      name = name.substring(0, name.indexOf('.'));
+      exercises.add(new VexTabRhythmExercise(1, "test", fileEntry.getPath(), name));
     }
     
     if (this.exercises.isEmpty()) {

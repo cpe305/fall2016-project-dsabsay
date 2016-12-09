@@ -15,7 +15,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <WebView fx:id="webView" layoutX="125.0" layoutY="53.0" prefHeight="100.0" prefWidth="450.0" />
-      <Label fx:id="melodyTypeLabel" layoutX="61.0" layoutY="288.0" text="4/4 Meter">
+      <Label fx:id="exerciseTypeLabel" layoutX="61.0" layoutY="288.0" text="4/4 Meter">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font></Label>
@@ -35,7 +35,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Label fx:id="melodyTypeLabel1" layoutX="61.0" layoutY="307.0" text="Rhythm 1" />
+      <Label fx:id="exerciseNameLabel" layoutX="61.0" layoutY="307.0" text="Rhythm 1" />
       <Group layoutX="-153.0" layoutY="-2.0">
          <children>
             <Circle fx:id="recordCircle" fill="#f8b4b4" layoutX="503.0" layoutY="325.0" onMouseClicked="#recordCircleMouseClicked" onMouseEntered="#recordCircleMouseEntered" onMouseExited="#recordCircleMouseExited" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="circle" />
@@ -52,5 +52,6 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
+      <ListView fx:id="feedbackList" layoutX="440.0" layoutY="206.0" prefHeight="114.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

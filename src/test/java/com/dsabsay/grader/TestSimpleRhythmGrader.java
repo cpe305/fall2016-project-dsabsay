@@ -80,7 +80,9 @@ public class TestSimpleRhythmGrader {
     VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
     
     List<String> comments = new ArrayList<String>();
-    comments.add("woohoo!");
+    comments.add("Great job!");
+    comments.add("Correct Notes: 8");
+    comments.add("Wrong Notes: 0");
     
     PerformanceScore expected = new RhythmScore((float) 1.0, comments, exercise);
     final float rhythmErrorMargin = (float) 0.20;

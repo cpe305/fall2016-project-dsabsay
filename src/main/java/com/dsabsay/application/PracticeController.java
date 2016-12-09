@@ -10,12 +10,12 @@ import com.dsabsay.model.PerformanceRecord;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.Recorder;
 import com.dsabsay.model.RecorderException;
-import com.dsabsay.model.RhythmRecord;
 import com.dsabsay.model.VexTabExercise;
 import com.dsabsay.repo.ExercisesRepo;
-import com.dsabsay.repo.VexTabExercisesRepo;
 import com.dsabsay.repo.VexTabRhythmExercisesRepo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -43,23 +44,26 @@ public class PracticeController {
   private ResourceBundle resources;
   @FXML // URL location of the FXML file that was given to the FXMLLoader
   private URL location;
-  @FXML // fx:id="button"
+  @FXML
   private Button recordButton; // Value injected by FXMLLoader
   @FXML
   private Button optionsButton;
   @FXML
   private WebView webView;
   @FXML
-  private Label melodyTypeLabel;
+  private Label exerciseTypeLabel;
+  @FXML
+  private Label exerciseNameLabel;
   @FXML
   private ProgressIndicator progressIndicator;
   @FXML
   private Label scoreLabel;
   @FXML
   private Circle recordCircle;
+  @FXML
+  private ListView<String> feedbackList;
 
   private Recorder recorder;
-  //private VexTabExercise currentExercise;
   private Exercise currentExercise;
   private PerformanceGrader grader;
   
@@ -67,8 +71,7 @@ public class PracticeController {
   
   private static final float rhythmErrorMargin = (float) 0.20;
 
-  public PracticeController(MainController mainController, PerformanceGrader grader) {
-    //this.mainController = mainController;
+  public PracticeController(PerformanceGrader grader) {
     this.grader = grader;
   }
   
@@ -77,15 +80,6 @@ public class PracticeController {
    */
   @FXML // This method is called by the FXMLLoader when initialization is complete
   void initialize() {
-    /*
-     * assert sightSingButton != null :
-     * "fx:id=\"sightSingButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-     * 
-     * if (sightSingButton != null) { sightSingButton.setOnAction(new EventHandler<ActionEvent>() {
-     * 
-     * @Override public void handle(ActionEvent event) {
-     * System.out.println("Practice sight singing!"); } }); }
-     */
     
     this.recorder = new Recorder();
     
@@ -96,14 +90,6 @@ public class PracticeController {
       optionsButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-          /*
-          if (mainController == null) {
-            System.out.println("mainController not set in MainMenuController!");
-            System.exit(1);
-          }
-          mainController.startMainMenu();
-          */
-          
           try {
             MainController.getInstance().startMainMenu();
           } catch (ControllerException ex) {
@@ -120,13 +106,6 @@ public class PracticeController {
       recordButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-          /*
-          if (mainController == null) {
-            System.out.println("mainController not set in MainMenuController!");
-            System.exit(1);
-          }
-          */
-          
           if (!recorder.isRecording()) {
             startRecording();
           } else {
@@ -172,6 +151,9 @@ public class PracticeController {
       logger.log(Level.SEVERE, "Error displaying exercise.", exception);
     }
     
+    exerciseTypeLabel.setText(this.currentExercise.getType());
+    exerciseNameLabel.setText(this.currentExercise.getName());
+    
     /*
     String options = "options font-size=14 space=15";
     String tabstave = "tabstave notation=true tablature=false time=4/4 clef=percussion";
@@ -216,9 +198,6 @@ public class PracticeController {
       recorder.startRecording();
       //recordButton.setStyle("-fx-background-color: #ff0000");
       recordButton.getStyleClass().add("recording");
-      //recordButton.
-      System.out.println("recordButton styleClasses: " + recordButton.getStyleClass());
-      System.out.println("recordButton styleSheets: " + recordButton.getStylesheets());
     } catch (IOException | LineUnavailableException | RecorderException ex) {
       logger.log(Level.SEVERE, "Error starting recording.", ex);
       showAlertAndWait("Recorder Error", "An error occured trying to record audio.");
@@ -252,6 +231,14 @@ public class PracticeController {
     progressIndicator.setVisible(false);
     scoreLabel.setText(Math.round(score.getScore() * 100) + "%");
     scoreLabel.setVisible(true);
+    
+    //display feedback
+    ObservableList<String> list = FXCollections.observableArrayList();
+    list.addAll(score.getComments());
+    
+    feedbackList.setEditable(true);
+    feedbackList.setItems(list);
+    //feedbackList.setVisible(true);
     
     //save record
     PerformanceRecord record = score.createPerformanceRecord();
