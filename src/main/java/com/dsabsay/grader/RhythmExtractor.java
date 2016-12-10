@@ -95,14 +95,14 @@ public class RhythmExtractor {
 
     ArrayList<Float> onsets = new ArrayList<Float>();
     
-    System.out.println("Parse onsets:");
+    //System.out.println("Parse onsets:");
     
     for (String s : onsetsListString) {
       onsets.add(Float.parseFloat(s));
-      System.out.print(s + ", ");
+      //System.out.print(s + ", ");
     }
     
-    System.out.println();
+    //System.out.println();
     
     this.results.setOnsets(onsets);
   }

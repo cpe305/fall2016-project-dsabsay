@@ -95,8 +95,10 @@ public class EssentiaExtractorLauncher {
    * Runs the Essentia extractor in a new process
    * @param filename Filename of recorded performance.
    *      The path is relative to ESSENTIA_WORKING_DIRECTORY.
+   * @throws ExtractorException if the extractor exits with an exit code != EXIT_SUCCESS
    */
-  protected String processRhythmPerformance(String[] cmd) throws IOException, InterruptedException {
+  protected String processRhythmPerformance(String[] cmd) throws IOException, InterruptedException,
+      ExtractorException {
     Runtime runtime = Runtime.getRuntime();
     
     File dir = new File(ESSENTIA_WORKING_DIRECTORY);
@@ -107,12 +109,14 @@ public class EssentiaExtractorLauncher {
     InputStream error = extractor.getErrorStream();
 
     //wait for process to terminate
-    if (extractor.waitFor() != EXIT_SUCCESS) {
-      System.out.println("extractor exited with failure");
-      Scanner scanner = new Scanner(error).useDelimiter("\\A");
-      String string = scanner.hasNext() ? scanner.next() : "";
-      scanner.close();
-      System.out.println("error: " + string);
+    int exit;
+    if ((exit = extractor.waitFor()) != EXIT_SUCCESS) {
+      throw new ExtractorException("Extractor exited with: " + exit);
+      //System.out.println("extractor exited with failure");
+      //Scanner scanner = new Scanner(error).useDelimiter("\\A");
+      //String string = scanner.hasNext() ? scanner.next() : "";
+      //scanner.close();
+      //System.out.println("error: " + string);
     }
     
     error.close();

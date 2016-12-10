@@ -54,29 +54,6 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
     // read file
     File file = new File(pathToExercise);
     String vextab = "";
-
-    /*
-    BufferedReader reader = null;
-    String buffer = null;
-
-    try {
-      reader = new BufferedReader(new FileReader(file));
-
-      while ((buffer = reader.readLine()) != null) {
-        vextab += buffer;
-      }
-
-      reader.close();
-
-      System.out.println("Read file");
-      System.out.println(vextab);
-
-    } catch (FileNotFoundException exception) {
-      exception.printStackTrace();
-    } catch (IOException exception) {
-      exception.printStackTrace();
-    }
-    */
     
     BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -89,28 +66,11 @@ public class VexTabRhythmExercise extends Exercise implements VexTabExercise {
 
     System.out.println("Read file");
     System.out.println(vextab);
-
-    /*
-    try {
-      this.vextabNotation = vextab;
-      this.exercise = parser.parseVexTab(vextab);
-    } catch (InvalidVexTabException exception) {
-      // TODO Auto-generated catch block
-      exception.printStackTrace();
-    }
-    */
     
     this.vextabNotation = vextab;
     VexTabRhythmParser parser = new VexTabRhythmParser();
     this.exercise = parser.parseVexTab(vextab);
-    
   }
-
-  /*
-  public String getVextabNotation() {
-    return vextabNotation;
-  }
-  */
 
   //assumes only one line of notes
   /**

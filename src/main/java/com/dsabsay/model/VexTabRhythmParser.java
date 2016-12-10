@@ -20,7 +20,6 @@ public class VexTabRhythmParser {
     //default duration values
     duration = 4;
     dotted = false;
-    
 
     int index;
     //get lines starting with "notes"
@@ -40,16 +39,7 @@ public class VexTabRhythmParser {
     //right now this only parses one line of notes
     String[] tokens = noteLine.split("\\s+");
     
-    //System.out.println("tokens: ");
-    
-    /*
-    for (String token: tokens) {
-      System.out.println(token);
-    }
-    */
-    
     for (String token : tokens) {
-      //System.out.println("Token: " + token);
       if (token.length() == 0) {
         continue;
       }
@@ -121,28 +111,7 @@ public class VexTabRhythmParser {
         notes.add(new Note(duration, dotted, false));
       }
       
-      /*
-      int i = 0;
-      for (i = 0; i < token.length(); i++) {
-      }
-      */
     }
-    
-    // iterate through tokens
-    /*
-    char c;
-    int i;
-    while (s.charAt(i) != '\n') {
-      
-      // ":"
-      if (c == ':') {
-        i++;
-        duration = Integer.parseInt(s.substring(i, i));
-        //ignore anything else after the duration, skip to next token
-      }
-    }
-    // if newline is read, look for next "notes" line
-    */
     
     // parse time signature
     // This code might be duplicated in VexTabRhythmExercise.getTimeSig()

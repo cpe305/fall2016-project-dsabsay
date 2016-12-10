@@ -47,7 +47,6 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     result = prime * result + rhythmId;
     result = prime * result + Float.floatToIntBits(rhythmScore);
     result = prime * result + ((rhythmType == null) ? 0 : rhythmType.hashCode());
-    //result = prime * result + Float.floatToIntBits(totalScore);
     return result;
   }
 
@@ -83,11 +82,6 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
     } else if (!rhythmType.equals(other.rhythmType)) {
       return false;
     }
-    /*
-    if (Float.floatToIntBits(totalScore) != Float.floatToIntBits(other.totalScore)) {
-      return false;
-    }
-    */
     return true;
   }
 
@@ -106,16 +100,6 @@ public class RhythmRecord extends PerformanceRecord implements Serializable {
   public void setRhythmType(String rhythmType) {
     this.rhythmType = rhythmType;
   }
-
-  /*
-  public float getTotalScore() {
-    return totalScore;
-  }
-
-  public void setTotalScore(float totalScore) {
-    this.totalScore = totalScore;
-  }
-  */
 
   public float getRhythmScore() {
     return rhythmScore;

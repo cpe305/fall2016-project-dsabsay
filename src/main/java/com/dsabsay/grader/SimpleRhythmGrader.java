@@ -6,55 +6,18 @@ import com.dsabsay.model.Note;
 import com.dsabsay.model.PerformanceScore;
 import com.dsabsay.model.RhythmExercise;
 import com.dsabsay.model.RhythmScore;
-import com.dsabsay.model.VexTabExerciseAbstractClass;
 import com.dsabsay.model.VexTabRhythmExercise;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //public class SimpleRhythmGrader extends VexTabRhythmGrader {
-public class SimpleRhythmGrader extends RhythmGrader {
-  
-  /*
-  public PerformanceScore evaluatePerformance(VexTabRhythmExercise vextabExercise,
-      RhythmExtractorResults performance) {
-    
-    int numCorrect = 0;
-    int numWrong = 0;
-    int exerciseBeat = 0;
-    int performanceBeat = 0;
-    RhythmExercise exercise = vextabExercise.getExercise();
-    
-    //assume first tick of performance is beginning of rhythm
-    
-    
-    return null;
-    
-  }
-  */
+//public class SimpleRhythmGrader extends RhythmGrader {
+public class SimpleRhythmGrader implements PerformanceGrader {
   
   public SimpleRhythmGrader() {
     
   }
-  
-  /**
-   * Evaluates the performance and returns the PerformanceScore object containing the results.
-   * @param exercise the exercise being graded
-   * @param results the performance information from processing the extractor output
-   * @param rhythmErrorMargin amount of allowable error
-   * @return the score for the performance
-   */
-  /*
-  public PerformanceScore evaluatePerformance(VexTabExerciseAbstractClass exercise,
-      ExtractorResults results, float rhythmErrorMargin) {
-    
-    // not sure what will happen if this is called with a VexTabExercise
-    // that is not a VexTabRhythmExercise,
-    // or an ExtractorResults that is not a RhythmExtractorResults
-    return evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
-        (RhythmExtractorResults) results, rhythmErrorMargin);
-  }
-  */
 
   /**
    * Evaluates the performance and returns the PerformanceScore object containing the results.
@@ -66,34 +29,22 @@ public class SimpleRhythmGrader extends RhythmGrader {
    */
   public PerformanceScore evaluatePerformance(Exercise exercise, String performanceFilename,
       float rhythmErrorMargin) throws ExtractorException, GraderException {
-    /*
-    public PerformanceScore evaluatePerformance(VexTabRhythmExerciseAbstractClass exercise,
-        String performanceFilename, float rhythmErrorMargin) throws ExtractorException {
-    */
-    //errorMargin (in beats)
     
     // check if exercise is the right type
     if (!(exercise instanceof VexTabRhythmExercise)) {
       throw new GraderException("Invalid Exercise type!");
     }
     
+    //errorMargin (in beats)
     final float errorMargin = (float) 0.20;
     
     RhythmExtractor extractor = new RhythmExtractor();
     RhythmExtractorResults results;
 
     results = extractor.processPerformance(performanceFilename);
-    /*
-    showAlertAndWait("Extractor Exception", "An error occurred while processing the performance.");
-    */
     
     SimpleRhythmGrader grader = new SimpleRhythmGrader();
     
-    // not sure what will happen if the VexTabExercise is not a VexTabRhythmExercise
-    /*
-    PerformanceScore score = grader.evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
-        results, errorMargin);
-    */
     //still not sure what will happen if the exercise is not a VexTabRhythmExercise
     PerformanceScore score = grader.evaluatePerformanceSimpler((VexTabRhythmExercise) exercise,
         results, errorMargin);
@@ -186,27 +137,6 @@ public class SimpleRhythmGrader extends RhythmGrader {
     
     return beats;
   }
-  
-  /*
-  private List<Float> getTickOnsets(RhythmExtractorResults performance) {
-    float bpm = performance.getBpm();
-    List<Float> noteOnsets = new ArrayList<Float>();
-    
-    //add first note onset = 0;
-    noteOnsets.add((float) 0.0);
-    
-    float start = performance.getTicks().get(0);
-    
-    List<Float> ticks = performance.getTicks();
-    
-    for (int i = 1; i < ticks.size(); i++) {
-      float onset = ticks.get(i) - start;
-      noteOnsets.add(tickToBeats(onset, bpm));
-    }
-    
-    return noteOnsets;
-  }
-  */
   
   private List<Float> getNoteOnsets(RhythmExtractorResults performance) {
     float bpm = performance.getBpm();

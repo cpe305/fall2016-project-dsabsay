@@ -1,4 +1,4 @@
-package com.dsabsay.main;
+package com.dsabsay.repo;
 
 import com.dsabsay.model.SightSingingRecord;
 import com.dsabsay.model.UserConfiguration;
@@ -8,7 +8,7 @@ import com.dsabsay.repo.PerformanceRecordRepo;
 import java.io.IOException;
 import java.util.List;
 
-public class SightSinger {
+public class PerformanceRecordRepoTester {
   /**
    * May not be used.
    * @param args arguments

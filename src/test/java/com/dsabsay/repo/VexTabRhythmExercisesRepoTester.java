@@ -17,7 +17,7 @@ public class VexTabRhythmExercisesRepoTester {
     config.setRhythmsPath("src/main/exercises/testRhythmExercises");
     
     try {
-      VexTabExercisesRepo repo = new VexTabRhythmExercisesRepo(config);
+      ExercisesRepo repo = new VexTabRhythmExercisesRepo(config);
     } catch (FileNotFoundException | InvalidVexTabException exception) {
       // TODO Auto-generated catch block
       exception.printStackTrace();

@@ -2,8 +2,6 @@ package com.dsabsay.application;
 
 import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.VexTabExercise;
-import com.dsabsay.model.VexTabExerciseAbstractClass;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;

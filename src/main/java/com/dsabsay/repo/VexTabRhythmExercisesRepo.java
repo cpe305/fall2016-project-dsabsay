@@ -4,7 +4,6 @@ import com.dsabsay.model.Exercise;
 import com.dsabsay.model.InvalidVexTabException;
 import com.dsabsay.model.UserConfiguration;
 import com.dsabsay.model.VexTabExercise;
-import com.dsabsay.model.VexTabExerciseAbstractClass;
 import com.dsabsay.model.VexTabRhythmExercise;
 
 import java.io.File;
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class VexTabRhythmExercisesRepo
-    extends VexTabExercisesRepo implements ExercisesRepo {
+//public class VexTabRhythmExercisesRepo extends VexTabExercisesRepo implements ExercisesRepo {
+public class VexTabRhythmExercisesRepo implements ExercisesRepo {
   private String rhythmsPath;
   List<VexTabExercise> exercises;
   
@@ -24,12 +23,6 @@ public class VexTabRhythmExercisesRepo
     this.rhythmsPath = config.getRhythmsPath();
     loadExercisesFromDisk();
   }
-  
-  /*
-  public List<VexTabExercise> getExercises() {
-    return exercises;
-  }
-  */
   
   private List<Exercise> convertExerciseList() {
     List<Exercise> list = new ArrayList<Exercise>();

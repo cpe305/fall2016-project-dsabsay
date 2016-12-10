@@ -73,25 +73,6 @@ public class Note {
     return "" + (isRest ? "#" : "") + rhythmicValue + (isDotted ? "." : "") + " " ;
   }
   
-  /*
-  @Override
-  public boolean equals(Object other) {
-    if (other == null) {
-      return false;
-    }
-    if (!(other instanceof Note)) {
-      return false;
-    }
-    
-    Note otherNote = (Note) other;
-    return this.rhythmicValue == otherNote.getRhythmicValue()
-        && this.pitch == otherNote.getPitch()
-        && this.isDotted == otherNote.getIsDotted()
-        && this.isRest == otherNote.getIsRest()
-        && this.tied == otherNote.getTied();
-  }
-  */
-  
   public boolean getIsDotted() {
     return isDotted;
   }

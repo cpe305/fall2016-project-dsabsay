@@ -117,17 +117,9 @@ public class PracticeController {
     
     NotationWebView notationWebView = new NotationWebView(webView);
     
-    //String path = "src/main/resources/testRhythm2.txt";
-    //VexTabRhythmExercise exercise = new VexTabRhythmExercise(1, "test", path);
-    
-    //UserConfiguration config = new UserConfiguration();
-    //config.setRhythmsPath("src/main/exercises/rhythmExercises");
-    
-    //TODO
-    //this should be an ExercisesRepo to make it more flexible
-    //VexTabExercisesRepo repo = null;
     ExercisesRepo repo = null;
     
+    //this just creates a VexTabRhythmExercisesRepo. could be generalized
     try {
       repo = new VexTabRhythmExercisesRepo(MainController.getInstance().getUserConfiguration());
     } catch (ControllerException | IOException | InvalidVexTabException ex) {
@@ -154,43 +146,6 @@ public class PracticeController {
     exerciseTypeLabel.setText(this.currentExercise.getType());
     exerciseNameLabel.setText(this.currentExercise.getName());
     
-    /*
-    String options = "options font-size=14 space=15";
-    String tabstave = "tabstave notation=true tablature=false time=4/4 clef=percussion";
-    //String notes = "notes :2S Bd/4 :qS Bd/4 :q ## | :8S Bd/4 Bu/4 :qS Bd-Bu-Bd/4 ^3^";
-    String notes = "notes :2S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
-    //String notes = "notes :1S B/4 :qS B/4 :q ## | :8S B/4 B/4 :qS B-B-B/4 ^3^";
-    String notation = "\n options font-size=14 space=15"
-        + "\n tabstave notation=true tablature=false"
-        + "\n time=4/4 clef=percussion "
-        + "\n notes :2S Bd/4 :qS Bd/4 :q ## | :8S Bd/4 Bu/4 :qS Bd-Bu-Bd/4 ^3^ "
-        + "\n text :w, G Maj7, |, Am " + "\n options space=10\n";
-
-    System.out.println("notation: " + notation);
-    System.out.println("notationWebView:" + notationWebView);
-    WebEngine webEngine = notationWebView.getEngine();
-    ClassLoader classLoader = this.getClass().getClassLoader();
-    String url = classLoader.getResource("notation.html").toExternalForm();
-    // String url = Main.class.getResource("/src/main/VexFlow/notation.html").toExternalForm();
-    notationWebView.setZoom(0.75);
-    // need to set appropriate zoom
-    // get size of div, compare with size of webview, then scale appropriately
-    webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
-      public void changed(ObservableValue ov, State oldState, State newState) {
-        if (newState == State.SUCCEEDED) {
-          // webEngine.executeScript("notate()");
-          // webEngine.executeScript("notate('" + notation + "')");
-          webEngine.executeScript("notateVexTab('" + notes + "')");
-        }
-      }
-    });
-    webEngine.load(url);
-    */
-
-    /*
-    webEngine
-      .load("/Users/danielsabsay/Documents/workspace/javafxtest/src/application/notation.html");
-    */
   }
   
   private void startRecording() {
@@ -257,28 +212,6 @@ public class PracticeController {
     alert.setContentText(content);
     alert.showAndWait();
   }
-  
-  /*
-  private void gradePerformance(String filename) {
-    //errorMargin (in beats)
-    final float errorMargin = (float) 0.20;
-    
-    RhythmExtractor extractor = new RhythmExtractor();
-    RhythmExtractorResults results;
-    
-    try {
-      results = extractor.processPerformance(filename);
-    } catch (ExtractorException ex) {
-      // TODO Auto-generated catch block
-      ex.printStackTrace();
-      showAlertAndWait("Extractor Exception", "An error occured while processing the performance.");
-    }
-    
-    SimpleRhythmGrader grader = new SimpleRhythmGrader();
-    PerformanceScore score = grader.evaluatePerformanceSimpler(this.currentExercise,
-        results, errorMargin);
-  }
-  */
   
   @FXML
   private void recordCircleMouseEntered() {

@@ -38,14 +38,6 @@ public class MainMenuController {
       settingsButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-          /*
-          if (mainController == null) {
-            System.out.println("mainController not set in MainMenuController!");
-            System.exit(1);
-          }
-          mainController.startSettings();
-          */
-          
           try {
             MainController.getInstance().startSettings();
           } catch (ControllerException ex) {
@@ -59,14 +51,6 @@ public class MainMenuController {
       rhythmButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-          System.out.println("Practice sight singing!");
-          /*
-          if (mainController == null) {
-            System.out.println("mainController not set in MainMenuController!");
-            System.exit(1);
-          }
-          mainController.startRhythmPracticeView();
-          */
           try {
             MainController.getInstance().startRhythmPracticeView();
           } catch (ControllerException ex) {
