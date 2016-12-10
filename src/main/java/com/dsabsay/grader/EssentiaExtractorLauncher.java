@@ -24,13 +24,15 @@ public class EssentiaExtractorLauncher {
       = "essentia_streaming_rhythmextractor_multifeature";
   private static final String OSX_EXTRACTOR_FOLDER = "essentia-extractors/osx_x86_64/";
   private static final String LINUX_EXTRACTOR_FOLDER = "essentia-extractors/linux_x86_64/";
+  private static final String WINDOWS_EXTRACTOR_FOLDER = "essentia-extractors/win_i686/";
   private static final int EXIT_SUCCESS = 0;
   
   private String getExtractorFolder() throws ExtractorException {
     
     System.out.println(System.getProperty("os.arch"));
+    // don't know if windows extractor binaries are 32 or 64 bit
     if (!System.getProperty("os.arch").contains("x86")
-        && !System.getProperty("os.arch").contains("64")) {
+        && !System.getProperty("os.arch").contains("64") && !SystemUtils.IS_OS_WINDOWS) {
       throw new ExtractorException("The extractor binaries only work on an x86_64 architecture.");
     }
     
@@ -46,6 +48,8 @@ public class EssentiaExtractorLauncher {
       return OSX_EXTRACTOR_FOLDER;
     } else if (SystemUtils.IS_OS_LINUX) {
       return LINUX_EXTRACTOR_FOLDER;
+    } else if (SystemUtils.IS_OS_WINDOWS) {
+      return WINDOWS_EXTRACTOR_FOLDER;
     } else {
       throw new ExtractorException("The " + SystemUtils.OS_NAME + " is not supported.");
     }
