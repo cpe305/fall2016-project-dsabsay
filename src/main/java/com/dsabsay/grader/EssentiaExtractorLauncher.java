@@ -22,10 +22,37 @@ public class EssentiaExtractorLauncher {
   private static final String STANDARD_ONSET_EXTRACTOR_NAME = "essentia_standard_onsetrate";
   private static final String RHYTHM_EXTRACTOR_NAME
       = "essentia_streaming_rhythmextractor_multifeature";
+  private static final String WINDOWS_STANDARD_ONSET_EXTRACTOR = "essentia_standard_onsetrate.exe";
+  private static final String WINDOWS_RHYTHM_EXTRACTOR
+      = "essentia_streaming_rhythmextractor_multifeature.exe";
   private static final String OSX_EXTRACTOR_FOLDER = "essentia-extractors/osx_x86_64/";
   private static final String LINUX_EXTRACTOR_FOLDER = "essentia-extractors/linux_x86_64/";
   private static final String WINDOWS_EXTRACTOR_FOLDER = "essentia-extractors/win_i686/";
   private static final int EXIT_SUCCESS = 0;
+  
+  private String getOnsetExtractorPath() throws ExtractorException {
+    if (SystemUtils.IS_OS_MAC_OSX) {
+      return OSX_EXTRACTOR_FOLDER + STANDARD_ONSET_EXTRACTOR_NAME;
+    } else if (SystemUtils.IS_OS_LINUX) {
+      return LINUX_EXTRACTOR_FOLDER +  STANDARD_ONSET_EXTRACTOR_NAME;
+    } else if (SystemUtils.IS_OS_WINDOWS) {
+      return WINDOWS_EXTRACTOR_FOLDER + WINDOWS_STANDARD_ONSET_EXTRACTOR;
+    } else {
+      throw new ExtractorException("The " + SystemUtils.OS_NAME + " is not supported.");
+    }
+  }
+  
+  private String getRhythmExtractorPath() throws ExtractorException {
+    if (SystemUtils.IS_OS_MAC_OSX) {
+      return OSX_EXTRACTOR_FOLDER + RHYTHM_EXTRACTOR_NAME;
+    } else if (SystemUtils.IS_OS_LINUX) {
+      return LINUX_EXTRACTOR_FOLDER +  RHYTHM_EXTRACTOR_NAME;
+    } else if (SystemUtils.IS_OS_WINDOWS) {
+      return WINDOWS_EXTRACTOR_FOLDER + WINDOWS_RHYTHM_EXTRACTOR;
+    } else {
+      throw new ExtractorException("The " + SystemUtils.OS_NAME + " is not supported.");
+    }
+  }
   
   private String getExtractorFolder() throws ExtractorException {
     
@@ -67,8 +94,11 @@ public class EssentiaExtractorLauncher {
   public String runRhythmExtractor(String filename) throws ExtractorException, IOException,
       InterruptedException {
     //return processRhythmPerformance(getCommand(RHYTHM_EXTRACTOR_PATH, filename));
+    /*
     return processRhythmPerformance(getCommand(getExtractorFolder()
         + RHYTHM_EXTRACTOR_NAME, filename));
+    */
+    return processRhythmPerformance(getCommand(getRhythmExtractorPath(), filename));
   }
   
   /**
@@ -83,8 +113,11 @@ public class EssentiaExtractorLauncher {
       InterruptedException {
     //return processRhythmPerformance(ONSET_EXTRACTOR_PATH, filename);
     //return processRhythmPerformance(getCommand(STANDARD_ONSET_EXTRACTOR_PATH, filename));
+    /*
     return processRhythmPerformance(getCommand(getExtractorFolder()
         + STANDARD_ONSET_EXTRACTOR_NAME, filename));
+    */
+    return processRhythmPerformance(getCommand(getOnsetExtractorPath(), filename));
   }
   
   private String[] getCommand(String extractorPath, String filename) {
