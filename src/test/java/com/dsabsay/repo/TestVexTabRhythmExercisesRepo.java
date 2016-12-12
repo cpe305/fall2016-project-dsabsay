@@ -19,7 +19,18 @@ public class TestVexTabRhythmExercisesRepo {
     repo = new VexTabRhythmExercisesRepo(config);
     
     assertTrue(repo.getExercises() != null);
-    assertTrue(repo.getExercises().size() >= 4);
+    assertTrue(repo.getExercises().size() >= 5);
+  }
+  
+  @Test
+  public void testDefaultRhythmsPath() throws IOException, InvalidVexTabException {
+    UserConfiguration config = new UserConfiguration();
+    ExercisesRepo repo = null;
+    
+    repo = new VexTabRhythmExercisesRepo(config);
+    
+    assertTrue(repo.getExercises() != null);
+    assertTrue(repo.getExercises().size() >= 5);
   }
 
 }

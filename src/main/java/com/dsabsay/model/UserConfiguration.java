@@ -18,12 +18,14 @@ public class UserConfiguration {
   private String rhythmRecordsPath = "src/main/records/rhythmRecords.ser";
   private String pathToConfig = "src/main/resources/userConfiguration";
 
+  private static final String DEFAULT_RHYTHMS_PATH = "src/main/exercises/testRhythmExercises";
   private String rhythmsPath;
   
   // to use singleton pattern, the constructor needs to be private
   // the instance of this class is retrieved via a getInstance() method
   public UserConfiguration() throws IOException {
-    readUserConfig();
+    //readUserConfig();
+    this.rhythmsPath = DEFAULT_RHYTHMS_PATH;
   }
 
   public String getRhythmsPath() {
@@ -73,7 +75,7 @@ public class UserConfiguration {
   public void readUserConfig() throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(pathToConfig));
     //this.rhythmRecordsPath = reader.readLine();
-    this.rhythmsPath = reader.readLine();
+    //this.rhythmsPath = reader.readLine();
     reader.close();
   }
 

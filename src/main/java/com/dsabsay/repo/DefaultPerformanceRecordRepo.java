@@ -28,12 +28,15 @@ import java.util.logging.Logger;
 public class DefaultPerformanceRecordRepo implements PerformanceRecordRepo {
 
   //private static final String DEFAULT_RHYTHM_RECORDS_PATH = "repo/rhythmRecords.ser";
+  
   private UserConfiguration config;
   private List<RhythmRecord> rhythmRecords;
   private List<SightSingingRecord> sightSingingRecords;
   
   private Logger logger = Logger.getLogger("com.dsabsay.application.DefaultPerformanceRecordRepo");
 
+  //need to get the default rhythms path
+  
   /**
    * Creates a DefaultPerformanceRecordRepo, and trues to read records from the disk.
    * @param config user configuration
